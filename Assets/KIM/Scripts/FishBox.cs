@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KIM
 {
-    public interface IHittable
+    public class FishBox : MonoBehaviour
     {
 
     }
