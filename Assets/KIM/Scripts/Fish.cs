@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fish : MonoBehaviour
+namespace KIM
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class Fish : MonoBehaviour, IHittable
     {
-        
-    }
+        protected FishData data;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected abstract void Move();
+        protected abstract void Die();
+        public void Hit()
+        {
+           
+        }
     }
 }
