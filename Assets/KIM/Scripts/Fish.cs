@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace KIM
 {
-    public class Fish : MonoBehaviour, IHittable
+    public abstract class Fish : MonoBehaviour, IHittable
     {
-        
+        protected FishData data;
+
+        protected abstract void Move();
+        protected abstract void Die();
     }
 }
