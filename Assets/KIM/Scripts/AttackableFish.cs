@@ -6,16 +6,12 @@ namespace KIM
 {
     public class AttackableFish : Fish
     {
-        // Start is called before the first frame update
-        void Start()
+        protected override void Die()
         {
-
         }
 
-        // Update is called once per frame
-        void Update()
+        protected override void Move()
         {
-
         }
     }
 }
