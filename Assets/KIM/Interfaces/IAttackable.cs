@@ -6,6 +6,6 @@ namespace KIM
 {
     public interface IAttackable
     {
-
+        public void Attack();
     }
 }

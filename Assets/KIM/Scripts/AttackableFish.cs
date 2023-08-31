@@ -4,8 +4,13 @@ using UnityEngine;
 
 namespace KIM
 {
-    public class AttackableFish : Fish
+    public class AttackableFish : Fish, IAttackable
     {
+        public void Attack()
+        {
+
+        }
+
         protected override void Die()
         {
         }

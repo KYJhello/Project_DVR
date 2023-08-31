@@ -1,18 +1,17 @@
+using KIM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NonAttackableFish : MonoBehaviour
+public class NonAttackableFish : Fish
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Die()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Move()
     {
-        
+        throw new System.NotImplementedException();
     }
 }
