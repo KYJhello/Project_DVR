@@ -6,6 +6,6 @@ namespace KIM
 {
     public interface IHittable
     {
-
+        public void Hit();
     }
 }
