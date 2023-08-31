@@ -10,5 +10,9 @@ namespace KIM
 
         protected abstract void Move();
         protected abstract void Die();
+        public void Hit()
+        {
+           
+        }
     }
 }
