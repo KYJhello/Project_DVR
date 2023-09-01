@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Shark
   hp: 100
-  recognitionRange: 10
+  weight: 800
+  length: 400
+  playerRecognitionRange: 0
+  wallRecognitionRange: 0
   moveSpeed: 5
   escapeSpeed: 10
+  isStopableFish: 0
+  curFishType: 1

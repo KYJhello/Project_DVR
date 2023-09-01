@@ -15,21 +15,33 @@ namespace KIM
         [SerializeField]
         private int hp;
         [SerializeField]
-        private float recognitionRange;
+        private float weight;
+        [SerializeField]
+        private float length;
+        [SerializeField]
+        private float playerRecognitionRange;
+        [SerializeField]
+        private float wallRecognitionRange;
         [SerializeField]
         private float moveSpeed;
         [SerializeField]
         private float escapeSpeed;
-        private float fishLength;
-        public FishType curFishType { get; set; }
+        [SerializeField]
+        private bool isStopableFish;
+        [SerializeField]
+        public FishType curFishType;
         public FishRank curFishRank { get; set; }
 
         public string Name { get { return name; } }
         public int HP { get { return hp; } }
-        public float RecognitionRange { get { return recognitionRange; } }
+        public float Weight { get { return weight; } }
+        public float Length { get { return length; } }
+
+        public float PlayerRecognitionRange { get { return playerRecognitionRange; } }
+        public float WallRecognitionRange { get { return wallRecognitionRange; } }
+
         public float MoveSpeed { get { return moveSpeed; } }
         public float EscapeSpeed { get { return escapeSpeed; } }
-        public float FishLength { get { return fishLength; } set { fishLength = value; } }
-
+        public bool IsStopableFish { get { return isStopableFish; } }
     }
 }

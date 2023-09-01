@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Salmon
   hp: 1
-  recognitionRange: 10
+  weight: 8.7
+  length: 80
+  playerRecognitionRange: 10
+  wallRecognitionRange: 2
   moveSpeed: 5
   escapeSpeed: 10
+  isStopableFish: 1
+  curFishType: 0
