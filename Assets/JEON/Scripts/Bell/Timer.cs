@@ -5,18 +5,33 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    int maxTimer;
-    int curTime = 0;
+    private TextMesh textMesh;
 
-    private void StertSell()
+    private int curTime;
+    private int minute;
+    private int second;
+
+    private void Awake()
     {
+        textMesh = GetComponent<TextMesh>();
+    }
+    public void StertSell()
+    {
+        minute = 5;
+        second = 0;
         StartCoroutine(StartTimer());
     }
     IEnumerator StartTimer()
     {
-        yield return null;
-
-        curTime += (int)Time.time;
-        
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            if (second < 0)
+            {
+                minute -= 1;
+                second = 59;
+            }
+            second -= 1;
+        }
     }
 }
