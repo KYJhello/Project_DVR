@@ -14,8 +14,8 @@ namespace KIM
         protected float curLength;
         protected float curWeight;
         protected Vector3 moveDir;
-        [SerializeField]
-        protected Rigidbody rb;
+        //[SerializeField]
+        //protected Rigidbody rb;
 
         private void Awake()
         {
@@ -32,6 +32,7 @@ namespace KIM
             return (Physics.OverlapSphere(this.transform.position, data.WallRecognitionRange, 1 << 14) != null) ? true : false;
         }
 
+        // 애니메이션 끄고, 움직임 멈추고, grabinteractable 키기
         protected void Die()
         {
 
