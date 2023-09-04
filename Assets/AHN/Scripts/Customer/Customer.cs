@@ -16,11 +16,6 @@ namespace AHN
         
         [SerializeField] TableManager tableManager;
 
-        private void Awake()
-        {
-            customersPos.position = transform.position;
-        }
-
         // 좌석 고르기
         public void SelectSeat()
         {

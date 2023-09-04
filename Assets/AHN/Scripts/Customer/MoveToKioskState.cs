@@ -22,9 +22,9 @@ namespace AHN
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)  // 키오스크까지 걸어가는 일
         {
-            agent.destination = customer.KioskDestination.position;
+            agent.destination = customer.kioskDestination.position;
 
-            if (Vector3.Distance(animator.gameObject.transform.position, customer.KioskDestination.position) < 1f)
+            if (Vector3.Distance(animator.gameObject.transform.position, customer.kioskDestination.position) < 1f)
             {
                 animator.SetTrigger("IsFrontKiosk");
             }

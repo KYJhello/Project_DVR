@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 namespace AHN
 {
     public class TableManager : MonoBehaviour
-    {ablemanager 참조가 안 되는 이유는, TableManager는 이미 seatSet이라는 씬오브젝트에 달려있어서 참조가 두 개가 되기 때문 아닐가??
+    {
         public Dictionary<Transform, bool> SeatDic;    // 좌석들의 trasnform, 찼는지안찼는지 여부 bool
 
         private void Awake()
