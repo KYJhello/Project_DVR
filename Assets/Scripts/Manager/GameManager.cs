@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AHN;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,6 +49,5 @@ public class GameManager : MonoBehaviour
         uiObj.name = "UIManager";
         uiObj.transform.parent = transform;
         ui = uiObj.AddComponent<UIManager>();
-
     }
 }

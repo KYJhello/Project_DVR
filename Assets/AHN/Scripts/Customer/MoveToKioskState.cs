@@ -9,32 +9,19 @@ namespace AHN
     public class MoveToKioskState : StateMachineBehaviour
     {
         Customer customer;
-        NavMeshAgent agent;
 
-        // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)   // ¸ÅÀå¿¡ µé¾î¿ÀÀÚ¸¶ÀÚ ÇÒ ÀÏ
+        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)   // ë§¤ì¥ì— ë“¤ì–´ì˜¤ìë§ˆì í•  ì¼
         {
             customer = animator.GetComponent<Customer>();
-            agent = animator.GetComponent<NavMeshAgent>();  // ¿©±â¼­ ³×ÀÌ¸Å½¬¸¦ °¡Á®¿È
+            animator.gameObject.GetComponent<Customer>().agent.destination = customer.kioskDestination.position;
         }
 
-        // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-        override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)  // Å°¿À½ºÅ©±îÁö °É¾î°¡´Â ÀÏ
+        override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)  // í‚¤ì˜¤ìŠ¤í¬ê¹Œì§€ ê±¸ì–´ê°€ëŠ” ì¼
         {
-            Debug.Log("MoveToKiosk");
-
-            agent.destination = customer.KioskDestination.position;
-
-            if (Vector3.Distance(animator.gameObject.transform.position, customer.KioskDestination.position) < 1f)
+            if (Vector3.Distance(animator.gameObject.transform.position, customer.kioskDestination.position) < 1f)
             {
                 animator.SetTrigger("IsFrontKiosk");
             }
-        }
-
-        // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)    // Å°¿À½ºÅ©¿¡ µü µµÂøÇÒ ¶§Âë
-        {
-            // ÇÊ¿ä¾øÀ»µí
         }
     }
 }
