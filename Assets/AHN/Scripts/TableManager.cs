@@ -3,21 +3,77 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using System.Linq;
+using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 namespace AHN
 {
     public class TableManager : MonoBehaviour
     {
-        // Seat[] À» ¸¸µé¾î¼­ ÁÂ¼®µéÀ» °ü¸®ÇÔ.
-        // TODO : ¸¸¼®ÀÌ¸é customer°¡ ´õÀÌ»ó »ı¼ºµÇÁö ¸øÇÏµµ·Ï. Bool ¹İÈ¯ÇüÀ¸·Î Å×ÀÌºíÀÌ ¸¸¼®ÀÎÁö¾Æ´ÑÁö¸¦ ¾Ë·ÁÁÖ´Â ÇÔ¼ö¸¦ ¸¸µé°í ÀÌ°É ÀÌº¥Æ®·Î ³Ö¾îµÒ.
-        // ±×¸®°í ¼Õ´ÔÀÌ »ı¼ºµÉ ¶§ ±× ÇÔ¼ö¸¦ È£Ãâ½ÃÄÑ¼­ true¸é ¼Õ´Ô »ı¼º ±İÁö!
+        public Dictionary<Transform, bool> SeatDic;    // ì¢Œì„ë“¤ì˜ trasnform, ì°¼ëŠ”ì§€ì•ˆì°¼ëŠ”ì§€ ì—¬ë¶€ bool
+
+        private void Awake()
+        {
+            SeatDic = new Dictionary<Transform, bool>();
+            AddDictionary();
+        }
+
+        void AddDictionary()    // ì¢Œì„ë“¤ì„ ëª¨ë‘ SeatDicì— ë„£ëŠ” ê³¼ì •
+        {
+            Transform[] seats = gameObject.GetComponentsInChildren<Transform>();
+
+            foreach (Transform seat in seats)
+            {
+                Transform key = seat.transform;
+
+                if (seat.name == "SeatSet")     // ìê¸° ìì‹ ì€ ì œì™¸
+                    continue;
+                else if (SeatDic.ContainsKey(key))
+                    continue;
+
+                SeatDic.Add(key, false);
+
+            }
+        }
+
+        // ë”•ì…”ë„ˆë¦¬ì—ì„œ ë¹ˆìë¦¬ë¥¼ ì°¾ëŠ” í•¨ìˆ˜. valueê°’ì´ Falseì¸ transformsë“¤ì„ ë°˜í™˜í•¨. customerì¸¡ì—ì„œëŠ” ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ì—¬ ì•‰ìœ¼ë©´ë¨
+        public List<Transform> FalseSeat()
+        {
+            List<Transform> falseSeatsList = new List<Transform>();
+
+            foreach (KeyValuePair<Transform, bool> seat in SeatDic)
+            {
+                if(seat.Value == false)
+                {
+                    falseSeatsList.Add(seat.Key);
+                }
+            }
+
+            return falseSeatsList;
+        }
 
 
-        // seat¿¡ Vector3 (¼Õ´Ô°ú seatÀÇ °Å¸®°¡) < 1f ÀÌ¶ó¸é ÁÂ¼®ÀÌ Ã¡´Ù´Â °Í.
-        // seat ¸¦ µñ¼Å³Ê¸®·Î °ü¸®ÇØ¼­ seat1 empty, seat2 full ÀÌ·±½ÄÀ¸·Î empty, fullÀ» value·Î, seat[n]À» key·Î
-        // Dictionary(key, value) ¶ó¼­ Dictionary(seat[n], stirng) À¸·Î ÇØ¼­ °ü¸®.
+        // ì¢Œì„ ê³ ë¥´ê¸°
+        public void SelectSeat()
+        {
+            // 1. ë¹ˆì¢Œì„ì„ ê°€ì ¸ì˜´
+            //List<Transform> falseSeatList = GameManager.Table.FalseSeat();  -> ì´ê²Œ ì™œ ì•ˆë˜ëŠ”ì§€ ëª¨ë¥´ê² ìŒ
+            List<Transform> falseSeatList = FalseSeat();
+ 
+            if (falseSeatList.Count <= 0)   // ì¢Œì„ ì—†ìœ¼ë©´ ì…ì¥ ê¸ˆì§€     
+                return;
+            // if (!seaDic.ContainsValue(false)) return; ìœ¼ë£¨ í•´ë„ë¼. falseì¸ valueê°’ì´ ì—†ë‹¤ë©´ return.
 
+            // 2. falseSeatListì—ì„œ ëœë¤ìœ¼ë¡œ í•˜ë‚˜ë¥¼ ë½‘ì•„ì„œ ë‚´ ì¢Œì„ìœ¼ë¡œ ì§€ì •
+            int randomSeat = UnityEngine.Random.Range(0, falseSeatList.Count - 1);
+            Transform customerSeat = falseSeatList[randomSeat];
 
-        [SerializeField] SerializedDictionary<int, string> SeatDic;
+            // 3. ê³ ë¥¸ ì¢Œì„ì˜ valueê°’ì€ trueë¡œ ë³€ê²½
+            SeatDic[falseSeatList[randomSeat]] = true; 
+        }
+
+        // TODO : ì†ë‹˜ì´ ë‹¤ ë¨¹ê³  ë‚˜ê°ˆê²½ìš°, ì¢Œì„ì„ ë‹¤ì‹œ falseë¡œ ë³€ê²½í•´ì£¼ì–´ì•¼ í•˜ëŠ”ë°,
+        // ì†ë‹˜ì˜ EatStateê°€ ëë‚  ë•Œ, ê·¸ ìƒíƒœì—ì„œ í•¨ìˆ˜ë¥¼ í•˜ë‚˜ ë§Œë“¤ì–´. ê·¸ë¦¬ê³  ê·¸ í•¨ìˆ˜ë¥¼ ì´ë²¤íŠ¸ì— 
     }
 }

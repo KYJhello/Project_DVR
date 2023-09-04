@@ -6,8 +6,8 @@ namespace AHN
 {
     public class StateCorutineManager : MonoBehaviour
     {
-        // StateMachine¿¡¼­´Â CorutineÀÌ ¾È µÇ´Ï±î ¿©±â¼­ ÄÚ·çÆ¾ ÇÔ¼öµé ´Ù ±¸ÇöÇÏ°í
-        // State¾Ö´Ï¸ŞÀÌ¼Ç ÂÊ¿¡¼­ animator.GetComponent<StateCorutineManager>·Î °¡Á®¿Í¼­ »ç¿ë ¤¡¤¡
+        // StateMachineì—ì„œëŠ” Corutineì´ ì•ˆ ë˜ë‹ˆê¹Œ ì—¬ê¸°ì„œ ì½”ë£¨í‹´ í•¨ìˆ˜ë“¤ ë‹¤ êµ¬í˜„í•˜ê³ 
+        // Stateì• ë‹ˆë©”ì´ì…˜ ìª½ì—ì„œ animator.GetComponent<StateCorutineManager>ë¡œ ê°€ì ¸ì™€ì„œ ì‚¬ìš© ã„±ã„±
 
         Animator anim;
 
@@ -16,24 +16,26 @@ namespace AHN
             anim = GetComponent<Animator>();
         }
 
-        public IEnumerator OrderingRoutine()    // ÁÖ¹® ÄÚ·çÆ¾
+        public IEnumerator OrderingRoutine()    // ì£¼ë¬¸ ì½”ë£¨í‹´
         {
             anim.SetTrigger("IsFrontKiosk");
             yield return new WaitForSeconds(3f);
             anim.SetTrigger("FinishedOrdering");
         }
 
-        public IEnumerator FoodWaitRoutine()    // À½½Ä ±â´Ù¸®´Â ÄÚ·çÆ¾
+        public IEnumerator FoodWaitRoutine()    // ìŒì‹ ê¸°ë‹¤ë¦¬ëŠ” ì½”ë£¨í‹´
         {
+            Debug.Log("Wait");
             yield return new WaitForSeconds(50f);
+            Debug.Log("Angry");
             anim.SetTrigger("Angry");
             yield return new WaitForSeconds(10f);
             anim.SetTrigger("GoOut");
-            // ¿©±â¼­ °ÔÀÓ½Ã°£À» °¨¼Ò½ÃÄÑ¾ß ÇÒµí (15ÃÊ Á¤µµ)
-            // ¼Õ´ÔÀÌ °ÔÀÓ½Ã°£À» ÂüÁ¶ÇØ¼­ ±× ½Ã°£À» Â÷°¨ÇÏµµ·Ï
+            // TODO : ì—¬ê¸°ì„œ ê²Œì„ì‹œê°„ì„ ê°ì†Œì‹œì¼œì•¼ í• ë“¯ (15ì´ˆ ì •ë„)
+            // ì†ë‹˜ì´ ê²Œì„ì‹œê°„ì„ ì°¸ì¡°í•´ì„œ ê·¸ ì‹œê°„ì„ ì°¨ê°í•˜ë„ë¡
         }
 
-        public IEnumerator EatRoutine()     // ¸Ô´Â ÄÚ·çÆ¾
+        public IEnumerator EatRoutine()     // ë¨¹ëŠ” ì½”ë£¨í‹´
         {
             yield return new WaitForSeconds(7f);
             anim.SetTrigger("GoOut");

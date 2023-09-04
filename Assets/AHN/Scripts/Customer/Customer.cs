@@ -6,17 +6,33 @@ namespace AHN
 {
     public class Customer : MonoBehaviour
     {
-        // Å°¿À½ºÅ© ¾Õ, Å×ÀÌºí ¾Õ, ¹®À¸·Î °¥ ¶§ °¥ À§Ä¡¿¡ ºó ¿ÀºêÁ§Æ®¸¦ ³Ö¾î¼­ ±× ¿ÀºêÁ§Æ®¸¦ ÇâÇØ¼­ °¥ ¼ö ÀÖµµ·ÏÇÔ.
-        // ex.Å°¿À½ºÅ© ¾Õ¿¡ ºó¿ÀºêÁ§Æ® ÇÏ³ª µÖ¼­ customer°¡ ±× ºó¿ÀºêÁ§Æ®¸¦ ÇâÇØ¼­ moveÇÏµµ·Ï.
+        // í‚¤ì˜¤ìŠ¤í¬ ì•, í…Œì´ë¸” ì•, ë¬¸ìœ¼ë¡œ ê°ˆ ë•Œ ê°ˆ ìœ„ì¹˜ì— ë¹ˆ ì˜¤ë¸Œì íŠ¸ë¥¼ ë„£ì–´ì„œ ê·¸ ì˜¤ë¸Œì íŠ¸ë¥¼ í–¥í•´ì„œ ê°ˆ ìˆ˜ ìˆë„ë¡í•¨.
+        // ex.í‚¤ì˜¤ìŠ¤í¬ ì•ì— ë¹ˆì˜¤ë¸Œì íŠ¸ í•˜ë‚˜ ë‘¬ì„œ customerê°€ ê·¸ ë¹ˆì˜¤ë¸Œì íŠ¸ë¥¼ í–¥í•´ì„œ moveí•˜ë„ë¡.
 
         public Transform customersPos;
-        public Transform customersDir;
-        public Transform KioskDestination;
+        public Transform kioskDestination;
+        public Transform mySeatDestination;     // ì–˜ëŠ” ë“œë˜ê·¸ê°€ ì•ˆ ë¼. ì§ì ‘ í• ë‹¹í•´ì¤˜ì•¼í•¨.
         public float speed;
+        
+        [SerializeField] TableManager tableManager;
 
-        private void Awake()
+        // ì¢Œì„ ê³ ë¥´ê¸°
+        public void SelectSeat()
         {
-            customersPos.position = transform.position;
+            // 1. ë¹ˆì¢Œì„ì„ ê°€ì ¸ì˜´
+            // List<Transform> falseSeatList = GameManager.Table.FalseSeat();  //-> ì´ê²Œ ì™œ ì•ˆë˜ëŠ”ì§€ ëª¨ë¥´ê² ìŒ (ì¼ë‹¨ ì”¬ì— gameObjì—†ìœ¼ë‹ˆê¹Œ ê·¸ê±° ë¶™ì—¬ë°”)
+            List<Transform> falseSeatList = tableManager.FalseSeat();
+
+            if (falseSeatList.Count <= 0)   // ì¢Œì„ ì—†ìœ¼ë©´ ì…ì¥ ê¸ˆì§€     
+                return;
+
+            // 2. falseSeatListì—ì„œ ëœë¤ìœ¼ë¡œ í•˜ë‚˜ë¥¼ ë½‘ì•„ì„œ ë‚´ ì¢Œì„ìœ¼ë¡œ ì§€ì •
+            int randomSeat = UnityEngine.Random.Range(0, falseSeatList.Count - 1);
+            mySeatDestination = falseSeatList[randomSeat];
+
+            // 3. ê³ ë¥¸ ì¢Œì„ì˜ valueê°’ì€ trueë¡œ ë³€ê²½
+            // GameManager.Table.SeatDic[falseSeatList[randomSeat]] = true;
+            tableManager.SeatDic[falseSeatList[randomSeat]] = true;
         }
     }
 }
