@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IAttackable : MonoBehaviour
+namespace KIM
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface IAttackable
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Attack();
     }
 }

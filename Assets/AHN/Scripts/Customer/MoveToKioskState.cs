@@ -12,7 +12,7 @@ namespace AHN
         NavMeshAgent agent;
 
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)   // ¸ÅÀå¿¡ µé¾î¿ÀÀÚ¸¶ÀÚ ÇÒ ÀÏ
+        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)   // ë§¤ì¥ì— ë“¤ì–´ì˜¤ìë§ˆì í•  ì¼
         {
             customer = animator.GetComponent<Customer>();
             agent = animator.GetComponent<NavMeshAgent>();
@@ -20,31 +20,31 @@ namespace AHN
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-        override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)  // Å°¿À½ºÅ©±îÁö °É¾î°¡´Â ÀÏ
+        override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)  // í‚¤ì˜¤ìŠ¤í¬ê¹Œì§€ ê±¸ì–´ê°€ëŠ” ì¼
         {
-            agent.destination = customer.kioskDestination.position;
+            agent.destination = customer.KioskDestination.position;
 
-            if (Vector3.Distance(animator.gameObject.transform.position, customer.kioskDestination.position) < 1f)
+            if (Vector3.Distance(animator.gameObject.transform.position, customer.KioskDestination.position) < 1f)
             {
                 animator.SetTrigger("IsFrontKiosk");
             }
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)    // Å°¿À½ºÅ©¿¡ µü µµÂøÇÒ ¶§Âë
+        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)    // í‚¤ì˜¤ìŠ¤í¬ì— ë”± ë„ì°©í•  ë•Œì¯¤
         {
-            // ÇÊ¿ä¾øÀ»µí
+            // í•„ìš”ì—†ì„ë“¯
         }
-
-        public void SelectSeat()    // ÁÂ¼® °í¸£±â
+        
+        public void SelectSeat()    // ì¢Œì„ ê³ ë¥´ê¸°
         {
-            // 1. ºóÁÂ¼®À» °¡Á®¿È
+            // 1. ë¹ˆì¢Œì„ì„ ê°€ì ¸ì˜´
             List<Transform> falseSeatList = GameManager.Table.FalseSeat();
 
-            if (falseSeatList.Count <= 0)   // ÁÂ¼® ¾øÀ¸¸é ÀÔÀå ±İÁö 
+            if (falseSeatList.Count <= 0)   // ì¢Œì„ ì—†ìœ¼ë©´ ì…ì¥ ê¸ˆì§€ 
                 return;
 
-            // 2. falseSeatList¿¡¼­ ·£´ıÀ¸·Î ÇÏ³ª¸¦ »Ì¾Æ¼­ ³» ÁÂ¼®À¸·Î ÁöÁ¤
+            // 2. falseSeatListì—ì„œ ëœë¤ìœ¼ë¡œ í•˜ë‚˜ë¥¼ ë½‘ì•„ì„œ ë‚´ ì¢Œì„ìœ¼ë¡œ ì§€ì •
             int randomSeat = Random.Range(0, falseSeatList.Count - 1);
             Transform mySeat = falseSeatList[randomSeat];
         }

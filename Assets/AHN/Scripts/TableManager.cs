@@ -10,9 +10,8 @@ using UnityEngine.UIElements;
 namespace AHN
 {
     public class TableManager : MonoBehaviour
-    {
-        // GameManager¿¡¼­ tablemanager ÂüÁ¶°¡ ¾È µÇ´Â ÀÌÀ¯´Â, TableManager´Â ÀÌ¹Ì seatSetÀÌ¶ó´Â ¾À¿ÀºêÁ§Æ®¿¡ ´Ş·ÁÀÖ¾î¼­ ÂüÁ¶°¡ µÎ °³°¡ µÇ±â ¶§¹® ¾Æ´Ò°¡??
-        public Dictionary<Transform, bool> SeatDic;    // ÁÂ¼®µéÀÇ trasnform, Ã¡´ÂÁö¾ÈÃ¡´ÂÁö ¿©ºÎ bool
+    {ablemanager ì°¸ì¡°ê°€ ì•ˆ ë˜ëŠ” ì´ìœ ëŠ”, TableManagerëŠ” ì´ë¯¸ seatSetì´ë¼ëŠ” ì”¬ì˜¤ë¸Œì íŠ¸ì— ë‹¬ë ¤ìˆì–´ì„œ ì°¸ì¡°ê°€ ë‘ ê°œê°€ ë˜ê¸° ë•Œë¬¸ ì•„ë‹ê°€??
+        public Dictionary<Transform, bool> SeatDic;    // ì¢Œì„ë“¤ì˜ trasnform, ì°¼ëŠ”ì§€ì•ˆì°¼ëŠ”ì§€ ì—¬ë¶€ bool
 
         private void Awake()
         {
@@ -20,7 +19,7 @@ namespace AHN
             AddDictionary();
         }
 
-        void AddDictionary()    // ÁÂ¼®µéÀ» ¸ğµÎ SeatDic¿¡ ³Ö´Â °úÁ¤
+        void AddDictionary()    // ì¢Œì„ë“¤ì„ ëª¨ë‘ SeatDicì— ë„£ëŠ” ê³¼ì •
         {
             Transform[] seats = gameObject.GetComponentsInChildren<Transform>();
 
@@ -28,7 +27,7 @@ namespace AHN
             {
                 Transform key = seat.transform;
 
-                if (seat.name == "SeatSet")     // ÀÚ±â ÀÚ½ÅÀº Á¦¿Ü
+                if (seat.name == "SeatSet")     // ìê¸° ìì‹ ì€ ì œì™¸
                     continue;
                 else if (SeatDic.ContainsKey(key))
                     continue;
@@ -38,7 +37,7 @@ namespace AHN
             }
         }
 
-        // µñ¼Å³Ê¸®¿¡¼­ ºóÀÚ¸®¸¦ Ã£´Â ÇÔ¼ö. value°ªÀÌ FalseÀÎ transformsµéÀ» ¹İÈ¯ÇÔ. customerÃø¿¡¼­´Â ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÏ¿© ¾ÉÀ¸¸éµÊ
+        // ë”•ì…”ë„ˆë¦¬ì—ì„œ ë¹ˆìë¦¬ë¥¼ ì°¾ëŠ” í•¨ìˆ˜. valueê°’ì´ Falseì¸ transformsë“¤ì„ ë°˜í™˜í•¨. customerì¸¡ì—ì„œëŠ” ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ì—¬ ì•‰ìœ¼ë©´ë¨
         public List<Transform> FalseSeat()
         {
             List<Transform> falseSeatsList = new List<Transform>();
@@ -55,27 +54,26 @@ namespace AHN
         }
 
 
-        // ÁÂ¼® °í¸£±â
+        // ì¢Œì„ ê³ ë¥´ê¸°
         public void SelectSeat()
         {
-            // 1. ºóÁÂ¼®À» °¡Á®¿È
-            //List<Transform> falseSeatList = GameManager.Table.FalseSeat();  -> ÀÌ°Ô ¿Ö ¾ÈµÇ´ÂÁö ¸ğ¸£°ÚÀ½
+            // 1. ë¹ˆì¢Œì„ì„ ê°€ì ¸ì˜´
+            //List<Transform> falseSeatList = GameManager.Table.FalseSeat();  -> ì´ê²Œ ì™œ ì•ˆë˜ëŠ”ì§€ ëª¨ë¥´ê² ìŒ
             List<Transform> falseSeatList = FalseSeat();
  
-            if (falseSeatList.Count <= 0)   // ÁÂ¼® ¾øÀ¸¸é ÀÔÀå ±İÁö     
+            if (falseSeatList.Count <= 0)   // ì¢Œì„ ì—†ìœ¼ë©´ ì…ì¥ ê¸ˆì§€     
                 return;
-            // if (!seaDic.ContainsValue(false)) return; À¸·ç ÇØµµµÅ. falseÀÎ value°ªÀÌ ¾ø´Ù¸é return.
+            // if (!seaDic.ContainsValue(false)) return; ìœ¼ë£¨ í•´ë„ë¼. falseì¸ valueê°’ì´ ì—†ë‹¤ë©´ return.
 
-            // 2. falseSeatList¿¡¼­ ·£´ıÀ¸·Î ÇÏ³ª¸¦ »Ì¾Æ¼­ ³» ÁÂ¼®À¸·Î ÁöÁ¤
+            // 2. falseSeatListì—ì„œ ëœë¤ìœ¼ë¡œ í•˜ë‚˜ë¥¼ ë½‘ì•„ì„œ ë‚´ ì¢Œì„ìœ¼ë¡œ ì§€ì •
             int randomSeat = UnityEngine.Random.Range(0, falseSeatList.Count - 1);
             Transform customerSeat = falseSeatList[randomSeat];
 
-            // 3. °í¸¥ ÁÂ¼®ÀÇ value°ªÀº true·Î º¯°æ
+            // 3. ê³ ë¥¸ ì¢Œì„ì˜ valueê°’ì€ trueë¡œ ë³€ê²½
             SeatDic[falseSeatList[randomSeat]] = true; 
         }
 
-        // TODO : ¼Õ´ÔÀÌ ´Ù ¸Ô°í ³ª°¥°æ¿ì, ÁÂ¼®À» ´Ù½Ã false·Î º¯°æÇØÁÖ¾î¾ß ÇÏ´Âµ¥,
-        // ¼Õ´ÔÀÇ EatState°¡ ³¡³¯ ¶§, ±× »óÅÂ¿¡¼­ ÇÔ¼ö¸¦ ÇÏ³ª ¸¸µé¾î. ±×¸®°í ±× ÇÔ¼ö¸¦ ÀÌº¥Æ®¿¡ 
-
+        // TODO : ì†ë‹˜ì´ ë‹¤ ë¨¹ê³  ë‚˜ê°ˆê²½ìš°, ì¢Œì„ì„ ë‹¤ì‹œ falseë¡œ ë³€ê²½í•´ì£¼ì–´ì•¼ í•˜ëŠ”ë°,
+        // ì†ë‹˜ì˜ EatStateê°€ ëë‚  ë•Œ, ê·¸ ìƒíƒœì—ì„œ í•¨ìˆ˜ë¥¼ í•˜ë‚˜ ë§Œë“¤ì–´. ê·¸ë¦¬ê³  ê·¸ í•¨ìˆ˜ë¥¼ ì´ë²¤íŠ¸ì— 
     }
 }

@@ -2,17 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishData : MonoBehaviour
+namespace KIM
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public enum FishType { NonAttackFish = 0, AttackFish }
+    public enum FishRank { Normal = 0, Rare, SuperRare, Special }
 
-    // Update is called once per frame
-    void Update()
+    [CreateAssetMenu(fileName = "Fish Data", menuName = "Scriptable Object/Fish Data", order =int.MaxValue)]
+    public class FishData : ScriptableObject
     {
-        
+        [SerializeField]
+        private new string name;
+        [SerializeField]
+        private int hp;
+        [SerializeField]
+        private float weight;
+        [SerializeField]
+        private float length;
+        [SerializeField]
+        private float playerRecognitionRange;
+        [SerializeField]
+        private float wallRecognitionRange;
+        [SerializeField]
+        private float moveSpeed;
+        [SerializeField]
+        private float escapeSpeed;
+        [SerializeField]
+        private bool isStopableFish;
+        [SerializeField]
+        public FishType curFishType;
+        public FishRank curFishRank { get; set; }
+
+        public string Name { get { return name; } }
+        public int HP { get { return hp; } }
+        public float Weight { get { return weight; } }
+        public float Length { get { return length; } }
+
+        public float PlayerRecognitionRange { get { return playerRecognitionRange; } }
+        public float WallRecognitionRange { get { return wallRecognitionRange; } }
+
+        public float MoveSpeed { get { return moveSpeed; } }
+        public float EscapeSpeed { get { return escapeSpeed; } }
+        public bool IsStopableFish { get { return isStopableFish; } }
     }
 }
