@@ -1,17 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace AHN
 {
     public class CustomerSqawnManager : MonoBehaviour
     {
-        public void CustomerSqawn()
-        {
-            // 1. 오브젝트풀로 Customer 생성 -> 코루틴 이용.
-            // GameObject hitEffect = GameManager.Pool.Get(hitParticle, hit.point, Quaternion.LookRotation(hit.normal), hit.transform);
-            // 위에 이런식으로 함
+        // CustomerSpawn는 풀형식으로 생성.
 
+        GameObject customer;
+        TableManager tableManager;
+
+        private void Start()
+        {
+            tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
+            customer = GameManager.Resource.Load<GameObject>("Customer");
+
+            StartCoroutine(CustomerSpawnRoutine());
+        }
+
+        IEnumerator CustomerSpawnRoutine()
+        {
+            while (true)
+            {
+                if (tableManager.IsSeatFull())  // tableManager.IsSeatFull 이 true면 만석. 생성금지
+                {
+                    // yield return null;
+                    yield return new WaitForSeconds(1f);
+                }
+                else if (!tableManager.IsSeatFull())
+                {
+                    GameObject newCustomer = GameManager.Pool.Get(customer, transform.position, Quaternion.identity);
+                    yield return new WaitForSeconds(2f);
+                }
+            }
         }
     }
 }
