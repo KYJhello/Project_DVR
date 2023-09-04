@@ -8,9 +8,10 @@ namespace AHN
 {
     public class Customer : MonoBehaviour
     {
-        [SerializeField] TableManager tableManager;
+        public TableManager tableManager;
         public Transform kioskDestination;
         public Transform mySeatDestination;     // 자동할당
+        public Transform mySeat;
         public NavMeshAgent agent;
 
         private void Awake()
@@ -42,7 +43,7 @@ namespace AHN
             mySeatDestination = falseSeatList[randomSeat];
 
             // 3. 고른 좌석의 value값은 true로 변경
-            // GameManager.Table.SeatDic[falseSeatList[randomSeat]] = true;
+            mySeat = falseSeatList[randomSeat];
             tableManager.SeatDic[falseSeatList[randomSeat]] = true;
         }
     }

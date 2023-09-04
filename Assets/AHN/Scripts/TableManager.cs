@@ -81,5 +81,10 @@ namespace AHN
 
         // TODO : 손님이 다 먹고 나갈경우, 좌석을 다시 false로 변경해주어야 하는데,
         // 손님의 EatState가 끝날 때, 그 상태에서 함수를 하나 만들어. 그리고 그 함수를 이벤트에 
+        // 매개변수를 mySeat로 하고, 그 매개변수의 value값을 false로 만들어주는 함수
+        public void ChangeValueFalse(Transform seat)
+        {
+            SeatDic[seat] = false;
+        }
     }
 }
