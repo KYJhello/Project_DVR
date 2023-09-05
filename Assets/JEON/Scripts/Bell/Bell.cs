@@ -20,6 +20,12 @@ public class Bell : MonoBehaviour
     private bool isFollowing = false;
     private bool freeze = false;
 
+    private Timer timer;
+
+    private void Awake()
+    {
+        timer = GameObject.Find("Clock").GetComponent<Timer>();
+    }
     private void Start()
     {
         initialLocalPos = visualTarget.localPosition;
@@ -65,6 +71,7 @@ public class Bell : MonoBehaviour
         if (hover.interactorObject is XRPokeInteractor)
         {
             freeze = true;
+            timer.StertSell();
         }
     }
 
