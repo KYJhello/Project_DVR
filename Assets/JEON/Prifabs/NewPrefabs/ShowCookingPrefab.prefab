@@ -1091,7 +1091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610430249168713475}
   m_LocalRotation: {x: 0.006311059, y: 0.9653049, z: -0.041357577, w: 0.25775212}
-  m_LocalPosition: {x: 0.0012312324, y: -0.0046760575, z: -0.0011649295}
+  m_LocalPosition: {x: 0.001238, y: -0.004481, z: -0.00118}
   m_LocalScale: {x: 1.0000002, y: 0.9999999, z: 1.0000005}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4800,7 +4800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7524432365128075365}
   m_Layer: 0
-  m_Name: ShowCooking
+  m_Name: ShowCookingPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
