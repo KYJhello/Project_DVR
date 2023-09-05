@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
-    
+    [SerializeField] int cuttingCount;
+
+    public void UseKnife()
+    {
+
+    }
 }

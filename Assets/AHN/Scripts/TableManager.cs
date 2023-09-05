@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using System.Linq;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 namespace AHN
 {
@@ -27,13 +28,12 @@ namespace AHN
             {
                 Transform key = seat.transform;
 
-                if (seat.name == "SeatSet")     // 자기 자신은 제외
+                if (seat.name == "TableManager")     // 자기 자신은 제외
                     continue;
                 else if (SeatDic.ContainsKey(key))
                     continue;
 
                 SeatDic.Add(key, false);
-
             }
         }
 
@@ -53,17 +53,23 @@ namespace AHN
             return falseSeatsList;
         }
 
+        // 만석인지 아닌지. 만석이면 true
+        public bool IsSeatFull()
+        {
+            if (FalseSeat().Count == 0)
+                return true;
+            else
+                return false;
+        }
 
         // 좌석 고르기
         public void SelectSeat()
         {
             // 1. 빈좌석을 가져옴
-            //List<Transform> falseSeatList = GameManager.Table.FalseSeat();  -> 이게 왜 안되는지 모르겠음
             List<Transform> falseSeatList = FalseSeat();
  
             if (falseSeatList.Count <= 0)   // 좌석 없으면 입장 금지     
                 return;
-            // if (!seaDic.ContainsValue(false)) return; 으루 해도돼. false인 value값이 없다면 return.
 
             // 2. falseSeatList에서 랜덤으로 하나를 뽑아서 내 좌석으로 지정
             int randomSeat = UnityEngine.Random.Range(0, falseSeatList.Count - 1);
@@ -75,5 +81,10 @@ namespace AHN
 
         // TODO : 손님이 다 먹고 나갈경우, 좌석을 다시 false로 변경해주어야 하는데,
         // 손님의 EatState가 끝날 때, 그 상태에서 함수를 하나 만들어. 그리고 그 함수를 이벤트에 
+        // 매개변수를 mySeat로 하고, 그 매개변수의 value값을 false로 만들어주는 함수
+        public void ChangeValueFalse(Transform seat)
+        {
+            SeatDic[seat] = false;
+        }
     }
 }

@@ -5,33 +5,61 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private TextMesh textMesh;
+    [SerializeField] TextMesh[] textMesh;
 
     private int curTime;
     private int minute;
-    private int second;
+    [SerializeField] int second;
+
+    private bool touchButton = true;
 
     private void Awake()
     {
-        textMesh = GetComponent<TextMesh>();
+        textMesh = GetComponentsInChildren<TextMesh>();
     }
     public void StertSell()
     {
-        minute = 5;
-        second = 0;
-        StartCoroutine(StartTimer());
+        if (touchButton)
+        {
+            minute = 3;
+            second = 0;
+            touchButton = false;
+        }
+        
+        if (minute >= 3)
+            StartCoroutine(StartTimer());
     }
     IEnumerator StartTimer()
     {
+        if (minute == 0 && second == 0)
+        {
+            StopCoroutine(StartTimer());
+            minute = 3;
+            second = 0;
+        }
         while (true)
         {
             yield return new WaitForSeconds(1);
-            if (second < 0)
+
+            if (second <= 0)
             {
                 minute -= 1;
-                second = 59;
+                second = 60;
             }
+
             second -= 1;
+
+            if (second <= 9)
+            {
+                textMesh[0].text = ($"{minute} : ");
+                textMesh[1].text = ($"0{second}");
+            }
+            else
+            {
+                textMesh[0].text = ($"{minute} : ");
+                textMesh[1].text = ($"{second}");
+            }
+            
         }
     }
 }
