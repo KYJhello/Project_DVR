@@ -12,6 +12,7 @@ namespace AHN
         public Transform kioskDestination;
         public Transform mySeatDestination;     // 자동할당
         public Transform mySeat;
+        public Transform customerSpawnPoint;
         public NavMeshAgent agent;
 
         private void Awake()
@@ -23,6 +24,7 @@ namespace AHN
         {
             tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
             kioskDestination = GameObject.Find("KioskDestnation").GetComponent<Transform>();
+            customerSpawnPoint = GameObject.Find("CustomerSpawnPoint").GetComponent<Transform>();
             SelectSeat();
 
             agent.enabled = true;

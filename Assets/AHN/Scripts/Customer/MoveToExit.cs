@@ -17,20 +17,21 @@ namespace AHN
 
             // TODO : Exit 문을 Destination으로 잡고 나가야함
             customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<CustomerSqawnManager>();
-            animator.GetComponent<Customer>().agent.destination = customer.kioskDestination.position;
+            animator.GetComponent<Customer>().agent.destination = customer.customerSpawnPoint.position;
 
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
+            if (Vector3.Distance(animator.transform.position, customer.customerSpawnPoint.position) < 2f)
+            {
+                Debug.Log("Exit");
+                GameManager.Pool.Release(customer.gameObject);
+            }
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            // 여기서 손님은 없어져야함. 풀링으로 비활성화.
-            // if (Exit 문이랑 손님 거리가 1도 안 된다면)
-            GameManager.Pool.Release(animator.gameObject);
         }
     }
 }
