@@ -75,8 +75,7 @@ public class Bell : MonoBehaviour
         {
             freeze = true;
             timer.StertSell();
-            customerSqawn.StartI();
-            // 颊丛 积己
+            customerSqawn.CustomerSpawnRoutine();   // 颊丛 积己
         }
     }
 

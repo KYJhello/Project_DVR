@@ -10,16 +10,15 @@ namespace AHN
         GameObject customer;
         TableManager tableManager;
 
-        public void StartI()
+        public void Start()
         {
             tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
             customer = GameManager.Resource.Load<GameObject>("Customer");
 
-            StartCoroutine(CustomerSpawnRoutine());
         }
 
 
-        IEnumerator CustomerSpawnRoutine()
+        public IEnumerator CustomerSpawnRoutine()
         {
             while (true)
             {
