@@ -10,7 +10,7 @@ namespace AHN
     {
         public TableManager tableManager;
         public Transform kioskDestination;
-        public Transform mySeatDestination;     // 자동할당
+        public Transform mySeatDestination;
         public Transform mySeat;
         public Transform customerSpawnPoint;
         public NavMeshAgent agent;
