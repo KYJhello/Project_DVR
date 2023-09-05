@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -21,10 +22,12 @@ public class Bell : MonoBehaviour
     private bool freeze = false;
 
     private Timer timer;
+    private AHN.CustomerSqawnManager customerSqawn;
 
     private void Awake()
     {
         timer = GameObject.Find("Clock").GetComponent<Timer>();
+        customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<AHN.CustomerSqawnManager>();
     }
     private void Start()
     {
@@ -72,6 +75,8 @@ public class Bell : MonoBehaviour
         {
             freeze = true;
             timer.StertSell();
+            customerSqawn.StartI();
+            // ¼Õ´Ô »ý¼º
         }
     }
 

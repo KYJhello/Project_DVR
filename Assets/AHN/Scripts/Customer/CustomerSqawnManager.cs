@@ -7,18 +7,17 @@ namespace AHN
 {
     public class CustomerSqawnManager : MonoBehaviour
     {
-        // CustomerSpawn는 풀형식으로 생성.
-
         GameObject customer;
         TableManager tableManager;
 
-        private void Start()
+        public void StartI()
         {
             tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
             customer = GameManager.Resource.Load<GameObject>("Customer");
 
             StartCoroutine(CustomerSpawnRoutine());
         }
+
 
         IEnumerator CustomerSpawnRoutine()
         {
