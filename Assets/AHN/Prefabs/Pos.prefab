@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &236659132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 236659133}
+  m_Layer: 0
+  m_Name: OrderSheetPoolPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &236659133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236659132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -62, y: 104.7, z: 48.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6531872580940031800}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &247612597472753080
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718013025092017705}
   m_LocalRotation: {x: 0.86569065, y: -0, z: -0, w: 0.5005795}
-  m_LocalPosition: {x: -3.6, y: 35.3, z: 12}
+  m_LocalPosition: {x: -3.6, y: 36.7, z: 18.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -340,7 +371,7 @@ GameObject:
   - component: {fileID: 1718013025239838040}
   - component: {fileID: 1718013025239838041}
   m_Layer: 0
-  m_Name: ADDText
+  m_Name: AddSalesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,7 +447,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718013025239838039}
-  m_Text: "\uACB0\uC81C\uAE08\uC561"
+  m_Text: 
   m_OffsetZ: 1
   m_CharacterSize: 4.43
   m_LineSpacing: 1
@@ -1527,6 +1558,7 @@ Transform:
   - {fileID: 875311683386350494}
   - {fileID: 5234419119843996803}
   - {fileID: 2696798822155040504}
+  - {fileID: 236659133}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -1556,5 +1588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e445b8556995d4597b7e20507cd748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addText: {fileID: 1718013025239838041}
-  totalText: {fileID: 1718013025092017707}
+  addSalesText: {fileID: 1718013025239838041}
+  totalSalesText: {fileID: 1718013025092017707}
+  orderSheetPoolPosition: {fileID: 0}
