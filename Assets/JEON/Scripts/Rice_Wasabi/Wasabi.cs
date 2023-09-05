@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Wasabi : MonoBehaviour
 {
-    [SerializeField] int triggerCount;
+    int triggerCount;
+    float stayTime;
 
+    private void OnTriggerStay(Collider other)
+    {
+        
+    }
 
 }

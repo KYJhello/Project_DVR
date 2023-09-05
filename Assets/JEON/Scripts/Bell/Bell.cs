@@ -1,31 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Bell : MonoBehaviour
 {
-    private Timer timer;
+    public Transform visualTarget;
+    public Vector3 localAxis;
 
-    private void Awake()
+    private Vector3 offset;
+    private Transform pokeAttechTransform;
+
+    private XRBaseInteractable interactable;
+
+    private bool isFollowing = false;
+
+    private void Start()
     {
-        timer = GameObject.Find("Clock").GetComponent<Timer>();
+        interactable = GetComponent<XRBaseInteractable>();
+        interactable.hoverEntered.AddListener(Follow);
     }
 
-    public void TouchBell()
+    private void Follow(BaseInteractionEventArgs hover)
     {
-        StartCoroutine(ObjectChengePos());
-        // 사운드 내주기
+        if (hover.interactorObject is XRPokeInteractor)
+        {
+            XRPokeInteractor interactor = (XRPokeInteractor)hover.interactorObject;
+            isFollowing = true;
+
+            pokeAttechTransform = interactor.attachTransform;
+            offset = visualTarget.position - pokeAttechTransform.position;
+        }
     }
 
-    IEnumerator ObjectChengePos()
+    private void Update()
     {
-        yield return null;
+        if (isFollowing)
+        {
+            Vector3 localTargetPosition = visualTarget.InverseTransformPoint(pokeAttechTransform.position + offset); // 
+            Vector3 constrainedLocalTargetPosition = Vector3.Project(localTargetPosition, localAxis); // Vector3.Project 수직으로 투영한 결과 벡터를 반환합니다. 이렇게 얻은 벡터는 normal방향으로만 미치는 힘을 나타냅니다.
 
-        transform.position = new Vector3(0, 0.5f, 0);
-        yield return null;
-
-        timer.StertSell();
-        yield return new WaitForSeconds(1f);
-        transform.position = new Vector3(0, 0.6f, 0);
+            visualTarget.position = pokeAttechTransform.position + offset;
+        }
     }
+
 }
