@@ -27,12 +27,12 @@ namespace AHN
                 if (tableManager.IsSeatFull())  // tableManager.IsSeatFull 이 true면 만석. 생성금지
                 {
                     // yield return null;
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(3f);
                 }
                 else if (!tableManager.IsSeatFull())
                 {
                     GameObject newCustomer = GameManager.Pool.Get(customer, transform.position, Quaternion.identity);
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(5f);
                 }
             }
         }
