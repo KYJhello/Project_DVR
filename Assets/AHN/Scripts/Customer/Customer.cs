@@ -1,22 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 namespace AHN
 {
     public class Customer : MonoBehaviour
     {
-        // Å°¿À½ºÅ© ¾Õ, Å×ÀÌºí ¾Õ, ¹®À¸·Î °¥ ¶§ °¥ À§Ä¡¿¡ ºó ¿ÀºêÁ§Æ®¸¦ ³Ö¾î¼­ ±× ¿ÀºêÁ§Æ®¸¦ ÇâÇØ¼­ °¥ ¼ö ÀÖµµ·ÏÇÔ.
-        // ex.Å°¿À½ºÅ© ¾Õ¿¡ ºó¿ÀºêÁ§Æ® ÇÏ³ª µÖ¼­ customer°¡ ±× ºó¿ÀºêÁ§Æ®¸¦ ÇâÇØ¼­ moveÇÏµµ·Ï.
-
-        public Transform customersPos;
-        public Transform customersDir;
-        public Transform KioskDestination;
-        public float speed;
+        public TableManager tableManager;
+        public Transform kioskDestination;
+        public Transform mySeatDestination;     // ìë™í• ë‹¹
+        public Transform mySeat;
+        public Transform customerSpawnPoint;
+        public NavMeshAgent agent;
 
         private void Awake()
         {
-            customersPos.position = transform.position;
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+        private void Start()
+        {
+            tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
+            kioskDestination = GameObject.Find("KioskDestnation").GetComponent<Transform>();
+            customerSpawnPoint = GameObject.Find("CustomerSpawnPoint").GetComponent<Transform>();
+            SelectSeat();
+
+            agent.enabled = true;
+            GetComponent<Animator>().enabled = true;
+        }
+
+        // ì¢Œì„ ê³ ë¥´ê¸°
+        public void SelectSeat()
+        {
+            // 1. ë¹ˆì¢Œì„ì„ ê°€ì ¸ì˜´
+            List<Transform> falseSeatList = tableManager.FalseSeat();
+
+            if (falseSeatList.Count <= 0)   // ì¢Œì„ ì—†ìœ¼ë©´ ì…ì¥ ê¸ˆì§€
+                return;
+
+            // 2. falseSeatListì—ì„œ ëœë¤ìœ¼ë¡œ í•˜ë‚˜ë¥¼ ë½‘ì•„ì„œ ë‚´ ì¢Œì„ìœ¼ë¡œ ì§€ì •
+            int randomSeat = UnityEngine.Random.Range(0, falseSeatList.Count - 1);
+            mySeatDestination = falseSeatList[randomSeat];
+
+            // 3. ê³ ë¥¸ ì¢Œì„ì˜ valueê°’ì€ trueë¡œ ë³€ê²½
+            mySeat = falseSeatList[randomSeat];
+            tableManager.SeatDic[falseSeatList[randomSeat]] = true;
         }
     }
 }
