@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 8903041149228638018}
   - component: {fileID: 5147891299983902968}
   - component: {fileID: 1576617611}
+  - component: {fileID: 123824419}
   m_Layer: 0
   m_Name: noz_mesarski
   m_TagString: Untagged
@@ -327,12 +328,27 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5970401346641395975}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4040014565279584641, guid: 828da4ef88a9b60469e6cdadb299f277, type: 3}
+--- !u!114 &123824419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5970401346641395975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5082b4753578ea9418bd62993209537e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cuttingCount: 0
+  headCuttingPoint: {fileID: 0}
+  tailCuttingPoint: {fileID: 0}
 --- !u!1 &8652392801155031173
 GameObject:
   m_ObjectHideFlags: 0
