@@ -27,7 +27,7 @@ public class Bell : MonoBehaviour
     private void Awake()
     {
         timer = GameObject.Find("Clock").GetComponent<Timer>();
-        customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<AHN.CustomerSqawnManager>();
+        //customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<AHN.CustomerSqawnManager>();
     }
     private void Start()
     {
