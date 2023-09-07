@@ -41,6 +41,14 @@ namespace AHN
         bool oneButton = false;
         bool twoButton = false;
         bool threeButton = false;
+        int currentScore = 0;   // 디버깅하기 위한 예시. 현재 점수
+
+        XRController xrController;
+
+        private void Start()
+        {
+            xrController = GameObject.FindObjectOfType<XRController>(); ;
+        }
 
         /// <summary>
         /// 밥을 쥐고 컨트롤러 버튼을 누를수록 점수가 증가. 하지만 3번까지만.
@@ -48,11 +56,21 @@ namespace AHN
         /// <param name="currentScore"></param>
         public void ScoreUP(int currentScore)
         {
-            if (canScroeUp)     // 첫 번째 클릭
+            // TODO : 버튼 누를 때마다 진동 ㄱㄱ
+
+
+            if (threeButton)    // 세 번을 다 채웠으니 더 이상 점수 못올리고 return
             {
-                oneButton = true;
+                Debug.Log(currentScore);
+                ActivateHaptic();
+                return;
+            }
+            else if (twoButton)     // 세 번째 클릭
+            {
+                threeButton = true;
                 currentScore += 500;
-                canScroeUp = false;                 // canScoreUp = false, oneButton = true, twoButton = false, threeButton = false;
+                twoButton = false;                 // canScoreUp = false, oneButton = false, twoButton = false, threeButton = true;
+                ActivateHaptic();
                 Debug.Log(currentScore);
             }
             else if (oneButton)     // 두 번째 클릭
@@ -60,20 +78,22 @@ namespace AHN
                 twoButton = true;
                 currentScore += 500;
                 oneButton = false;                 // canScoreUp = false, oneButton = false, twoButton = true, threeButton = false;
+                ActivateHaptic();
                 Debug.Log(currentScore);
             }
-            else if (twoButton)     // 세 번째 클릭
+            if (canScroeUp)     // 첫 번째 클릭
             {
-                threeButton = true;
+                oneButton = true;
                 currentScore += 500;
-                twoButton = false;                 // canScoreUp = false, oneButton = false, twoButton = false, threeButton = true;
+                canScroeUp = false;                 // canScoreUp = false, oneButton = true, twoButton = false, threeButton = false;
+                ActivateHaptic();
                 Debug.Log(currentScore);
             }
-            else if (threeButton)    // 세 번을 다 채웠으니 더 이상 점수 못올리고 return
-            {
-                Debug.Log(currentScore);
-                return;
-            }
+        }
+
+        void ActivateHaptic()
+        {
+            xrController.SendHapticImpulse(0.8f, 2f);
         }
     }
 }
