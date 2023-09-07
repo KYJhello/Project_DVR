@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Bell : MonoBehaviour
+public class TrashButton : MonoBehaviour
 {
     public Transform visualTarget;
     public Vector3 localAxis;
     public float resetSpeed = 5;
     public float followAngleTreshold;
 
+    public Transform trashCoverTransform;
+    public float openSpeed = 0.5f;
+    public Rigidbody rb;
+
     private Vector3 initialLocalPos;
+    Transform cover;
+    Vector3 targetPoint;
 
     private Vector3 offset;
     private Transform pokeAttechTransform;
@@ -20,16 +26,13 @@ public class Bell : MonoBehaviour
 
     private bool isFollowing = false;
     private bool freeze = false;
-
-    private Timer timer;
-    private AHN.CustomerSqawnManager customerSqawn;
+    private bool stopMoveCover;
 
     private void Start()
     {
-        timer = GameObject.Find("Clock").GetComponent<Timer>();
-        //customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<AHN.CustomerSqawnManager>();
-
         initialLocalPos = visualTarget.localPosition;
+        cover = trashCoverTransform.transform;
+        targetPoint = new Vector3(90, 0, 75);
 
         interactable = GetComponent<XRBaseInteractable>();
         interactable.hoverEntered.AddListener(Follow);
@@ -42,7 +45,7 @@ public class Bell : MonoBehaviour
         if (hover.interactorObject is XRPokeInteractor) // 상호작용하는 객체가 XRPokeInteractor인 경우에만 실행
         {
             XRPokeInteractor interactor = (XRPokeInteractor)hover.interactorObject;//XRPokeInteractor로 형변환하여 상호작용하는 포커스 대상을 가져옵니다.
- 
+
             pokeAttechTransform = interactor.attachTransform; //pokeAttechTransform에 상호작용하는 포커스 대상의 위치와 회전 정보를 저장합니다.
 
             // visualTarget의 현재 위치와 pokeAttechTransform의 위치 사이의 차이(오프셋)를 계산합니다.
@@ -72,10 +75,47 @@ public class Bell : MonoBehaviour
         if (hover.interactorObject is XRPokeInteractor)
         {
             freeze = true;
-            timer.StertSell();
-            customerSqawn.CustomerSpawnRoutine();   // 손님 생성
+            Coroutine at = StartCoroutine(OpenedCover());
         }
     }
+    IEnumerator OpenedCover()
+    {
+        float zRot = 0;
+        while (true)
+        {
+            yield return new WaitForSeconds(0.005f);
+            cover.rotation = Quaternion.Euler(0, 0, zRot);
+            zRot -= 0.5f;
+            if (zRot < -75)
+                break;
+        }
+
+        yield return new WaitForSeconds(3f);
+        while (true)
+        {
+            yield return new WaitForSeconds(0.005f);
+            cover.rotation = Quaternion.Euler(0, 0, zRot);
+            zRot += 0.5f;
+            if (zRot > 0)
+                break;
+        }
+    }
+
+    /*public void OpenedCover()
+    {
+        Vector3 targetPosition = Vector3.Lerp(cover.position, targetPoint, 0.1f);
+
+        cover.rotation = Quaternion.Euler(targetPosition);
+        StartCoroutine(CloseCover());
+    }
+
+    IEnumerator CloseCover()
+    {
+        yield return new WaitForSeconds(3f);
+        targetPoint = new Vector3(90, 0, 0);
+        Vector3 targetPosition = Vector3.Lerp(cover.position, targetPoint, 0.1f);
+        cover.rotation = Quaternion.Euler(targetPosition);
+    }*/
 
     private void Update()
     {
@@ -99,5 +139,4 @@ public class Bell : MonoBehaviour
             visualTarget.localPosition = Vector3.Lerp(visualTarget.localPosition, initialLocalPos, resetSpeed * Time.deltaTime);
         }
     }
-
 }
