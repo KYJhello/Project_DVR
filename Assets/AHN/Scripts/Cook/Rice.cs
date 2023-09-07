@@ -1,36 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.OpenVR;
 using UnityEngine;
-using UnityEngine.Experimental.XR.Interaction;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-
-/*
-namespace AHN
-{
-    public class Rice : XRBaseInteractable
-    {
-        /// <summary>
-        /// TODO : 컨트롤러 버튼 3번 이상 누르면 맛 평가가 올라감. 또한 버튼을 누를 때마다 진동.
-        /// </summary>
-        /// <param name="args"></param>
-        protected override void OnSelectEntering(SelectEnterEventArgs args)
-        {
-            base.OnSelectEntering(args);
-
-            // if (컨트롤러의 메인버튼(A?)을 3번 이상 눌렀다면)
-            // { 초밥의 점수 += 10f; }
-            
-            // if (컨트롤러의 메인버튼(A?)을 누른다면)
-            // { 진동기능; } 
-
-
-
-            // * 지금은 Grab 버튼을 계속 누르고 있어야 잡히는데 
-            // * 한 번만 눌러도 계속 잡힐 수 있도록
-        }
-    }
-}*/
-
 
 namespace AHN
 {
@@ -43,26 +16,24 @@ namespace AHN
         bool threeButton = false;
         int currentScore = 0;   // 디버깅하기 위한 예시. 현재 점수
 
-        XRController xrController;
+        XRBaseController xrController;
+        // ActionBasedController xrController;
 
         private void Start()
         {
-            xrController = GameObject.FindObjectOfType<XRController>(); ;
+            xrController = GameObject.FindObjectOfType<XRBaseController>(true); 
         }
 
         /// <summary>
-        /// 밥을 쥐고 컨트롤러 버튼을 누를수록 점수가 증가. 하지만 3번까지만.
+        /// 밥을 쥐고 컨트롤러 버튼을 누를수록 점수가 증가 + 진동. 하지만 점수 증가는 3번까지만.
         /// </summary>
         /// <param name="currentScore"></param>
-        public void ScoreUP(int currentScore)
+        public void ScoreUP(ActivateEventArgs args)
         {
-            // TODO : 버튼 누를 때마다 진동 ㄱㄱ
-
-
             if (threeButton)    // 세 번을 다 채웠으니 더 이상 점수 못올리고 return
             {
                 Debug.Log(currentScore);
-                ActivateHaptic();
+                ActivateHaptic(args);
                 return;
             }
             else if (twoButton)     // 세 번째 클릭
@@ -70,7 +41,7 @@ namespace AHN
                 threeButton = true;
                 currentScore += 500;
                 twoButton = false;                 // canScoreUp = false, oneButton = false, twoButton = false, threeButton = true;
-                ActivateHaptic();
+                ActivateHaptic(args);
                 Debug.Log(currentScore);
             }
             else if (oneButton)     // 두 번째 클릭
@@ -78,7 +49,7 @@ namespace AHN
                 twoButton = true;
                 currentScore += 500;
                 oneButton = false;                 // canScoreUp = false, oneButton = false, twoButton = true, threeButton = false;
-                ActivateHaptic();
+                ActivateHaptic(args);
                 Debug.Log(currentScore);
             }
             if (canScroeUp)     // 첫 번째 클릭
@@ -86,14 +57,19 @@ namespace AHN
                 oneButton = true;
                 currentScore += 500;
                 canScroeUp = false;                 // canScoreUp = false, oneButton = true, twoButton = false, threeButton = false;
-                ActivateHaptic();
+                ActivateHaptic(args);
                 Debug.Log(currentScore);
             }
         }
 
-        void ActivateHaptic()
+        void ActivateHaptic(ActivateEventArgs args)
         {
-            xrController.SendHapticImpulse(0.8f, 2f);
+            XRBaseControllerInteractor interactor = args.interactorObject.transform.GetComponent<XRBaseControllerInteractor>();
+            if (interactor != null)
+            {
+                interactor.SendHapticImpulse(0.3f, 0.1f);
+            }
         }
+
     }
 }
