@@ -17,7 +17,6 @@ namespace AHN
         int currentScore = 0;   // 디버깅하기 위한 예시. 현재 점수
 
         XRBaseController xrController;
-        // ActionBasedController xrController;
 
         private void Start()
         {
