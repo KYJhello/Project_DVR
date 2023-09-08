@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,9 +8,10 @@ namespace AHN
 {
     public class PosManager : MonoBehaviour
     {
-        public static UnityEvent<int> OnPayEvent = new UnityEvent<int>();
-        [SerializeField] TextMesh addSalesText;
-        [SerializeField] TextMesh totalSalesText;
+        public static UnityEvent<int> OnPayEvent = new UnityEvent<int>();   // EatState에서 호출할 event
+        [SerializeField] TMP_Text paymentAmountText;
+        [SerializeField] TMP_Text totalSalesText;
+        [SerializeField] TMP_Text fundText;
         [SerializeField] Transform orderSheetPoolPosition;
         GameObject orderSheet;     // 주문서
         private int totalSales;
@@ -23,8 +25,8 @@ namespace AHN
 
         private void OnEnable()
         {
-            OnPayEvent.AddListener(IncreaseInSales);
-            OnPayEvent.AddListener(AddText);
+            OnPayEvent.AddListener(TotalSalesText);
+            OnPayEvent.AddListener(PaymentAmountText);
         }
 
         private void OnDisable()
@@ -45,26 +47,35 @@ namespace AHN
             // TODO : 주문서 나중에 Release 해줘야 하는데 그건 나중에,,,
         }
 
-        void IncreaseInSales(int amount)
+        void TotalSalesText(int amount)   // 총매출
         {
             totalSales += amount;
-            totalSalesText.text = $"합계 : {totalSales}";
+            totalSalesText.text = $"Total Sales : {totalSales}";
+
+            // TODO : 하루마다 매출 초기화
+
         }
 
-        public void AddText(int amount)
+        void FundText(int totalSales)   // 가게 총 자본
         {
-            StartCoroutine(AppearAddTextRoutine(amount));
-            IncreaseInSales(amount);    // 총매출 늘려줌
-            
+            // 모든 매출 다 더하기
+
+        }
+
+        public void PaymentAmountText(int amount)   // 결제금액
+        {
+            StartCoroutine(AppearPaymentAmountRoutine(amount));
+            TotalSalesText(amount);
             
             PrintOrderSheet();
         }
 
-        IEnumerator AppearAddTextRoutine(int amount)
+        IEnumerator AppearPaymentAmountRoutine(int amount)
         {
-            addSalesText.text = $"결제금액 : {amount}원";
+            paymentAmountText.text = $"amount : {amount}";
             yield return new WaitForSeconds(5f);
-            addSalesText.text = "";
+            paymentAmountText.text = "";
         }
+
     }
 }
