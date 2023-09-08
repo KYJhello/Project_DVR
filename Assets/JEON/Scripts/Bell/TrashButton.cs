@@ -101,22 +101,6 @@ public class TrashButton : MonoBehaviour
         }
     }
 
-    /*public void OpenedCover()
-    {
-        Vector3 targetPosition = Vector3.Lerp(cover.position, targetPoint, 0.1f);
-
-        cover.rotation = Quaternion.Euler(targetPosition);
-        StartCoroutine(CloseCover());
-    }
-
-    IEnumerator CloseCover()
-    {
-        yield return new WaitForSeconds(3f);
-        targetPoint = new Vector3(90, 0, 0);
-        Vector3 targetPosition = Vector3.Lerp(cover.position, targetPoint, 0.1f);
-        cover.rotation = Quaternion.Euler(targetPosition);
-    }*/
-
     private void Update()
     {
         if (freeze)
