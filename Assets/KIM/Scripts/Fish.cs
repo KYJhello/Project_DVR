@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 namespace KIM
 {
 
     public class Fish : MonoBehaviour, IHittable
     {
-        public enum State { Idle = 0, Move, Hit, Escape, Die, Store }
-
         List<string> fishInfo;
 
         [SerializeField]
@@ -21,6 +19,7 @@ namespace KIM
         protected Vector3 moveDir;
         protected Rigidbody rb;
         protected bool inStore = false;
+        protected bool isDirChangeActive = false;
 
         protected virtual void Awake()
         {
@@ -32,7 +31,7 @@ namespace KIM
 
         protected Vector3 GetRandVector()
         {
-            return new Vector3(Random.Range(-1f, 1f), Random.Range(-0.1f, 0.1f), Random.Range(-1f, 1f));
+            return new Vector3(Random.Range(-1f, 1f), Random.Range(-0.3f, 0.3f), Random.Range(-1f, 1f));
         }
         
         protected bool WallDetect()
@@ -60,7 +59,23 @@ namespace KIM
             //moveDir += Vector3.Dot(hit.normal, transform.up) >= 0 ?
             //    transform.up / 2 : -transform.up / 2;
 
-            moveDir = -moveDir;
+            if (isDirChangeActive == false)
+            {
+                isDirChangeActive = true;
+                StartCoroutine(ChangeDirRoutine());
+            }
+            
+        }
+        IEnumerator ChangeDirRoutine()
+        {
+            while (isDirChangeActive)
+            {
+                //rb.rotation = Quaternion.LookRotation(transform.forward);
+                moveDir = -moveDir.normalized;
+                yield return new WaitForSeconds(1f);
+
+                isDirChangeActive = false;
+            }
         }
 
         // 애니메이션 끄고, 움직임 멈추고, grabinteractable 키기
@@ -96,6 +111,10 @@ namespace KIM
             fishInfo.Add(data.curFishType.ToString());
             //enum
             fishInfo.Add(data.curFishRank.ToString());
+        }
+        public void SetInStore(bool value)
+        {
+            inStore = value;
         }
     }
 }
