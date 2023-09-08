@@ -1,19 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LM
 {
     public class DiverHelmetHUD : BaseUI
     {
-        Diver diver;
+        public Diver diver;
+
         Coroutine updateRoutine;
+        Color o2Color;
+
         protected override void Awake()
         {
             base.Awake();
-            diver = GameObject.Find("XR Origin (XR Rig)")?.GetComponentInChildren<Diver>();
+            diver = Camera.main.GetComponentInChildren<Diver>();
         }
         private void OnEnable()
         {
@@ -62,13 +63,21 @@ namespace LM
             // 플레이어에 '잠수' 이벤트 만들고 거기에 에드리스너 하기
             diver.OnDived.AddListener(Dive);
             diver.OnDiveEnded.AddListener(DiveEnd);
+            diver.OnChangedO2.AddListener(ChangeO2);
+            diver.OnChangeWeight.AddListener(ChangeWeight);
+
+            diver.glassMat.color = new Color(diver.glassMat.color.r, diver.glassMat.color.g, diver.glassMat.color.b, 1);
+            StartCoroutine(EnableRoutine());
         }
         private void OnDisable()
         {
+            diver.glassMat.color = new Color(diver.glassMat.color.r, diver.glassMat.color.g, diver.glassMat.color.b , 1);
+            images["Mask"].enabled = true;
             diver.OnDived.RemoveListener(Dive);
             diver.OnDiveEnded.RemoveListener(DiveEnd);
+            diver.OnChangedO2.RemoveListener(ChangeO2);
+            diver.OnChangeWeight.RemoveListener(ChangeWeight);
         }
-
 
         private void Dive()
         {
@@ -83,6 +92,10 @@ namespace LM
         {
             StartCoroutine(WeightChangeRoutine());
         }
+        private void ChangeO2(float o2)
+        {
+            StartCoroutine(O2ChangeRoutine(o2));
+        }
 
         IEnumerator HUDUpdate()
         {
@@ -90,7 +103,7 @@ namespace LM
             images["DepthBG"].enabled = true;
             transforms["DepthSlider"].gameObject.SetActive(true);
             float tic = (1 / diver.MaxO2) * Time.fixedDeltaTime;
-            Color o2Color = new Color(0, 1, 0, 1);
+            o2Color = new Color(0, 1, 0, 1);
             while (true)
             {
                 if (o2Color.r < 1)
@@ -167,38 +180,101 @@ namespace LM
                 yield return null;
             }
         }
-        IEnumerator ResetRoutine()
+        IEnumerator O2ChangeRoutine(float o2)
         {
             float t = 0;
-            float rate = 0;
-            Color c = images["O2SliderBGEdge"].color;
-            float fill = images["O2Slider"].fillAmount;
-            float txt = float.Parse(texts["O2Text"].text);
-            while (t < 2)
+            float tic = o2 * Time.fixedDeltaTime;
+            while (t <= 1)
             {
-                rate = t * 0.5f;
-                if(c.g < 1 && t < 1)
+                if(tic < 0)
                 {
-                    images["O2SliderBGEdge"].color = new Color(1, Mathf.Lerp(c.g, 1, t), 0);
-                    images["O2SliderEdge"].color = new Color(1, Mathf.Lerp(c.g, 1, t), 0);
+                    if (o2Color.r < 1)
+                        o2Color = new Color(o2Color.r - tic, 1, 0);
+                    else
+                        o2Color = new Color(1, o2Color.g + tic, 0);
                 }
                 else
                 {
-                    images["O2SliderBGEdge"].color = new Color(Mathf.Lerp(c.r, 0, t - 1), 1, 0);
-                    images["O2SliderEdge"].color = new Color(Mathf.Lerp(c.r, 0, t - 1), 1, 0);
+                    if (o2Color.g < 1)
+                        o2Color = new Color(1, o2Color.g + tic, 0);
+                    else
+                        o2Color = new Color(o2Color.r - tic, 1, 0);
+                }
+                images["O2SliderBGEdge"].color = o2Color;
+                images["O2SliderEdge"].color = o2Color;
+                images["O2Slider"].fillAmount += tic;
+                t += Time.deltaTime;
+                yield return null;
+            }
+        }
+        IEnumerator ResetRoutine()
+        {
+            float t = 0;
+            Color c = images["O2SliderBGEdge"].color;
+            float fill = images["O2Slider"].fillAmount;
+            float txt = float.Parse(texts["O2Text"].text);
+            while (t < 1)
+            {
+                if(c.g < 1)
+                {
+                    images["O2SliderBGEdge"].color = new Color(1, Mathf.Lerp(c.g, 1, t * 2), 0);
+                    images["O2SliderEdge"].color = new Color(1, Mathf.Lerp(c.g, 1, t * 2), 0);
+                }
+                else
+                {
+                    images["O2SliderBGEdge"].color = new Color(Mathf.Lerp(c.r, 0, (t - 0.5f) * 2), 1, 0);
+                    images["O2SliderEdge"].color = new Color(Mathf.Lerp(c.r, 0, (t - 0.5f) * 2), 1, 0);
                 }
 
-                images["O2Slider"].fillAmount = Mathf.Lerp(fill, 1, rate);
+                images["O2Slider"].fillAmount = Mathf.Lerp(fill, 1, t);
 
-                texts["O2Text"].text = ((int)Mathf.Lerp(txt, diver.MaxO2, rate)).ToString();
+                texts["O2Text"].text = ((int)Mathf.Lerp(txt, diver.MaxO2, t)).ToString();
 
                 t += Time.deltaTime;
 
                 yield return null;
             }
-            texts["O2Text"].text = diver.MaxO2.ToString();
 
-            OnEnable();
+            Color startColor = new Color(0, 1, 0, 1);
+
+            images["O2SliderBGEdge"].color = startColor;
+            images["O2SliderEdge"].color = startColor;
+
+            images["O2Slider"].fillAmount = 1;
+
+            texts["O2Text"].text = ((int)diver.MaxO2).ToString();
+
+            texts["DepthText"].text = "0m";
+            texts["DepthText"].enabled = false;
+            images["DepthBG"].enabled = false;
+
+            images["DepthSliderBG"].color = new Color(0, 1, 1);
+            transforms["CurDepthPos"].anchoredPosition = new Vector2(transforms["CurDepthPos"].anchoredPosition.x, 250);
+            transforms["DepthSlider"].gameObject.SetActive(false);
+        }
+        IEnumerator EnableRoutine()
+        {
+            float t = 0;
+            float a = 1;
+            float rate = 0;
+            Color glass = diver.glassMat.color;
+            while (t <= 1)
+            {
+                a = Mathf.Lerp(1, 0, t);
+                images["Mask"].color = new Color(1, 1, 1, a);
+                t += Time.deltaTime;
+                yield return null;
+            }
+            images["Mask"].enabled = false;
+            t = 0;
+            while (t <= 5)
+            {
+                rate = t * 0.25f;
+                a = Mathf.Lerp(1, 0, rate);
+                diver.glassMat.color = new Color(glass.r, glass.g, glass.b, a);
+                t += Time.deltaTime * 2;
+                yield return null;
+            }
         }
     }
 }

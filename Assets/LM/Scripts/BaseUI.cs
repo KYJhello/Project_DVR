@@ -9,9 +9,10 @@ namespace LM
     public class BaseUI : MonoBehaviour
     {
         protected Dictionary<string, RectTransform> transforms;
-        protected Dictionary<string, Button> buttons;
         protected Dictionary<string, TMP_Text> texts;
         protected Dictionary<string, Image> images;
+        protected Dictionary<string, Button> buttons;
+        protected Dictionary<string, Toggle> toggles;
 
         protected virtual void Awake()
         {
@@ -21,9 +22,10 @@ namespace LM
         protected virtual void BindChildren()
         {
             transforms = new Dictionary<string, RectTransform>();
-            buttons = new Dictionary<string, Button>();
             texts = new Dictionary<string, TMP_Text>();
             images = new Dictionary<string, Image>();
+            buttons = new Dictionary<string, Button>();
+            toggles = new Dictionary<string, Toggle>();
 
             RectTransform[] children = GetComponentsInChildren<RectTransform>();
             foreach (RectTransform child in children)
@@ -35,10 +37,6 @@ namespace LM
 
                 transforms.Add(key, child);
 
-                Button button = child.GetComponent<Button>();
-                if (button != null)
-                    buttons.Add(key, button);
-
                 TMP_Text text = child.GetComponent<TMP_Text>();
                 if (text != null)
                     texts.Add(key, text);
@@ -46,6 +44,14 @@ namespace LM
                 Image image = child.GetComponent<Image>();
                 if(image != null)
                     images.Add(key, image);
+
+                Button button = child.GetComponent<Button>();
+                if (button != null)
+                    buttons.Add(key, button);
+
+                Toggle toggle = child.GetComponent<Toggle>();
+                if(toggle != null)
+                    toggles.Add(key, toggle);
             }
         }
     }
