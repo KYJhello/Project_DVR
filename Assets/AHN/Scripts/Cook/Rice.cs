@@ -9,7 +9,7 @@ namespace AHN
 {
     public class Rice : MonoBehaviour
     {
-        // 점수가 올라가는 함수. (밥이 뭉쳐지는 건 어려우니 패스)
+        // 점수가 올라가는 함수. (밥이 뭉쳐지는 건 어려우니 일단 패스 -> 밥의 크기가 점점 줄어드는 거로 대체해도 괜찮을듯.)
         bool canScroeUp = true;
         bool oneButton = false;
         bool twoButton = false;
@@ -69,6 +69,5 @@ namespace AHN
                 interactor.SendHapticImpulse(0.3f, 0.1f);
             }
         }
-
     }
 }
