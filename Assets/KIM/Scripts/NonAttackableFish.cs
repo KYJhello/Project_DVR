@@ -8,12 +8,10 @@ namespace KIM
 {
     public class NonAttackableFish : Fish
     {
-        public enum State { Idle = 0, Move, Hit, Escape, Die }
         StateMachine<State, NonAttackableFish> stateMachine;
 
         Coroutine nomalMoveRoutine;
         Coroutine wallEscapeRoutine;
-
 
         protected override void Awake()
         {
@@ -23,7 +21,8 @@ namespace KIM
             stateMachine = new StateMachine<State, NonAttackableFish>(this);
             stateMachine.AddState(State.Idle, new IdleState(this, stateMachine));
             stateMachine.AddState(State.Move, new MoveState(this, stateMachine));
-
+            stateMachine.AddState(State.Store, new StoreState(this, stateMachine));
+            
         }
         private void Start()
         {
@@ -60,6 +59,10 @@ namespace KIM
 
             public override void Enter()
             {
+                if (owner.inStore)
+                {
+                    stateMachine.ChangeState(State.Store);
+                }
                 stateMachine.ChangeState(State.Move);
             }
 
@@ -120,6 +123,38 @@ namespace KIM
                 }
 
                 transform.Translate(moveDir * owner.data.MoveSpeed * Time.deltaTime);
+            }
+        }
+        private class StoreState : NonAttackableFishState
+        {
+            public StoreState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
+            {
+
+            }
+
+            public override void Enter()
+            {
+                Debug.Log("IN Store");
+            }
+
+            public override void Exit()
+            {
+
+            }
+
+            public override void Setup()
+            {
+
+            }
+
+            public override void Transition()
+            {
+
+            }
+
+            public override void Update()
+            {
+
             }
         }
         #endregion

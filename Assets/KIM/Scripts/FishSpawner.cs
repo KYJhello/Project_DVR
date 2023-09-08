@@ -7,16 +7,16 @@ namespace KIM
 {
     public class FishSpawner : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField]
+        private int spawnNum;
+        [SerializeField]
+        private bool isStore;
+
+        private void Awake()
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            for(int i = 0; i < spawnNum; i++) {
+                GameManager.Resource.Instantiate<GameObject>("KIM_Prefabs/Fish", transform.position, Quaternion.identity);
+            }
         }
     }
 }

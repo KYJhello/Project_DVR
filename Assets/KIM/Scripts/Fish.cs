@@ -6,8 +6,11 @@ using UnityEngine;
 
 namespace KIM
 {
+
     public class Fish : MonoBehaviour, IHittable
     {
+        public enum State { Idle = 0, Move, Hit, Escape, Die, Store }
+
         List<string> fishInfo;
 
         [SerializeField]
@@ -17,6 +20,7 @@ namespace KIM
         protected float curWeight;
         protected Vector3 moveDir;
         protected Rigidbody rb;
+        protected bool inStore = false;
 
         protected virtual void Awake()
         {
