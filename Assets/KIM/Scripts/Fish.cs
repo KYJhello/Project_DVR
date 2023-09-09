@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace KIM
 {
 
     public class Fish : MonoBehaviour, IHittable
     {
-        List<string> fishInfo;
+        // 이름, 길이, 무게, 랭크
+        List<string> fishInfo = new List<string>();
 
         [SerializeField]
         protected FishData data;
@@ -18,15 +20,19 @@ namespace KIM
         protected float curWeight;
         protected Vector3 moveDir;
         protected Rigidbody rb;
-        protected bool inStore = false;
+        protected bool isDie = false;
         protected bool isDirChangeActive = false;
+        protected XRGrabInteractable grabInteractable;
 
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            grabInteractable = GetComponent<XRGrabInteractable>();
+            grabInteractable.enabled = false;
             SetHP();
             SetLength();
             SetWeight();
+            SetFishInfo();
         }
 
         protected Vector3 GetRandVector()
@@ -81,7 +87,9 @@ namespace KIM
         // 애니메이션 끄고, 움직임 멈추고, grabinteractable 키기
         protected void Die()
         {
-
+            isDie = true;
+            StopAllCoroutines();
+            grabInteractable.enabled = true;
         }
         public void Hit()
         {
@@ -112,9 +120,22 @@ namespace KIM
             //enum
             fishInfo.Add(data.curFishRank.ToString());
         }
-        public void SetInStore(bool value)
+        public bool GetIsDie()
         {
-            inStore = value;
+            return isDie;
+        }
+        public List<string> GetFishInfo()
+        {
+            StartCoroutine(DestroyRoutine());
+            return fishInfo;
+        }
+        IEnumerator DestroyRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.2f);
+                Destroy(this.gameObject);
+            }
         }
     }
 }

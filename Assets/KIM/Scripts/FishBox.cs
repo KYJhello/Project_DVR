@@ -7,10 +7,8 @@ namespace KIM
 {
     public class FishBox : MonoBehaviour
     {
-        public UnityEvent<int> OnPullRequest;
-
-        List<Dictionary<string, string>> fishList;
-        List<string> fishKeys;
+        public List<Dictionary<string, string>> fishList = new List<Dictionary<string, string>>();
+        List<string> fishKeys = new List<string>();
 
         private void Awake()
         {
@@ -39,16 +37,21 @@ namespace KIM
             fishList.RemoveAt(index);
         }
 
+        //private void OnCollisionEnter(Collision other)
+        //{
+        //    // 물고기랑 닿으면
+        //    if (other.gameObject.layer == 10)
+        //    {
+        //        AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());
+        //    }
+        //    // 
+        //}
         private void OnTriggerEnter(Collider other)
         {
             // 물고기랑 닿으면
-            if (other.gameObject.layer == 10)
+            if (other.gameObject.layer == 10 && other.gameObject.GetComponent<Fish>().GetIsDie())
             {
-                if (other.gameObject.GetComponent<Fish>().enabled == false)
-                {
-                    // TODO 피쉬에서 정보 보내는 함수 만들어서 실행시키기
-                    //AddFish(other.gameObject.GetComponent<Fish>());
-                }
+                AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());
             }
             // 
         }
