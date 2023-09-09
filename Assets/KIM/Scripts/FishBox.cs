@@ -33,22 +33,15 @@ namespace KIM
             // TODO : ¹°°í±â ²¨³ÂÀ» ¶§ ¹°°í±â »ý¼º
             // GameManager.Resource.Instantiate<GameObject>("Sea_Fish_" + (fishList[index])[name], transform.position + Vector3.up, Quaternion.identity);
 
-
             fishList.RemoveAt(index);
         }
-
-        //private void OnCollisionEnter(Collision other)
-        //{
-        //    // ¹°°í±â¶û ´êÀ¸¸é
-        //    if (other.gameObject.layer == 10)
-        //    {
-        //        AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());
-        //    }
-        //    // 
-        //}
+        public List<Dictionary<string, string>> GetFishDicList()
+        {
+            return fishList;
+        }
         private void OnTriggerEnter(Collider other)
         {
-            // ¹°°í±â¶û ´êÀ¸¸é
+            // Á×Àº ¹°°í±â¶û ´êÀ¸¸é
             if (other.gameObject.layer == 10 && other.gameObject.GetComponent<Fish>().GetIsDie())
             {
                 AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());

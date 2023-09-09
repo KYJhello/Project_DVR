@@ -1760,11 +1760,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishBox
       objectReference: {fileID: 0}
-    - target: {fileID: 304038675038764922, guid: a98c14e16f2e9b04297c4acd098d06ef,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 304038675038764925, guid: a98c14e16f2e9b04297c4acd098d06ef,
         type: 3}
       propertyPath: m_RootOrder

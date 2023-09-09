@@ -29,10 +29,9 @@ namespace KIM
             rb = GetComponent<Rigidbody>();
             grabInteractable = GetComponent<XRGrabInteractable>();
             grabInteractable.enabled = false;
-            SetHP();
-            SetLength();
-            SetWeight();
+
             SetFishInfo();
+            
         }
 
         protected Vector3 GetRandVector()
@@ -102,23 +101,53 @@ namespace KIM
         }
         private void SetLength()
         {
-            float randomRangeValue = data.Length / 10 + data.Length % 10;
+            float randomRangeValue = data.Length / 10;
             curLength = data.Length + Random.Range(-randomRangeValue,randomRangeValue);
+            curLength = Mathf.Floor(curLength * 100f) / 100f;
         }
         private void SetWeight()
         {
-            float randomRangeValue = data.Weight / 10 + data.Weight % 10;
-            curWeight = data.Weight;
+            float randomRangeValue = data.Weight / 10;
+            curWeight = data.Weight + Random.Range(-randomRangeValue, randomRangeValue);
+            curWeight = Mathf.Floor(curWeight * 100f) / 100f;
+        }
+        // È®·ü
+        // ½ºÆä¼È 3%
+        // ½´ÆÛ·¹¾î 10%
+        // ·¹¾î 27%
+        // ³ë¸» 60%
+        private void SetFishRank()
+        {
+            int num = Random.Range(1, 100);
+            if (num >=1 && num <=3)
+            {
+                data.CurFishRank = FishRank.Special;
+            }
+            else if (num > 3 && num <= 13)
+            {
+                data.CurFishRank = FishRank.SuperRare;
+            }else if (num > 13 && num <= 40)
+            {
+                data.CurFishRank = FishRank.Rare;
+            }else if(num > 40 && num <= 100)
+            {
+                data.CurFishRank = FishRank.Normal;
+            }
         }
         private void SetFishInfo()
         {
+            SetHP();
+            SetLength();
+            SetWeight();
+            SetFishRank();
+
             fishInfo.Add(data.Name);
             fishInfo.Add(curWeight.ToString());
             fishInfo.Add(curLength.ToString());
             //enum
-            fishInfo.Add(data.curFishType.ToString());
+            fishInfo.Add(data.CurFishType.ToString());
             //enum
-            fishInfo.Add(data.curFishRank.ToString());
+            fishInfo.Add(data.CurFishRank.ToString());
         }
         public bool GetIsDie()
         {
@@ -133,7 +162,7 @@ namespace KIM
         {
             while (true)
             {
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.05f);
                 Destroy(this.gameObject);
             }
         }
