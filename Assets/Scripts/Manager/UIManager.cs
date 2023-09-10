@@ -17,9 +17,6 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        eventSystem = GameManager.Resource.Instantiate<EventSystem>("UI/EventSystem");
-        eventSystem.transform.parent = transform;
-
         popUpCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         popUpCanvas.gameObject.name = "PopUpCanvas";
         popUpCanvas.sortingOrder = 100;
