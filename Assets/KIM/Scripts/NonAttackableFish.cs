@@ -12,7 +12,7 @@ namespace KIM
     {
         public enum State { Idle = 0, Move, Hit, Escape, Die }
         private int curHitDamage;
-        private bool isHitable;
+        private bool isHittable;
 
         StateMachine<State, NonAttackableFish> stateMachine;
 
@@ -72,7 +72,7 @@ namespace KIM
 
             public override void Enter()
             {
-                owner.isHitable = true;
+                owner.isHittable = true;
             }
 
             public override void Exit()
@@ -147,7 +147,7 @@ namespace KIM
 
             public override void Enter()
             {
-                owner.isHitable = false;
+                owner.isHittable = false;
                 owner.curHp -= owner.curHitDamage;
             }
 
