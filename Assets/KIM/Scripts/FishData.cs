@@ -29,8 +29,11 @@ namespace KIM
         [SerializeField]
         private bool isStopableFish;
         [SerializeField]
-        public FishType curFishType;
-        public FishRank curFishRank { get; set; }
+        private FishType curFishType;
+        private FishRank curFishRank; 
+        
+        public FishType CurFishType { get { return curFishType; } set { curFishType = value; } }
+        public FishRank CurFishRank { get { return curFishRank; } set { curFishRank = value; } }
 
         public string Name { get { return name; } }
         public int HP { get { return hp; } }

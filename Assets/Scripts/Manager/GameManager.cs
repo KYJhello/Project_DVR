@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AHN;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,20 +35,20 @@ public class GameManager : MonoBehaviour
     }
     private void InitManagers()
     {
+        GameObject resourceObj = new GameObject();
+        resourceObj.name = "ResourceManager";
+        resourceObj.transform.parent = transform;
+        resource = resourceObj.AddComponent<ResourceManager>();
+        
         GameObject poolObj = new GameObject();
         poolObj.name = "PoolManager";
         poolObj.transform.parent = transform;
         pool = poolObj.AddComponent<PoolManager>();
 
-        GameObject resourceObj = new GameObject();
-        resourceObj.name = "ResourceManager";
-        resourceObj.transform.parent = transform;
-        resource = resourceObj.AddComponent<ResourceManager>();
 
         GameObject uiObj = new GameObject();
         uiObj.name = "UIManager";
         uiObj.transform.parent = transform;
         ui = uiObj.AddComponent<UIManager>();
-
     }
 }

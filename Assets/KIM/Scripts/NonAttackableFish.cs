@@ -8,78 +8,244 @@ namespace KIM
 {
     public class NonAttackableFish : Fish
     {
-        //public enum State { State_Idle = 0, State_Move, State_Hit, State_Escape, State_Die }
-        //StateMachine<State, NonAttackableFish> stateMachine;
+        public enum State { Idle = 0, Move, Hit, Escape, Die }
 
-        private void Awake()
+        StateMachine<State, NonAttackableFish> stateMachine;
+
+        Coroutine nomalMoveRoutine;
+        Coroutine wallEscapeRoutine;
+
+        protected override void Awake()
         {
+            base.Awake();
+
             StartCoroutine(MoveRoutine());
-            //stateMachine = new StateMachine<State, NonAttackableFish>(this);
-            //stateMachine.AddState(State.State_Idle, new IdleState(this, stateMachine));
+            stateMachine = new StateMachine<State, NonAttackableFish>(this);
+            stateMachine.AddState(State.Idle, new IdleState(this, stateMachine));
+            stateMachine.AddState(State.Move, new MoveState(this, stateMachine));
+            stateMachine.AddState(State.Hit, new HitState(this, stateMachine));
+            stateMachine.AddState(State.Escape, new EscapeState(this, stateMachine));
+            stateMachine.AddState(State.Die, new DieState(this, stateMachine));
+
 
         }
-
-        //#region FishState
-        //private abstract class NonAttackableFishState : StateBase<State, NonAttackableFish>
-        //{
-        //    protected GameObject gameObject => owner.gameObject;
-        //    protected FishData data => owner.data;
-        //    protected int curHp => owner.curHp;
-        //    protected float curLength => owner.curLength;
-        //    protected float curWeight => owner.curWeight;
-
-        //    protected NonAttackableFishState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
-        //    {
-
-        //    }
-        //}
-
-        //private class IdleState : NonAttackableFishState
-        //{
-        //    public IdleState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
-        //    {
-
-        //    }
-
-        //    public override void Enter()
-        //    {
-
-        //    }
-
-        //    public override void Exit()
-        //    {
-
-        //    }
-
-        //    public override void Setup()
-        //    {
-
-        //    }
-
-        //    public override void Transition()
-        //    {
-
-        //    }
-
-        //    public override void Update()
-        //    {
-
-        //    }
-        //}
-        //#endregion
-
+        private void Start()
+        {
+            stateMachine.SetUp(State.Idle);
+        }
         private void Update()
         {
-            transform.Translate(moveDir.normalized * Time.deltaTime);
-
+            stateMachine.Update();
+            transform.rotation = Quaternion.LookRotation(moveDir);
         }
+        private void LateUpdate()
+        {
+        }
+
+        #region FishState
+        private abstract class NonAttackableFishState : StateBase<State, NonAttackableFish>
+        {
+            protected GameObject gameObject => owner.gameObject;
+            protected Transform transform => owner.transform;
+            protected FishData data => owner.data;
+            protected int curHp => owner.curHp;
+            protected float curLength => owner.curLength;
+            protected float curWeight => owner.curWeight;
+            protected Vector3 moveDir => owner.moveDir;
+
+            protected NonAttackableFishState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
+            {
+
+            }
+        }
+
+        private class IdleState : NonAttackableFishState
+        {
+            private float time;
+
+            public IdleState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
+            {
+
+            }
+
+            public override void Enter()
+            {
+                
+            }
+
+            public override void Exit()
+            {
+
+            }
+
+            public override void Setup()
+            {
+
+            }
+
+            public override void Transition()
+            {
+            }
+
+            public override void Update()
+            {
+                stateMachine.ChangeState(State.Move);
+            }
+        }
+        private class MoveState : NonAttackableFishState
+        {
+            public MoveState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
+            {
+
+            }
+
+            public override void Enter()
+            {
+
+            }
+
+            public override void Exit()
+            {
+
+            }
+
+            public override void Setup()
+            {
+
+            }
+
+            public override void Transition()
+            {
+                stateMachine.ChangeState(State.Die);
+            }
+
+            public override void Update()
+            {
+                //owner.Move();
+
+                //Debug.Log(moveDir);
+                if (owner.WallDetect() && !owner.isDirChangeActive)
+                {
+                    //Debug.Log("wallDetect");
+                    owner.ChangeMoveDir();
+                }
+                //if (owner.isDirChangeActive)
+                //{
+                //    //return;
+                //}
+                transform.Translate(moveDir * owner.data.MoveSpeed * Time.deltaTime, Space.World);
+            }
+        }
+        private class HitState : NonAttackableFishState
+        {
+            public HitState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
+            {
+
+            }
+
+            public override void Enter()
+            {
+
+            }
+
+            public override void Exit()
+            {
+
+            }
+
+            public override void Setup()
+            {
+
+            }
+
+            public override void Transition()
+            {
+            }
+
+            public override void Update()
+            {
+
+            }
+        }
+        private class EscapeState : NonAttackableFishState
+        {
+            public EscapeState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
+            {
+
+            }
+
+            public override void Enter()
+            {
+
+            }
+
+            public override void Exit()
+            {
+
+            }
+
+            public override void Setup()
+            {
+
+            }
+
+            public override void Transition()
+            {
+            }
+
+            public override void Update()
+            {
+
+            }
+        }
+        private class DieState : NonAttackableFishState
+        {
+            public DieState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
+            {
+
+            }
+
+            public override void Enter()
+            {
+                owner.Die();
+            }
+
+            public override void Exit()
+            {
+
+            }
+
+            public override void Setup()
+            {
+
+            }
+
+            public override void Transition()
+            {
+            }
+
+            public override void Update()
+            {
+
+            }
+        }
+
+        #endregion
+
 
         IEnumerator MoveRoutine()
         {
             while (true)
             {
-                moveDir = GetRandVector();
-                Debug.Log(moveDir);
+                if (isDirChangeActive)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    moveDir = GetRandVector();
+                }
+                //Debug.Log(moveDir);
                 //Move();
 
                 yield return new WaitForSeconds(Random.Range(3f,5f));
@@ -94,32 +260,6 @@ namespace KIM
         protected void Move()
         {
             
-            // 벽이 있는지 감지
-            if (WallDetect())
-            {
-                Ray ray = new Ray();
-                ray.origin = this.transform.position;
-                ray.direction = this.transform.position;
-                RaycastHit hit;
-                // 표면으로 레이케스트를 보내 RaycastHit을 구한다
-                Physics.Raycast(ray, out hit, data.WallRecognitionRange, 1 << 14);
-
-                // 벽 표면의 노말백터와 진행방향의 오른쪽노말백터를 내적하여
-                // 값이 양수면 오른쪽, 음수면 왼쪽으로 진행
-                moveDir = Vector3.Dot(hit.normal, transform.right) >= 0 ?
-                    transform.right / 2 : -transform.right / 2;
-
-                // 벽 표면의 노말벡터와 진행방향의 위쪽 벡터를 내적하여
-                // 값이 양수면 위, 음수면 아래로 진행
-                moveDir += Vector3.Dot(hit.normal, transform.up) >= 0 ?
-                    transform.up / 2 : -transform.up / 2;
-
-                moveDir = moveDir.normalized;
-            }
-
-        }
-        protected void Die()
-        {
         }
 
         //protected override void Move()
