@@ -6,14 +6,9 @@ namespace KIM
 {
     public class KIM_FishTank : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private List<Dictionary<string, string>> fishList;
 
-        }
-
-        // Update is called once per frame
-        void Update()
+        private void OnTriggerEnter(Collider other)
         {
 
         }

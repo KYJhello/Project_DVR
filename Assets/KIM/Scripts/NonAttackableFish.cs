@@ -116,7 +116,7 @@ namespace KIM
 
             public override void Transition()
             {
-                stateMachine.ChangeState(State.Die);
+                //stateMachine.ChangeState(State.Die);
             }
 
             public override void Update()
