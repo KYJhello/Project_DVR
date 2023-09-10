@@ -62,9 +62,13 @@ namespace KIM
         private void OnTriggerEnter(Collider other)
         {
             // Á×Àº ¹°°í±â¶û ´êÀ¸¸é
-            if (other.gameObject.layer == 10 && other.gameObject.GetComponent<Fish>().GetIsDie())
+            if (other.gameObject.layer == 10)
             {
-                AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());
+                if (other.gameObject.GetComponent<Fish>().GetIsDie())
+                {
+                    AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());
+
+                }
             }
             // 
         }
