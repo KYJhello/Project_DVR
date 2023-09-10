@@ -130,7 +130,7 @@ namespace LM
                     Fish fish = hit.collider.gameObject.GetComponent<Fish>();
                     if (fish != null)
                     {
-                        if (true)
+                        if (false)
                         {
                             //만약 체력이 남았으면 데미지 주기
                             socketInteractor.allowSelect = false;
