@@ -9,6 +9,7 @@ namespace KIM
     {
         public List<Dictionary<string, string>> fishList = new List<Dictionary<string, string>>();
         List<string> fishKeys = new List<string>();
+        private float totalWeight = 0f;
 
         private void Awake()
         {
@@ -26,18 +27,37 @@ namespace KIM
             {
                 fish.Add(fishKeys[i], info[i]);
             }
+            AddWeight(float.Parse(fish["weight"]));;
             fishList.Add(fish);
+            Debug.Log(totalWeight);
         }
         public void PullFish(int index)
         {
             // TODO : 물고기 꺼냈을 때 물고기 생성
             // GameManager.Resource.Instantiate<GameObject>("Sea_Fish_" + (fishList[index])[name], transform.position + Vector3.up, Quaternion.identity);
-
+            SubWeight(float.Parse((fishList[index])["weight"]));
             fishList.RemoveAt(index);
+        }
+        private void AddWeight(float input)
+        {
+            totalWeight += input;
+        }
+        private void SubWeight(float input)
+        {
+            totalWeight -= input;
         }
         public List<Dictionary<string, string>> GetFishDicList()
         {
+            StartCoroutine(DeleteFishListRoutine());
             return fishList;
+        }
+        IEnumerator DeleteFishListRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.05f);
+                fishList.Clear();
+            }
         }
         private void OnTriggerEnter(Collider other)
         {
