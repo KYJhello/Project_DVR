@@ -12,6 +12,8 @@ namespace LM
         protected int damage;
         protected Rigidbody rb;
 
+        public int Damage { get { return damage; } protected set { damage = value; } }
+
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
