@@ -187,12 +187,12 @@ namespace KIM
 
             public override void Enter()
             {
-                
+                owner.StartCoroutine(EscapeMoveRoutine());
             }
 
             public override void Exit()
             {
-
+                owner.StopCoroutine(EscapeMoveRoutine());
             }
 
             public override void Setup()
@@ -206,11 +206,11 @@ namespace KIM
 
             public override void Update()
             {
-                if (owner.WallDetect() && !owner.isDirChangeActive)
-                {
-                    //Debug.Log("wallDetect");
-                    owner.ChangeMoveDir();
-                }
+                //if (owner.WallDetect() && !owner.isDirChangeActive)
+                //{
+                //    //Debug.Log("wallDetect");
+                //    owner.ChangeMoveDir();
+                //}
 
                 transform.Translate(escapeMoveDir * owner.data.EscapeSpeed * Time.deltaTime, Space.World);
             }
@@ -226,6 +226,7 @@ namespace KIM
                     yield return new WaitForSeconds(1f);
                     escapeMoveDir = owner.GetRandVector();
                     yield return new WaitForSeconds(1f);
+                    stateMachine.ChangeState(State.Idle);
                 }
             }
         }
@@ -298,10 +299,14 @@ namespace KIM
             {
                 if(collision.gameObject.GetComponent<AttackSpear>() != null)
                 {
-                    //curHitDamage = collision.gameObject.GetComponent<AttackSpear>().
+                    curHitDamage = collision.gameObject.GetComponent<AttackSpear>().Damage;
                     stateMachine.ChangeState(State.Hit);
                 }
             }
+        }
+        public string GetCurState()
+        {
+            return stateMachine.GetCurStateName();
         }
 
         //protected override void Move()
