@@ -24,6 +24,8 @@ namespace KIM
         protected bool isDirChangeActive = false;
         protected XRGrabInteractable grabInteractable;
 
+        public int CurHp { get { return curHp; } }
+
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();

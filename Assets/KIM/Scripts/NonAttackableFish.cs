@@ -1,14 +1,18 @@
 using KIM;
+using LM;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+
 
 namespace KIM
 {
     public class NonAttackableFish : Fish
     {
         public enum State { Idle = 0, Move, Hit, Escape, Die }
+        private int curHitDamage;
+        private bool isHittable;
 
         StateMachine<State, NonAttackableFish> stateMachine;
 
@@ -61,8 +65,6 @@ namespace KIM
 
         private class IdleState : NonAttackableFishState
         {
-            private float time;
-
             public IdleState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
             {
 
@@ -70,7 +72,7 @@ namespace KIM
 
             public override void Enter()
             {
-                
+                owner.isHittable = true;
             }
 
             public override void Exit()
@@ -116,7 +118,7 @@ namespace KIM
 
             public override void Transition()
             {
-                stateMachine.ChangeState(State.Die);
+                //stateMachine.ChangeState(State.Die);
             }
 
             public override void Update()
@@ -140,12 +142,13 @@ namespace KIM
         {
             public HitState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
             {
-
+                
             }
 
             public override void Enter()
             {
-
+                owner.isHittable = false;
+                owner.curHp -= owner.curHitDamage;
             }
 
             public override void Exit()
@@ -160,6 +163,13 @@ namespace KIM
 
             public override void Transition()
             {
+                if (owner.curHp <= 0)
+                {
+                    stateMachine.ChangeState(State.Die);
+                }else if(owner.curHp > 0)
+                {
+                    stateMachine.ChangeState(State.Escape);
+                }
             }
 
             public override void Update()
@@ -169,6 +179,7 @@ namespace KIM
         }
         private class EscapeState : NonAttackableFishState
         {
+            private Vector3 escapeMoveDir;
             public EscapeState(NonAttackableFish owner, StateMachine<State, NonAttackableFish> stateMachine) : base(owner, stateMachine)
             {
 
@@ -176,12 +187,12 @@ namespace KIM
 
             public override void Enter()
             {
-
+                owner.StartCoroutine(EscapeMoveRoutine());
             }
 
             public override void Exit()
             {
-
+                owner.StopCoroutine(EscapeMoveRoutine());
             }
 
             public override void Setup()
@@ -195,7 +206,28 @@ namespace KIM
 
             public override void Update()
             {
+                //if (owner.WallDetect() && !owner.isDirChangeActive)
+                //{
+                //    //Debug.Log("wallDetect");
+                //    owner.ChangeMoveDir();
+                //}
 
+                transform.Translate(escapeMoveDir * owner.data.EscapeSpeed * Time.deltaTime, Space.World);
+            }
+            IEnumerator EscapeMoveRoutine()
+            {
+                while (true)
+                {
+                    escapeMoveDir = owner.GetRandVector();
+                    yield return new WaitForSeconds(1f);
+                    escapeMoveDir = owner.GetRandVector();
+                    yield return new WaitForSeconds(1f);
+                    escapeMoveDir = owner.GetRandVector();
+                    yield return new WaitForSeconds(1f);
+                    escapeMoveDir = owner.GetRandVector();
+                    yield return new WaitForSeconds(1f);
+                    stateMachine.ChangeState(State.Idle);
+                }
             }
         }
         private class DieState : NonAttackableFishState
@@ -260,6 +292,22 @@ namespace KIM
         protected void Move()
         {
             
+        }
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == 12)
+            {
+                if(collision.gameObject.GetComponent<AttackSpear>() != null)
+                {
+                    if (!isHittable) return;
+                    curHitDamage = collision.gameObject.GetComponent<AttackSpear>().Damage;
+                    stateMachine.ChangeState(State.Hit);
+                }
+            }
+        }
+        public string GetCurState()
+        {
+            return stateMachine.GetCurStateName();
         }
 
         //protected override void Move()
