@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Salmon
   m_EditorClassIdentifier: 
   name: Salmon
-  hp: 2
+  hp: 1
   weight: 8.7
   length: 80
   playerRecognitionRange: 10

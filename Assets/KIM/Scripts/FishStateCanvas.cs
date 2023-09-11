@@ -13,6 +13,7 @@ namespace KIM
         private void Update()
         {
             test.text = fish.GetCurState();
+            test.text += "\n " + "curHP : " + fish.CurHp;
         }
     }
 }

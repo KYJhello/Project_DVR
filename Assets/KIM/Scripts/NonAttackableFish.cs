@@ -299,6 +299,7 @@ namespace KIM
             {
                 if(collision.gameObject.GetComponent<AttackSpear>() != null)
                 {
+                    if (!isHittable) return;
                     curHitDamage = collision.gameObject.GetComponent<AttackSpear>().Damage;
                     stateMachine.ChangeState(State.Hit);
                 }
