@@ -784,6 +784,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1847198079705299164, guid: 9fcf8871abbd83349981ffb95c6cd70f,
+        type: 3}
+      propertyPath: spawnNum
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1847198079705299165, guid: 9fcf8871abbd83349981ffb95c6cd70f,
         type: 3}
       propertyPath: m_Name
@@ -1305,6 +1310,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fish
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191847937756659530, guid: 4275ec144f00d2548aac74b80c982c37,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7531499846527362544, guid: 4275ec144f00d2548aac74b80c982c37,
         type: 3}

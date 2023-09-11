@@ -6,36 +6,37 @@ namespace KIM
 {
     public class KIM_FishTank : MonoBehaviour
     {
-        private List<Dictionary<string, string>> fishList = new List<Dictionary<string, string>>();
-
-        //private void CreateStoreFishes()
-        //{
-        //    foreach (Dictionary<string, string> fishInfo in fishList)
-        //    {
-        //        GameObject go = GameManager.Resource.Instantiate<GameObject>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity);
-        //        go.GetComponent<StoreFish>().GetFishInfo(fishInfo);
-        //    }
-        //    gameObject.GetComponent<BoxCollider>().enabled = true;
-        //}
+        private List<Dictionary<string, string>> fishList/* = new List<Dictionary<string, string>>()*/;
+        private bool isCreating = false;
 
         private void OnTriggerEnter(Collider other)
         {
             // 만약 충돌한 물체의 레이어가 피쉬박스라면
-            if(other.gameObject.layer == 15)
+            if(other.gameObject.layer == 15 && !isCreating)
             {
-                //gameObject.GetComponent<BoxCollider>().enabled = false;
-                if(other.gameObject.GetComponent<FishBox>().GetFishDicList().Count == 0 )
-                {
-                    return;
-                }
-                Debug.Log("FishTankUpdated");
-                foreach(Dictionary<string,string> fishInfo in other.gameObject.GetComponent<FishBox>().GetFishDicList())
+                if(other.gameObject.GetComponent<FishBox>().GetFishDicList().Count <= 0) { return; }
+                isCreating = true;
+                fishList = new List<Dictionary<string, string>>();
+                StartCoroutine(CreateFishRoutine(other));
+            }
+        }
+        IEnumerator CreateFishRoutine(Collider other)
+        {
+            while (true)
+            {
+                foreach (Dictionary<string, string> fishInfo in other.gameObject.GetComponent<FishBox>().GetFishDicList())
                 {
                     fishList.Add(fishInfo);
-                    /*GameObject go = */GameManager.Resource.Instantiate<StoreFish>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity).GetFishInfo(fishInfo);
-                    //go.GetComponent<StoreFish>().GetFishInfo(fishInfo);
+                    /*GameObject go = */
                 }
-                //CreateStoreFishes();
+                foreach(Dictionary<string,string> fishInfo in fishList)
+                {
+                    GameManager.Resource.Instantiate<StoreFish>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity).GetFishInfo(fishInfo);
+                    yield return new WaitForSeconds(0.2f);
+                }
+                isCreating = false;
+                fishList.Clear();
+                yield return null;
             }
         }
         
