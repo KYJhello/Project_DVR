@@ -12,11 +12,10 @@ namespace KIM
         private string length;
         private string fishType;
         private string fishRank;
-
-
+        private FishBody body;
         private void Awake()
         {
-            
+            body = GetComponentInChildren<FishBody>();
         }
 
         public void GetFishInfo(Dictionary<string, string> info)
@@ -27,6 +26,7 @@ namespace KIM
             fishType = info["fishType"];
             fishRank = info["fishRank"];
             Debug.Log("StoreFishInfo : " + name + ", " + weight + ", " + fishRank);
+            body.Rank = fishRank;
         }
     }
 }
