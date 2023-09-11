@@ -1159,6 +1159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRange: 10
+  damage: 1
   castPos: {fileID: 4667175407966962326}
   mask:
     serializedVersion: 2
