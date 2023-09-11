@@ -29,7 +29,7 @@ namespace KIM
             }
             AddWeight(float.Parse(fish["weight"]));;
             fishList.Add(fish);
-            Debug.Log(totalWeight);
+            Debug.Log("FishBox TotalWeight : " +  totalWeight);
         }
         public void PullFish(int index)
         {
