@@ -27,7 +27,7 @@ namespace KIM
         { 
             // spawnNum만큼 프리팹 생성
             for(int i = 0; i < spawnNum; i++) {
-                GameManager.Resource.Instantiate<GameObject>("KIM_Prefabs/Fish", new Vector3(randPM() * Random.Range(playerWidth, seaWidth), Random.Range(seaMinY, seaHeight),randPM() * Random.Range(playerWidth,seaWidth)), Quaternion.identity);
+                GameManager.Resource.Instantiate<Fish>("KIM_Prefabs/Fish", new Vector3(randPM() * Random.Range(playerWidth, seaWidth), Random.Range(seaMinY, seaHeight),randPM() * Random.Range(playerWidth,seaWidth)), Quaternion.identity);
             }
         }
         private int randPM()

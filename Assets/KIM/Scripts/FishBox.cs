@@ -22,6 +22,7 @@ namespace KIM
 
         public void AddFish(List<string> info)
         {
+            StopAllCoroutines();
             Dictionary<string, string> fish = new Dictionary<string, string>();
             for (int i = 0; i < fishKeys.Count; i++)
             {
@@ -57,6 +58,8 @@ namespace KIM
             {
                 yield return new WaitForSeconds(0.05f);
                 fishList.Clear();
+                totalWeight = 0f;
+                fishList = new List<Dictionary<string, string>>();
             }
         }
         private void OnTriggerEnter(Collider other)
@@ -67,7 +70,6 @@ namespace KIM
                 if (other.gameObject.GetComponent<Fish>().GetIsDie())
                 {
                     AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());
-
                 }
             }
             // 
