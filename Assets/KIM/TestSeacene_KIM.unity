@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2525,7 +2525,6 @@ GameObject:
   - component: {fileID: 3127728407184317584}
   - component: {fileID: 3127728407184317585}
   - component: {fileID: 3127728407184317587}
-  - component: {fileID: 8646833451685001390}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2858,7 +2857,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 23
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 31745
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -2929,7 +2928,7 @@ MonoBehaviour:
   m_ImproveAccuracyWithSphereCollider: 1
   m_PhysicsLayerMask:
     serializedVersion: 2
-    m_Bits: 200342583
+    m_Bits: 200408119
   m_PhysicsTriggerInteraction: 1
 --- !u!1 &3412649391586723693
 GameObject:
@@ -4821,8 +4820,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4667175408074310230}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.8, y: 4.3, z: 1.43}
-  m_LocalScale: {x: 30, y: 30, z: 10}
+  m_LocalPosition: {x: 1.8, y: 7.81, z: 1.43}
+  m_LocalScale: {x: 290.4008, y: 196.03369, z: -30.233551}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4667175406875728945}
@@ -5647,7 +5646,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 23
   m_InteractionLayers:
-    m_Bits: 15361
+    m_Bits: 31745
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -5718,7 +5717,7 @@ MonoBehaviour:
   m_ImproveAccuracyWithSphereCollider: 1
   m_PhysicsLayerMask:
     serializedVersion: 2
-    m_Bits: 15361
+    m_Bits: 80897
   m_PhysicsTriggerInteraction: 1
 --- !u!114 &6694496370112608993
 MonoBehaviour:
@@ -7340,10 +7339,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4970422377385546286, guid: d1586664453c1fd4d9663ed0a9eece91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970422377468670305, guid: d1586664453c1fd4d9663ed0a9eece91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970422377977106443, guid: d1586664453c1fd4d9663ed0a9eece91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7176144683843569798, guid: d1586664453c1fd4d9663ed0a9eece91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7176144685137258152, guid: d1586664453c1fd4d9663ed0a9eece91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 8870236612093257851, guid: d1586664453c1fd4d9663ed0a9eece91,
         type: 3}
       propertyPath: m_Name
       value: StoreFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8870236612093257851, guid: d1586664453c1fd4d9663ed0a9eece91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8870236612093257851, guid: d1586664453c1fd4d9663ed0a9eece91,
         type: 3}
@@ -7379,21 +7408,6 @@ MonoBehaviour:
   m_EnableScaling: 0
   m_MinimumScale: 0.2
   m_MaximumScale: 5
---- !u!114 &8646833451685001390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3127728407184317583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245cbddba11cba14f806daae3c70ad68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RayPositionIgnoreAngle: 45
-  m_RayFacingIgnoreAngle: 75
-  m_RayPositionIgnoreDistance: 25
 --- !u!1 &8677371568090530371
 GameObject:
   m_ObjectHideFlags: 0
