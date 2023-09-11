@@ -406,7 +406,7 @@ MonoBehaviour:
   rayLineWidth: 0.002
   harpoonGunRayCastMask:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 1024
   objectRope: {fileID: 44789347896950862}
   gunUpBodyCollider: {fileID: 280648110010973069}
   spearForce: 10
