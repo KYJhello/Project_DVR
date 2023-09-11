@@ -31,6 +31,7 @@ namespace LM
             socketInteractor.hoverEntered.AddListener(CheckFish);
             socketInteractor.selectEntered.AddListener(GetFish);
             socketInteractor.selectExited.AddListener(RemoveGetFish);
+            socketInteractor.allowSelect = false;
         }
         private void OnDisable()
         {

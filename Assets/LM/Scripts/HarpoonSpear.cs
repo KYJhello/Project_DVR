@@ -7,9 +7,9 @@ namespace LM
 {
     public abstract class HarpoonSpear : MonoBehaviour
     {
-        public float maxRange = 5;
+        public float maxRange;
 
-        protected int damage;
+        public int damage;
         protected Rigidbody rb;
 
         public int Damage { get { return damage; } protected set { damage = value; } }
