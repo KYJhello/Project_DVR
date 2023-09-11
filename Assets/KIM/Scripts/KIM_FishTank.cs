@@ -32,8 +32,8 @@ namespace KIM
                 foreach(Dictionary<string,string> fishInfo in other.gameObject.GetComponent<FishBox>().GetFishDicList())
                 {
                     fishList.Add(fishInfo);
-                    GameObject go = GameManager.Resource.Instantiate<GameObject>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity);
-                    go.GetComponent<StoreFish>().GetFishInfo(fishInfo);
+                    /*GameObject go = */GameManager.Resource.Instantiate<StoreFish>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity).GetFishInfo(fishInfo);
+                    //go.GetComponent<StoreFish>().GetFishInfo(fishInfo);
                 }
                 //CreateStoreFishes();
             }
