@@ -6,10 +6,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Knife : MonoBehaviour
 {
-    int cuttingCount = 1;
     int fishTier;
 
     Transform fishPos;
+    Quaternion quaternion;
 
     GameObject headCuttingPoint;
     GameObject tailCuttingPoint;
@@ -44,19 +44,13 @@ public class Knife : MonoBehaviour
         if (other.gameObject == fishBody && colliders == 3)
         {
             fishPos = other.transform;
-            if (cuttingCount < 10)
-                cuttingCount++;
-            else if (cuttingCount == 10)
-            {
-                GetRawFishPrefab(other);
-            }
-            Debug.Log($"{fishPos}");
-            Debug.Log($"{cuttingCount}");
+            GetRawFishPrefab(other);
         }
     }
 
     private void HeadCutting()
     {
+        headCuttingPoint.GetComponent<BoxCollider>().enabled = false;
         fishHead.transform.SetParent(null);
         fishHead.GetComponent<BoxCollider>().enabled = true;
         fishHead.GetComponent<Rigidbody>().useGravity = true;
@@ -67,6 +61,7 @@ public class Knife : MonoBehaviour
 
     private void TailCutting()
     {
+        tailCuttingPoint.GetComponent<BoxCollider>().enabled = false;
         fishTail.transform.SetParent(null);
         fishTail.GetComponent<BoxCollider>().enabled = true;
         fishTail.GetComponent<Rigidbody>().useGravity = true;
@@ -77,6 +72,13 @@ public class Knife : MonoBehaviour
 
     private void GetRawFishPrefab(Collider other)
     {
+        quaternion = Quaternion.Euler(0, -90, 0);
+        GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Fish_Body_Meat", fishPos.position, quaternion, false);
+        Destroy(other.gameObject);
+    }
+
+    /*private void GetRawFishPrefab(Collider other)
+    {
         // TODO : 물고기의 등급에 따라서 for문을 돌려서 나오는 프리팹의 개수가 달라지도록
         for (fishTier = 1; fishTier < 5; fishTier++)
         {
@@ -84,5 +86,5 @@ public class Knife : MonoBehaviour
 
         }
         Destroy(other.gameObject);
-    }
+    }*/
 }

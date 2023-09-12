@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372985016312983094}
   - component: {fileID: 4372985016312983095}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: Salmon_Sushi_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372985016776883354}
   - component: {fileID: 4372985016776883355}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: Wasabi_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372985017132580064}
   - component: {fileID: 4372985017132580065}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: Salmon_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372985017190957287}
   - component: {fileID: 4372985017190957284}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: Rise_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 7932295793370237083}
   - component: {fileID: 2957223106952021975}
   - component: {fileID: 736464299}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: RP_Salmon_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 268435457
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -544,7 +544,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 0}
   m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
+  m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1
@@ -618,7 +618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372985018009055801}
   - component: {fileID: 4372985018009055798}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: pngwing.com 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
