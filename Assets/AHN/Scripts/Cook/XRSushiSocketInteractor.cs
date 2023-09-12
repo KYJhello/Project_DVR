@@ -10,7 +10,7 @@ namespace AHN
     /// 밥에 와사비를 붙일 Socket.
     /// + Material이 아예 없었으면 좋겠음.
     /// </summary>
-    public class XRRiceWasabiSocketInteractor : XRSocketInteractor
+    public class XRSushiSocketInteractor : XRSocketInteractor
     {
         protected override void CreateDefaultHoverMaterials()
         {
