@@ -20,8 +20,7 @@ namespace AHN
         {
             if (other.gameObject.layer == 22)    // 와사비(22)가 트리거 됐다면, 와사비가 이미 발라진 밥으로 교체
             {
-                // TODO : 와사비가 비활성화 되는 게 아니라 Destroy 돼야함
-                other.gameObject.SetActive(false);
+                Destroy(other.gameObject);
                 wasabi.SetActive(true);
             }
         }

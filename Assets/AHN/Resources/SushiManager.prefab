@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 9027598962796683936}
   - component: {fileID: 5416561305502453276}
   - component: {fileID: 4957296586483843557}
-  m_Layer: 0
+  - component: {fileID: 853403323}
+  m_Layer: 20
   m_Name: SushiRice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,12 +32,13 @@ Transform:
   m_GameObject: {fileID: 610233688}
   m_LocalRotation: {x: 0.7132504, y: 0, z: 0, w: 0.7009094}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 32, y: 32, z: 32}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2360241876662298793}
   - {fileID: 5936171336128265152}
   - {fileID: 8187750496799368005}
+  - {fileID: 1334852467}
   m_Father: {fileID: 2360241877116930937}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 91, y: 0, z: 0}
@@ -55,7 +57,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610233688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -118,7 +120,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 96
   m_CollisionDetection: 0
 --- !u!114 &5416561305502453276
 MonoBehaviour:
@@ -133,8 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wasabi: {fileID: 5936171336128265156}
-  riceWithWasabi: {fileID: 610233688}
-  wasabiTransform: {fileID: 8187750496799368004}
 --- !u!114 &4957296586483843557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,8 +204,8 @@ MonoBehaviour:
   m_Activated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2360241877116930938}
-        m_TargetAssemblyTypeName: AHN.MakeSushi, Assembly-CSharp
+      - m_Target: {fileID: 853403323}
+        m_TargetAssemblyTypeName: AHN.RiceController, Assembly-CSharp
         m_MethodName: ScoreUP
         m_Mode: 0
         m_Arguments:
@@ -299,6 +299,103 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &853403323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610233688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc16e393f4a6a842ab8088da9af3590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rice: {fileID: 610233688}
+  riceMeshRenderer: {fileID: 1334852466}
+--- !u!1 &1334852466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1334852467}
+  - component: {fileID: 1334852469}
+  - component: {fileID: 1334852468}
+  m_Layer: 20
+  m_Name: RiceMeshRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1334852467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334852466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 610233691}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1334852469
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334852466}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 8081549449454791438, guid: f9ade153f4592634aad3b548a7a9450b, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1334852468
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334852466}
+  m_Mesh: {fileID: -2111966116063097590, guid: f9ade153f4592634aad3b548a7a9450b, type: 3}
 --- !u!1 &2360241876662298806
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2360241876662298806}
   m_LocalRotation: {x: -0.7132504, y: -0, z: -0, w: 0.7009094}
-  m_LocalPosition: {x: 0, y: -0.00124, z: -0.00434}
+  m_LocalPosition: {x: 0, y: -0.0001, z: -0.0035}
   m_LocalScale: {x: 0.008125, y: 0.0042419494, z: 0.010595447}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -359,7 +456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sushiManager: {fileID: 2360241877116930936}
   rice: {fileID: 610233688}
-  sushi: {fileID: 0}
 --- !u!1 &2360241877116930936
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +465,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2360241877116930937}
-  - component: {fileID: 2360241877116930938}
   m_Layer: 0
   m_Name: SushiManager
   m_TagString: Untagged
@@ -386,26 +481,13 @@ Transform:
   m_GameObject: {fileID: 2360241877116930936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 676.95, y: 1.902, z: 660.536}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 610233691}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2360241877116930938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2360241877116930936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc16e393f4a6a842ab8088da9af3590, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rice: {fileID: 610233688}
 --- !u!1 &8187750496799368004
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +722,7 @@ PrefabInstance:
     - target: {fileID: 2576410638014077569, guid: 7fb44267e0cf77a43a93440535c2310a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0011
+      value: -0.0012
       objectReference: {fileID: 0}
     - target: {fileID: 2576410638014077569, guid: 7fb44267e0cf77a43a93440535c2310a,
         type: 3}
@@ -679,6 +761,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2576410638014077570, guid: 7fb44267e0cf77a43a93440535c2310a,
         type: 3}
+      propertyPath: m_Radius
+      value: 0.45271787
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576410638014077570, guid: 7fb44267e0cf77a43a93440535c2310a,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.04728213
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576410638014077570, guid: 7fb44267e0cf77a43a93440535c2310a,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.0000000024694757
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576410638014077570, guid: 7fb44267e0cf77a43a93440535c2310a,
+        type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -686,6 +783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wasabi
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576410638014077573, guid: 7fb44267e0cf77a43a93440535c2310a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2576410638014077573, guid: 7fb44267e0cf77a43a93440535c2310a,
         type: 3}
