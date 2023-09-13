@@ -10,6 +10,7 @@ namespace KIM
 {
     public class NonAttackableFish : Fish
     {
+        [SerializeField] bool TESTDIEBUTTON;
         public enum State { Idle = 0, Move, Hit, Escape, Die }
         private int curHitDamage;
         private bool isHittable;
@@ -39,6 +40,10 @@ namespace KIM
         }
         private void Update()
         {
+            if (TESTDIEBUTTON)
+            {
+                stateMachine.ChangeState(State.Die);
+            }
             stateMachine.Update();
             transform.rotation = Quaternion.LookRotation(moveDir);
         }
