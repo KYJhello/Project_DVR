@@ -6,11 +6,10 @@ namespace KIM
 {
     public class StoreFish : MonoBehaviour
     {
-        Dictionary<string, string> fishInfo = new Dictionary<string, string>();
+        List<string> fishInfo = new List<string>();
         private new string name;
         private string weight;
         private string length;
-        private string fishType;
         private string fishRank;
         private FishBody body;
         private void Awake()
@@ -18,13 +17,13 @@ namespace KIM
             body = GetComponentInChildren<FishBody>();
         }
 
-        public void GetFishInfo(Dictionary<string, string> info)
+        public void SetFishInfo(List<string> info)
         {
             fishInfo = info;
-            name = info["name"];
-            weight = info["length"];
-            fishType = info["fishType"];
-            fishRank = info["fishRank"];
+            name = info[0];
+            weight = info[1];
+            length = info[2];
+            fishRank = info[3];
             Debug.Log("StoreFishInfo : " + name + ", " + weight + ", " + fishRank);
             body.Rank = fishRank;
         }
