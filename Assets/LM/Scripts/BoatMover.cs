@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace LM
@@ -11,10 +8,16 @@ namespace LM
         [SerializeField] Vector3 portPos;
         [SerializeField] Vector3 seaPos;
         [SerializeField] Vector3 startPosOffset = new Vector3(0, 0.5f, 0);
+        [SerializeField] float moveSpeed;
+        [SerializeField] GameObject portTeleportAnchor;
+
+        CharacterController controller;
+        Collider col;
+        bool isPlayerIn;
 
         private void Awake()
         {
-            
+            col = GetComponent<Collider>();
         }
         public void MoveToDive()
         {
@@ -28,21 +31,35 @@ namespace LM
         {
             float t = 0;
             Vector3 startPos = transform.position;
+            Vector3 moveDir;
             if (i == 0)
             {
-                while(t <= 10)
+                // 나중에 거리로 바꾸기
+                moveDir = (portPos - startPos).normalized;
+                while(t <= 180)
                 {
-                    transform.position = Vector3.Lerp(startPos, portPos, t * 0.1f);
+                    transform.position += (moveDir * moveSpeed * Time.fixedDeltaTime);
+                    if (isPlayerIn && controller != null)
+                    {
+                        controller.Move(moveDir * moveSpeed * Time.fixedDeltaTime);
+                    }
                     t += Time.fixedDeltaTime;
                     yield return new WaitForFixedUpdate();
                 }
+                portTeleportAnchor.SetActive(true);
                 yield break;
             }
             else if (i == 1)
             {
-                while (t <= 10)
+                moveDir = (seaPos - startPos).normalized;
+                portTeleportAnchor.SetActive(false);
+                while (t <= 180)
                 {
-                    transform.position = Vector3.Lerp(startPos, seaPos, t * 0.1f);
+                    transform.position += (moveDir * moveSpeed * Time.fixedDeltaTime);
+                    if (isPlayerIn && controller != null)
+                    {
+                        controller.Move(moveDir * moveSpeed * Time.fixedDeltaTime);
+                    }
                     t += Time.fixedDeltaTime;
                     yield return new WaitForFixedUpdate();
                 }
@@ -50,6 +67,23 @@ namespace LM
             }
             else
                 yield break;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            controller = other?.GetComponentInChildren<CharacterController>();
+            if (controller != null)
+            {
+                isPlayerIn = true;
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if(controller != null && other?.GetComponentInChildren<CharacterController>() != null)
+            {
+                isPlayerIn = false;
+                controller = null;
+            }
         }
     }
 }

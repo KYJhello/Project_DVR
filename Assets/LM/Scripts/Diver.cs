@@ -9,6 +9,7 @@ namespace LM
     {
         [SerializeField] Canvas HUDCanvas;
         [SerializeField] GameObject helmet;
+        [SerializeField] GameObject helmetLight;
         
         public Material glassMat;
         public UnityEvent OnDived;
@@ -55,6 +56,8 @@ namespace LM
             
             if(platform != null)
                 platform.gameObject.SetActive(false);
+
+            helmetLight.SetActive(false);
         }
         private void OnEnable()
         {
@@ -95,6 +98,7 @@ namespace LM
             {
                 OnDived?.Invoke();
                 isDived = true;
+                helmetLight.SetActive(true);
                 BreathRoutine = StartCoroutine(Breath());
                 OnPlateEnable();
             }
@@ -105,6 +109,7 @@ namespace LM
             {
                 OnDiveEnded?.Invoke();
                 isDived = false;
+                helmetLight.SetActive(false);
                 StopCoroutine(BreathRoutine);
                 CurO2 = MaxO2;
                 OnPlateDisable();
