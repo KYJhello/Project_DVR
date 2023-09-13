@@ -7,36 +7,22 @@ namespace KIM
 {
     public class FishBox : MonoBehaviour
     {
-        public List<Dictionary<string, string>> fishList = new List<Dictionary<string, string>>();
-        List<string> fishKeys = new List<string>();
+        // fish list <fishInfo> 
+        // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
+        public List<List<string>> fishList = new List<List<string>>();
         private float totalWeight = 0f;
-
-        private void Awake()
-        {
-            fishKeys.Add("name");
-            fishKeys.Add("weight");
-            fishKeys.Add("length");
-            fishKeys.Add("fishType");
-            fishKeys.Add("fishRank");
-        }
 
         public void AddFish(List<string> info)
         {
             StopAllCoroutines();
-            Dictionary<string, string> fish = new Dictionary<string, string>();
-            for (int i = 0; i < fishKeys.Count; i++)
-            {
-                fish.Add(fishKeys[i], info[i]);
-            }
-            AddWeight(float.Parse(fish["weight"]));;
-            fishList.Add(fish);
+            fishList.Add(info);
+            AddWeight(float.Parse(info[1]));
             Debug.Log("FishBox TotalWeight : " +  totalWeight);
         }
         public void PullFish(int index)
         {
             // TODO : 물고기 꺼냈을 때 물고기 생성
             // GameManager.Resource.Instantiate<GameObject>("Sea_Fish_" + (fishList[index])[name], transform.position + Vector3.up, Quaternion.identity);
-            SubWeight(float.Parse((fishList[index])["weight"]));
             fishList.RemoveAt(index);
         }
         private void AddWeight(float input)
@@ -47,9 +33,13 @@ namespace KIM
         {
             totalWeight -= input;
         }
-        public List<Dictionary<string, string>> GetFishDicList()
+        public List<List<string>> GetFishList()
         {
             StartCoroutine(DeleteFishListRoutine());
+            return fishList;
+        }
+        public List<List<string>> ReturnFishBoxFishList()
+        {
             return fishList;
         }
         IEnumerator DeleteFishListRoutine()
@@ -59,7 +49,7 @@ namespace KIM
                 yield return new WaitForSeconds(0.05f);
                 fishList.Clear();
                 totalWeight = 0f;
-                fishList = new List<Dictionary<string, string>>();
+                fishList = new List<List<string>>();
             }
         }
         private void OnTriggerEnter(Collider other)
