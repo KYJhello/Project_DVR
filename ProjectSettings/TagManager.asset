@@ -20,8 +20,8 @@ TagManager:
   - HarpoonSpear
   - DivingHelmet
   - Wall
-  - 
-  - 
+  - FishBox
+  - StoreFish
   - 
   - 
   - 
@@ -32,7 +32,7 @@ TagManager:
   - Plate
   - Knife
   - Customer
-  - 
+  - ChoppingBoard
   - 
   - 
   - 
