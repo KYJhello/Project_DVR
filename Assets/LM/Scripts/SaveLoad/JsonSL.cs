@@ -22,11 +22,11 @@ public class JsonSL : MonoBehaviour
         public int day;
         public bool isHome;
         public int money;
-        public List<SaveFishData> fishTank;
+        public List<List<string>> fishTank;
         public float repute;
         public float curWeight;
         public int harpoonLevel;
-        public List<SaveFishData> fishBox;
+        public List<List<string>> fishBox;
 
         public float masterVolume;
         public float SFXVolume;
@@ -34,7 +34,7 @@ public class JsonSL : MonoBehaviour
     }
     public class SaveFishData
     {
-
+        // name, weight, length, rank 
     }
 
     public void Save(int slot)
@@ -47,8 +47,12 @@ public class JsonSL : MonoBehaviour
         // save.repute = 
         save.curWeight = FindObjectOfType<Diver>().CurWeight;
         save.harpoonLevel = FindObjectOfType<HarpoonGun>().Level;
-        // save.fishBox = 
-
+        /*
+        foreach(List<string> list in FindObjectOfType<FishBox>().fishList)
+        {
+            save.fishBox.Add(list);
+        }
+        */
         SettingUI ui = FindObjectOfType<SettingUI>();
         // save.masterVolume = ui.
 
@@ -60,8 +64,9 @@ public class JsonSL : MonoBehaviour
     {
         // 화면 가리기
         string path = Path.Combine(Application.dataPath, $"save{slot}.json");
-        if (!Directory.Exists(path))
+        if (!File.Exists(path))
         {
+            Debug.Log("No Save");
             return false;
         }
 
@@ -84,7 +89,7 @@ public class JsonSL : MonoBehaviour
         FindObjectOfType<Diver>().CurWeight = save.curWeight;
         FindObjectOfType<HarpoonGun>().Level = save.harpoonLevel;
         // save.fishBox = 
-
+        Debug.Log("Load");
         return true;
     }
 }

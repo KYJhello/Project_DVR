@@ -23,15 +23,15 @@ namespace LM
 
             for (int i = 1; i < 6; i++)
             {
+                // Application.persistentDataPath
+
                 string path = Path.Combine(Application.dataPath, $"save{i}.json");
-                if (Directory.Exists(path))
+                if (File.Exists(path))
                 {
-                    Debug.Log($"{i}save load");
                     images[$"LoadSlot{i}"].color = Color.green;
                 }
                 else
                 {
-                    Debug.Log("¾ø¾î");
                     images[$"LoadSlot{i}"].color = Color.white;
                 }
             }

@@ -24,7 +24,7 @@ namespace LM
             for(int i = 1; i < 6; i++)
             {
                 string path = Path.Combine(Application.dataPath, $"save{i}.json");
-                if (Directory.Exists(path))
+                if (File.Exists(path))
                 {
                     images[$"SaveSlot{i}"].color = Color.green;
                 }
