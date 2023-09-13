@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RawSalmon : MonoBehaviour
 {
+    float cuttingCount;
+
     GameObject knife;
 
     public List<GameObject> fishMeats;
@@ -16,10 +18,23 @@ public class RawSalmon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == knife)
+        if (other.gameObject.layer == 25)
         {
-            
+            Debug.Log("µé¾î¿È");
+            cuttingCount++;
+            if (cuttingCount >= 5)
+            {
+                Debug.Log("ÄÆ");
+
+                foreach (GameObject salmon in fishMeats)
+                {
+                    salmon.SetActive(true);
+                    salmon.transform.SetParent(null);
+                }
+                gameObject.SetActive(false);
+            }
         }
+
     }
 
     private void NextTurn()
