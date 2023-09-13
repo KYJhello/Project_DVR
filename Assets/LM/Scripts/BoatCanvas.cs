@@ -11,6 +11,13 @@ namespace LM
             base.Awake();
         }
 
+        private void Save()
+        {
 
+        }
+        private void Load()
+        {
+
+        }
     }
 }
