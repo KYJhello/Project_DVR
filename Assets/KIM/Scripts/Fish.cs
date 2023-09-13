@@ -7,11 +7,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace KIM
 {
-
+    public enum FishRank { Normal = 0, Rare, SuperRare, Special }
     public class Fish : MonoBehaviour, IHittable
     {
-        // 이름, 길이, 무게, 랭크
+        // 이름, 무게, 길이, 랭크
         List<string> fishInfo = new List<string>();
+
+        // 물고기 랭크
+        private FishRank curFishRank;
+        public FishRank CurFishRank { get { return curFishRank; } set { curFishRank = value; } }
 
         [SerializeField]
         protected FishData data;
@@ -123,17 +127,17 @@ namespace KIM
             int num = Random.Range(1, 100);
             if (num >=1 && num <=3)
             {
-                data.CurFishRank = FishRank.Special;
+                CurFishRank = FishRank.Special;
             }
             else if (num > 3 && num <= 13)
             {
-                data.CurFishRank = FishRank.SuperRare;
+                CurFishRank = FishRank.SuperRare;
             }else if (num > 13 && num <= 40)
             {
-                data.CurFishRank = FishRank.Rare;
+                CurFishRank = FishRank.Rare;
             }else if(num > 40 && num <= 100)
             {
-                data.CurFishRank = FishRank.Normal;
+                CurFishRank = FishRank.Normal;
             }
         }
         private void SetFishInfo()
@@ -146,10 +150,8 @@ namespace KIM
             fishInfo.Add(data.Name);
             fishInfo.Add(curWeight.ToString());
             fishInfo.Add(curLength.ToString());
-            //enum
-            fishInfo.Add(data.CurFishType.ToString());
-            //enum
-            fishInfo.Add(data.CurFishRank.ToString());
+            //enum to string
+            fishInfo.Add(CurFishRank.ToString());
         }
         public bool GetIsDie()
         {
@@ -158,6 +160,10 @@ namespace KIM
         public List<string> GetFishInfo()
         {
             StartCoroutine(DestroyRoutine());
+            return fishInfo;
+        }
+        public List<string> GetJustFishInfo()
+        {
             return fishInfo;
         }
         IEnumerator DestroyRoutine()

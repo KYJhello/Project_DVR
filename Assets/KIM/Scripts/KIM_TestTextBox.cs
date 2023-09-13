@@ -13,9 +13,9 @@ namespace KIM {
         private void Update()
         {
             texts.text = null;
-            foreach(Dictionary<string,string> dic in fishBox.fishList)
+            foreach(List<string> info in fishBox.fishList)
             {
-                var items = dic.Select(t => t.ToString());
+                var items = info.Select(t => t.ToString());
                 texts.text += string.Join(", ", items);
                 texts.text += "\n";
             }

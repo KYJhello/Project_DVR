@@ -6,7 +6,10 @@ namespace KIM
 {
     public class KIM_FishTank : MonoBehaviour
     {
-        private List<Dictionary<string, string>> fishList/* = new List<Dictionary<string, string>>()*/;
+        // fish list <fishInfo> 
+        // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
+
+        private List<List<string>> fishList = new List<List<string>>();
         private bool isCreating = false;
 
         private void OnTriggerEnter(Collider other)
@@ -14,24 +17,28 @@ namespace KIM
             // 만약 충돌한 물체의 레이어가 피쉬박스라면
             if(other.gameObject.layer == 15 && !isCreating)
             {
-                if(other.gameObject.GetComponent<FishBox>().GetFishDicList().Count <= 0) { return; }
+                if(other.gameObject.GetComponent<FishBox>().GetFishList().Count <= 0) { return; }
                 isCreating = true;
-                fishList = new List<Dictionary<string, string>>();
+                fishList = new List<List<string>>();
                 StartCoroutine(CreateFishRoutine(other));
             }
         }
+        public List<List<string>> ReturnFishTankFishList()
+        {
+            return fishList;
+        }
+
         IEnumerator CreateFishRoutine(Collider other)
         {
             while (true)
             {
-                foreach (Dictionary<string, string> fishInfo in other.gameObject.GetComponent<FishBox>().GetFishDicList())
+                foreach (List<string> fishInfo in other.gameObject.GetComponent<FishBox>().GetFishList())
                 {
                     fishList.Add(fishInfo);
-                    /*GameObject go = */
                 }
-                foreach(Dictionary<string,string> fishInfo in fishList)
+                foreach(List<string> fishInfo in fishList)
                 {
-                    GameManager.Resource.Instantiate<StoreFish>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity).GetFishInfo(fishInfo);
+                    GameManager.Resource.Instantiate<StoreFish>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
                     yield return new WaitForSeconds(0.2f);
                 }
                 isCreating = false;
