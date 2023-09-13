@@ -37,7 +37,7 @@ public class JsonSL : MonoBehaviour
 
     }
 
-    public void Save()
+    public void Save(int slot)
     {
         SaveData save = new SaveData();
         // save.day =
@@ -53,13 +53,18 @@ public class JsonSL : MonoBehaviour
         // save.masterVolume = ui.
 
         string json = JsonUtility.ToJson(save, true);
-        string path = Path.Combine(Application.dataPath, "save.json");
+        string path = Path.Combine(Application.dataPath, $"save{slot}.json");
         File.WriteAllText(path, json);
     }
-    public void Load() 
+    public bool Load(int slot) 
     {
         // 화면 가리기
-        string path = Path.Combine(Application.dataPath, "save.json");
+        string path = Path.Combine(Application.dataPath, $"save{slot}.json");
+        if (!Directory.Exists(path))
+        {
+            return false;
+        }
+
         string loadJson = File.ReadAllText(path);
         SaveData save = JsonUtility.FromJson<SaveData>(loadJson);
         // save.day =
@@ -79,5 +84,7 @@ public class JsonSL : MonoBehaviour
         FindObjectOfType<Diver>().CurWeight = save.curWeight;
         FindObjectOfType<HarpoonGun>().Level = save.harpoonLevel;
         // save.fishBox = 
+
+        return true;
     }
 }

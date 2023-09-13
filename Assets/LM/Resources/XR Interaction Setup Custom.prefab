@@ -1518,7 +1518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HUDCanvas: {fileID: 7332515378484012273}
   helmet: {fileID: 7800556652924667182}
-  light: {fileID: 1939599138}
+  helmetLight: {fileID: 1939599138}
   glassMat: {fileID: 2100000, guid: 75c84500727997546a44b6898f349c0e, type: 2}
   OnDived:
     m_PersistentCalls:
