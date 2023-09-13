@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 8903041149228638018}
   - component: {fileID: 5147891299983902968}
   - component: {fileID: 1576617611}
-  - component: {fileID: 123824419}
+  - component: {fileID: 48298714}
   m_Layer: 25
   m_Name: noz_mesarski
   m_TagString: Untagged
@@ -397,7 +397,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4040014565279584641, guid: 828da4ef88a9b60469e6cdadb299f277, type: 3}
---- !u!114 &123824419
+--- !u!114 &48298714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

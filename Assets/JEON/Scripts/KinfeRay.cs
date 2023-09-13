@@ -11,7 +11,7 @@ public class KinfeRay : MonoBehaviour
 
     bool firstHeadHit = false;
 
-    float x = -1f;
+    float x = -0.15f;
     Vector3 collisionNormal;
     Vector3 hitInfoPos;
     GameObject fish;
@@ -43,9 +43,9 @@ public class KinfeRay : MonoBehaviour
         // 닿은 오브젝트의 레이어가 29번이고, 트루상태라면
         if (other.gameObject.layer == 29 && firstHeadHit && collisionNormal.x < x)
         {
-
             Debug.Log("트리거 됐다");
             Debug.Log($"{collisionNormal.x < x}");
+
             CuttingFish();
         }
     }
@@ -58,6 +58,7 @@ public class KinfeRay : MonoBehaviour
         if (collisionNormal.x < x)
         {
             Debug.Log("쭉 진행중");
+
             check = StartCoroutine(CheckSecondHitTime());
         }
         
@@ -72,11 +73,13 @@ public class KinfeRay : MonoBehaviour
             if (timer < 2)
             {
                 Debug.Log("프리팹가져와");
+
                 for (int i = 0; i < 2; i++)
                 {
                     GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/FishMeat", hitInfoPos, Quaternion.identity);
                 }
                 Debug.Log($"{fish.transform.parent.name}");
+
                 Destroy(fish.transform.parent.gameObject);
 
                 StopCoroutine(check);
@@ -85,6 +88,7 @@ public class KinfeRay : MonoBehaviour
             else if (timer >= 2)
             {
                 Debug.Log("다시잘라");
+
                 timer = 0;
                 StopCoroutine(check);
             }
@@ -94,6 +98,7 @@ public class KinfeRay : MonoBehaviour
     IEnumerator CheckSecondHitTime()
     {
         Debug.Log("2초안에 자르기");
+
         while (true)
         {
             timer += Time.deltaTime;
