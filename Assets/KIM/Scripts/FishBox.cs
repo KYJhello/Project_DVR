@@ -7,47 +7,59 @@ namespace KIM
 {
     public class FishBox : MonoBehaviour
     {
-        public UnityEvent<int> OnPullRequest;
-
-        List<Dictionary<string, string>> fishList;
-        List<string> fishKeys;
-
-        private void Awake()
-        {
-            fishKeys.Add("name");
-            fishKeys.Add("weight");
-            fishKeys.Add("length");
-            fishKeys.Add("fishType");
-            fishKeys.Add("fishRank");
-        }
+        // fish list <fishInfo> 
+        // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
+        public List<List<string>> fishList = new List<List<string>>();
+        private float totalWeight = 0f;
 
         public void AddFish(List<string> info)
         {
-            Dictionary<string, string> fish = new Dictionary<string, string>();
-            for (int i = 0; i < fishKeys.Count; i++)
-            {
-                fish.Add(fishKeys[i], info[i]);
-            }
-            fishList.Add(fish);
+            StopAllCoroutines();
+            fishList.Add(info);
+            AddWeight(float.Parse(info[1]));
+            Debug.Log("FishBox TotalWeight : " +  totalWeight);
         }
         public void PullFish(int index)
         {
             // TODO : 물고기 꺼냈을 때 물고기 생성
             // GameManager.Resource.Instantiate<GameObject>("Sea_Fish_" + (fishList[index])[name], transform.position + Vector3.up, Quaternion.identity);
-
-
             fishList.RemoveAt(index);
         }
-
+        private void AddWeight(float input)
+        {
+            totalWeight += input;
+        }
+        private void SubWeight(float input)
+        {
+            totalWeight -= input;
+        }
+        public List<List<string>> GetFishList()
+        {
+            StartCoroutine(DeleteFishListRoutine());
+            return fishList;
+        }
+        public List<List<string>> ReturnFishBoxFishList()
+        {
+            return fishList;
+        }
+        IEnumerator DeleteFishListRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.05f);
+                fishList.Clear();
+                totalWeight = 0f;
+                fishList = new List<List<string>>();
+            }
+        }
         private void OnTriggerEnter(Collider other)
         {
-            // 물고기랑 닿으면
+            // 죽은 물고기랑 닿으면
             if (other.gameObject.layer == 10)
             {
-                if (other.gameObject.GetComponent<Fish>().enabled == false)
+                if (other.gameObject.GetComponent<Fish>().GetIsDie())
                 {
-                    // TODO 피쉬에서 정보 보내는 함수 만들어서 실행시키기
-                    //AddFish(other.gameObject.GetComponent<Fish>());
+                    AddFish(other.gameObject.GetComponent<Fish>()?.GetFishInfo());
                 }
             }
             // 

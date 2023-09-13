@@ -5,11 +5,14 @@ using UnityEngine;
 namespace KIM
 {
     public enum FishType { NonAttackFish = 0, AttackFish }
-    public enum FishRank { Normal = 0, Rare, SuperRare, Special }
 
     [CreateAssetMenu(fileName = "Fish Data", menuName = "Scriptable Object/Fish Data", order =int.MaxValue)]
     public class FishData : ScriptableObject
     {
+        [SerializeField]
+        private FishType curFishType;
+        public FishType CurFishType { get { return curFishType; } }
+
         [SerializeField]
         private new string name;
         [SerializeField]
@@ -28,9 +31,7 @@ namespace KIM
         private float escapeSpeed;
         [SerializeField]
         private bool isStopableFish;
-        [SerializeField]
-        public FishType curFishType;
-        public FishRank curFishRank { get; set; }
+
 
         public string Name { get { return name; } }
         public int HP { get { return hp; } }
