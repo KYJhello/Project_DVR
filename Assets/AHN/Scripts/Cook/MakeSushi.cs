@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.XR.OpenVR;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,11 +11,6 @@ namespace AHN
     public class MakeSushi : MonoBehaviour
     {
         [SerializeField] GameObject rice;
-        [SerializeField] GameObject sushi;
-        [SerializeField] GameObject rawFish;
-        [SerializeField] GameObject wasabi;
-        [SerializeField] Transform riceSocketTransform;    // 밥과 회가 얼마나 가까워졌는지의 기준이 됨
-
         bool canScroeUp = true;
         bool oneButton = false;
         bool twoButton = false;
@@ -26,12 +22,11 @@ namespace AHN
         private void Start()
         {
             xrController = GameObject.FindObjectOfType<XRBaseController>(true);
-            sushi.SetActive(false);
         }
 
         private void OnEnable()
         {
-            StartCoroutine(LocatedRiceAndSushiSameTransformRoutine());      // 초밥과 밥의 위치가 항상 같게 있도록
+            rice.SetActive(true);
         }
 
         /// <summary>
@@ -79,29 +74,6 @@ namespace AHN
             {
                 interactor.SendHapticImpulse(0.3f, 0.1f);
             }
-        }
-
-        IEnumerator LocatedRiceAndSushiSameTransformRoutine()
-        {
-            while (true)
-            {
-                if (Vector3.Distance(rawFish.transform.position, riceSocketTransform.position) < 0.5f)    // 회와 밥의 위치가 가까워졌다면,
-                {
-                    FinishSushi();
-                }
-
-                sushi.transform.position = rice.transform.position;
-                yield return null;
-            }
-        }
-
-        void FinishSushi()
-        {
-            // 밥 자식으로 있는 Socket Transform과 회의 위치가 가까워지면 밥, 와사비, 회를 비활성화하고 초밥을 활성화 시킨다.
-            sushi.SetActive(true);      // 여기서 완성본 스시들은 Resources 폴더에 다 넣고 회에 따라서 회에 맞는 sushi를 Resources에서 가져오기?
-            wasabi.SetActive(false);
-            rawFish.SetActive(false);
-            rice.SetActive(false);
         }
     }
 }
