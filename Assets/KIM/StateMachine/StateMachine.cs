@@ -44,5 +44,9 @@ namespace KIM
             curState = states[newState];
             curState.Enter();
         }
+        public string GetCurStateName()
+        {
+            return curState.ToString();
+        }
     }
 }

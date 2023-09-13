@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace KIM
 {
+    public enum FishRank { Normal = 0, Rare, SuperRare, Special }
     public class Fish : MonoBehaviour, IHittable
     {
-        List<string> fishInfo;
+        // 이름, 무게, 길이, 랭크
+        List<string> fishInfo = new List<string>();
+
+        // 물고기 랭크
+        private FishRank curFishRank;
+        public FishRank CurFishRank { get { return curFishRank; } set { curFishRank = value; } }
 
         [SerializeField]
         protected FishData data;
@@ -17,18 +24,25 @@ namespace KIM
         protected float curWeight;
         protected Vector3 moveDir;
         protected Rigidbody rb;
+        protected bool isDie = false;
+        protected bool isDirChangeActive = false;
+        protected XRGrabInteractable grabInteractable;
+
+        public int CurHp { get { return curHp; } }
 
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            SetHP();
-            SetLength();
-            SetWeight();
+            grabInteractable = GetComponent<XRGrabInteractable>();
+            grabInteractable.enabled = false;
+
+            SetFishInfo();
+            
         }
 
         protected Vector3 GetRandVector()
         {
-            return new Vector3(Random.Range(-1f, 1f), Random.Range(-0.1f, 0.1f), Random.Range(-1f, 1f));
+            return new Vector3(Random.Range(-1f, 1f), Random.Range(-0.3f, 0.3f), Random.Range(-1f, 1f));
         }
         
         protected bool WallDetect()
@@ -56,13 +70,31 @@ namespace KIM
             //moveDir += Vector3.Dot(hit.normal, transform.up) >= 0 ?
             //    transform.up / 2 : -transform.up / 2;
 
-            moveDir = -moveDir;
+            if (isDirChangeActive == false)
+            {
+                isDirChangeActive = true;
+                StartCoroutine(ChangeDirRoutine());
+            }
+            
+        }
+        IEnumerator ChangeDirRoutine()
+        {
+            while (isDirChangeActive)
+            {
+                //rb.rotation = Quaternion.LookRotation(transform.forward);
+                moveDir = -moveDir.normalized;
+                yield return new WaitForSeconds(1f);
+
+                isDirChangeActive = false;
+            }
         }
 
         // 애니메이션 끄고, 움직임 멈추고, grabinteractable 키기
         protected void Die()
         {
-
+            isDie = true;
+            StopAllCoroutines();
+            grabInteractable.enabled = true;
         }
         public void Hit()
         {
@@ -75,23 +107,72 @@ namespace KIM
         }
         private void SetLength()
         {
-            float randomRangeValue = data.Length / 10 + data.Length % 10;
+            float randomRangeValue = data.Length / 10;
             curLength = data.Length + Random.Range(-randomRangeValue,randomRangeValue);
+            curLength = Mathf.Floor(curLength * 100f) / 100f;
         }
         private void SetWeight()
         {
-            float randomRangeValue = data.Weight / 10 + data.Weight % 10;
-            curWeight = data.Weight;
+            float randomRangeValue = data.Weight / 10;
+            curWeight = data.Weight + Random.Range(-randomRangeValue, randomRangeValue);
+            curWeight = Mathf.Floor(curWeight * 100f) / 100f;
+        }
+        // 확률
+        // 스페셜 3%
+        // 슈퍼레어 10%
+        // 레어 27%
+        // 노말 60%
+        private void SetFishRank()
+        {
+            int num = Random.Range(1, 100);
+            if (num >=1 && num <=3)
+            {
+                CurFishRank = FishRank.Special;
+            }
+            else if (num > 3 && num <= 13)
+            {
+                CurFishRank = FishRank.SuperRare;
+            }else if (num > 13 && num <= 40)
+            {
+                CurFishRank = FishRank.Rare;
+            }else if(num > 40 && num <= 100)
+            {
+                CurFishRank = FishRank.Normal;
+            }
         }
         private void SetFishInfo()
         {
+            SetHP();
+            SetLength();
+            SetWeight();
+            SetFishRank();
+
             fishInfo.Add(data.Name);
             fishInfo.Add(curWeight.ToString());
             fishInfo.Add(curLength.ToString());
-            //enum
-            fishInfo.Add(data.curFishType.ToString());
-            //enum
-            fishInfo.Add(data.curFishRank.ToString());
+            //enum to string
+            fishInfo.Add(CurFishRank.ToString());
+        }
+        public bool GetIsDie()
+        {
+            return isDie;
+        }
+        public List<string> GetFishInfo()
+        {
+            StartCoroutine(DestroyRoutine());
+            return fishInfo;
+        }
+        public List<string> GetJustFishInfo()
+        {
+            return fishInfo;
+        }
+        IEnumerator DestroyRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.05f);
+                Destroy(this.gameObject);
+            }
         }
     }
 }
