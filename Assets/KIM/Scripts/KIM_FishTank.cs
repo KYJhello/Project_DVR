@@ -9,7 +9,7 @@ namespace KIM
         // fish list <fishInfo> 
         // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
 
-        private List<List<string>> fishList = new List<List<string>>();
+        public List<List<string>> fishList = new List<List<string>>();
         private bool isCreating = false;
 
         private void OnTriggerEnter(Collider other)
