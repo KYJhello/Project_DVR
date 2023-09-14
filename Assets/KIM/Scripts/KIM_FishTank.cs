@@ -38,7 +38,7 @@ namespace KIM
                 }
                 foreach(List<string> fishInfo in fishList)
                 {
-                    GameManager.Resource.Instantiate<StoreFish>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
+                    GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Fish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
                     yield return new WaitForSeconds(0.2f);
                 }
                 isCreating = false;
