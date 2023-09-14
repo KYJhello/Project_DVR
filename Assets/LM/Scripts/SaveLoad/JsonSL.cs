@@ -42,7 +42,7 @@ public class JsonSL : MonoBehaviour
         // save.day =
         // save.isHome =
         // save.money =
-        foreach (List<string> list in FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList())
+        foreach (List<string> list in FindObjectOfType<KIM_FishTank>().fishList)
         {
             save.fishTank.Add(list);
         }
