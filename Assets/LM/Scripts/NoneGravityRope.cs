@@ -101,7 +101,6 @@ namespace LM
 
         private void DrawRope()
         {
-            Debug.Log("inDraw");
             lineRenderer.startWidth = ropeWidth;
             lineRenderer.endWidth = ropeWidth;
             Vector3[] segmentPos = new Vector3[segments.Count];
