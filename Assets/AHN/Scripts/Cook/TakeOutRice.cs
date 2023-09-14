@@ -17,7 +17,6 @@ namespace AHN
         {
             GameObject rice = GameManager.Resource.Instantiate<GameObject>("SushiManager");
             riceCount = 1;
-            // rice.GetComponentInChildren<Rigidbody>().isKinematic = true;
             rice.gameObject.transform.position = riceTransform.transform.position;
         }
 
@@ -25,17 +24,8 @@ namespace AHN
         {
             if (other.gameObject.layer == 20)
             {
-                /*
-                Rigidbody rb = other.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.isKinematic = false;     // Å°³×¸¶Æ½ ¾È µÊ~
-                    Debug.Log("¹ä ³ª°¨");
-                }*/
-
                 GameObject rice = GameManager.Resource.Instantiate<GameObject>("SushiManager");
                 riceCount++;
-                // rice.GetComponentInChildren<Rigidbody>().isKinematic = true;
                 rice.gameObject.transform.position = riceTransform.transform.position;
             }
         }
