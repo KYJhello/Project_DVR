@@ -28,17 +28,21 @@ namespace LM
         public void UpToggle(bool isOn)
         {
             if (isOn)
-                device.PlateUp();
+                device.PlatformUp();
+            else
+                device.PlatformStop();
         }
         public void DownToggle(bool isOn)
         {
             if (isOn)
-                device.PlateDown();
+                device.PlatformDown();
+            else
+                device.PlatformStop();
         }
         public void StopToggle(bool isOn)
         {
             if (isOn)
-                device.PlateStop();
+                device.PlatformStop();
         }
     }
 }
