@@ -7,13 +7,13 @@ namespace AHN
     public class TakeOutWasabi : MonoBehaviour
     {
         // WasabiPile에 손을 넣으면 Wasabi한 블록이 손에 나오도록.
-        [SerializeField] GameObject wasabiTransform;
+        [SerializeField] Transform wasabiTransform;
         [SerializeField] int inWasabiCount;
 
         private void Start()
         {
             GameObject wasabi = GameManager.Resource.Instantiate<GameObject>("Wasabi");
-            wasabi.gameObject.transform.position = wasabiTransform.transform.position;
+            wasabi.gameObject.transform.position = wasabiTransform.position;
         }
 
         private void OnTriggerExit(Collider other)
@@ -26,8 +26,8 @@ namespace AHN
                 }
 
                 GameObject wasabi = GameManager.Resource.Instantiate<GameObject>("Wasabi");
-                wasabi.GetComponent<Rigidbody>().isKinematic = true;
-                wasabi.gameObject.transform.position = wasabiTransform.transform.position;
+                // wasabi.GetComponent<Rigidbody>().isKinematic = true;
+                wasabi.gameObject.transform.position = wasabiTransform.position;
             }
         }
     }

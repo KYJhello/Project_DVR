@@ -273,7 +273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5250785567133912238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.003, y: 0.144, z: -0.025}
+  m_LocalPosition: {x: -0.003, y: 0.15, z: -0.016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -309,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5250785567819980193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 674.236, y: 1.603, z: 659.013}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -381,8 +381,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13994557
-  m_Center: {x: 0.000000029802322, y: 0.13374057, z: 0.00047296286}
+  m_Radius: 0.1659336
+  m_Center: {x: 0.000000029802322, y: 0.1597286, z: 0.00047296286}
 --- !u!114 &5250785567818040167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0316e97afe596c5468767c4f14097a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riceTransform: {fileID: 5250785567133912238}
+  riceTransform: {fileID: 5250785567133912239}
 --- !u!65 &230188438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -407,5 +407,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.20544434, y: 0.011412084, z: 0.32079718}
-  m_Center: {x: 0.002746582, y: 0.07, z: 0.020750105}
+  m_Size: {x: 0.20544434, y: 0.017529428, z: 0.32079718}
+  m_Center: {x: 0.002746582, y: 0.09295729, z: 0.020750105}

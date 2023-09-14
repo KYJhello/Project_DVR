@@ -118,7 +118,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 96
   m_CollisionDetection: 0
@@ -422,7 +422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2360241876662298806}
   m_LocalRotation: {x: -0.7132504, y: -0, z: -0, w: 0.7009094}
-  m_LocalPosition: {x: 0, y: -0.0001, z: -0.0035}
+  m_LocalPosition: {x: 0, y: -0.00016, z: -0.00313}
   m_LocalScale: {x: 0.008125, y: 0.0042419494, z: 0.010595447}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -465,7 +465,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2360241877116930937}
-  m_Layer: 0
+  - component: {fileID: 9052034743298866952}
+  m_Layer: 20
   m_Name: SushiManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,14 +481,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2360241877116930936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 676.95, y: 1.902, z: 660.536}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.6}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 610233691}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &9052034743298866952
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360241877116930936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 0.48
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8187750496799368004
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8187750496799368004}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00248}
+  m_LocalPosition: {x: 0, y: -0, z: -0.00214}
   m_LocalScale: {x: 0.0026999996, y: 0.0014096326, z: 0.0035209486}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -612,7 +627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8555865596089890230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0048828144, y: 0.43565753, z: -0.32742843}
+  m_LocalPosition: {x: -0.0048828144, y: 0.221, z: -0.33}
   m_LocalScale: {x: 2.1156342, y: 1.5036083, z: 2.8208458}
   m_ConstrainProportionsScale: 0
   m_Children: []

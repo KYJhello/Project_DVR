@@ -192,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5093539734641566408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 674.493, y: 1.609, z: 659.658}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bc940f56352f44f8fd119d32ef199e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wasabiTransform: {fileID: 6946778706958497180}
+  wasabiTransform: {fileID: 6946778706958497181}
   inWasabiCount: 0
 --- !u!1 &6946778706958497180
 GameObject:
