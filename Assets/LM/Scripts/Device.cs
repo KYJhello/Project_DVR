@@ -7,7 +7,6 @@ namespace LM
     {
         public Platform platform;
 
-        XRGrabInteractable interactable;
         public bool isActive;
         SliderInteractable slider;
         DialInteractable dial;
@@ -15,7 +14,6 @@ namespace LM
 
         private void Awake()
         {
-            interactable = GetComponent<XRGrabInteractable>();
             slider = GetComponentInChildren<SliderInteractable>();
             dial = GetComponentInChildren<DialInteractable>();
             canvas = GetComponentInChildren<DeviceCanvas>();
@@ -23,14 +21,10 @@ namespace LM
         }
         private void OnEnable()
         {
-            interactable.selectEntered.AddListener(FindPlate);
-            
+            FindPlatform();
         }
-        private void OnDisable()
-        {
-            interactable.selectEntered.RemoveListener(FindPlate);
-        }
-        private void FindPlate(SelectEnterEventArgs args)
+
+        public void FindPlatform()
         {
             if(platform != null && platform.gameObject.activeSelf)
             {
@@ -42,17 +36,17 @@ namespace LM
             }
         }
 
-        public void PlateUp()
+        public void PlatformUp()
         {
             if(isActive)
                 platform.Up(slider.value * ((dial.value * 2) + 1));
         }
-        public void PlateDown()
+        public void PlatformDown()
         {
             if(isActive)
                 platform.Down(slider.value * ((dial.value * 2) + 1));
         }
-        public void PlateStop()
+        public void PlatformStop()
         {
             if(isActive)
                 platform.Stop();

@@ -11,8 +11,10 @@ namespace LM
         [SerializeField] LayerMask mask;
 
         XRSocketInteractor socketInteractor;
+        XRGrabInteractable interactable;
         Collider col;
 
+        public Rigidbody rb;
         public Transform ropePos;
         public Transform returnPos;
         public float pullForce = 3;
@@ -20,11 +22,12 @@ namespace LM
         public bool isPulling;
         public bool pullEnd;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
+            rb = GetComponent<Rigidbody>();
             col = GetComponent<Collider>();
             socketInteractor = GetComponentInChildren<XRSocketInteractor>();
+            interactable = GetComponent<XRGrabInteractable>();
         }
         private void OnEnable()
         {
@@ -32,12 +35,18 @@ namespace LM
             socketInteractor.selectEntered.AddListener(GetFish);
             socketInteractor.selectExited.AddListener(RemoveGetFish);
             socketInteractor.allowSelect = false;
+
+            interactable.selectEntered.AddListener(GrabInCheck);
+            interactable.selectExited.AddListener(GrabOutCheck);
         }
         private void OnDisable()
         {
             socketInteractor.hoverEntered?.RemoveListener(CheckFish);
             socketInteractor.selectEntered?.RemoveListener(GetFish);
-            socketInteractor.selectExited?.AddListener(RemoveGetFish);
+            socketInteractor.selectExited?.RemoveListener(RemoveGetFish);
+
+            interactable.selectEntered.RemoveListener(GrabInCheck);
+            interactable.selectExited.RemoveListener(GrabOutCheck);
         }
 
         public void CheckFish(HoverEnterEventArgs args)
@@ -68,6 +77,8 @@ namespace LM
 
         public override void OnFire(Vector3 dir, float force)
         {
+            rb.useGravity = false;
+            Debug.Log("OnFire");
             socketInteractor.allowSelect = false;
             isPulling = false;
             pullEnd = false;
@@ -97,6 +108,7 @@ namespace LM
             Vector3 v3 = dir.normalized;
             float dis = Vector3.Distance(returnPos.position, transform.position);
             transform.rotation = returnPos.rotation;
+            rb.AddForce(v3 * speed, ForceMode.Impulse);
             while (dis < maxRange)
             {
                 if (isPulling || pullEnd)
@@ -147,6 +159,17 @@ namespace LM
                 }
                 yield return new WaitForFixedUpdate();
             }
+        }
+        private void GrabInCheck(SelectEnterEventArgs args)
+        {
+
+        }
+        private void GrabOutCheck(SelectExitEventArgs args) 
+        {
+            HarpoonGun gun = args.interactorObject.transform.GetComponentInParent<HarpoonGun>();
+            if (gun != null)
+                rb.useGravity = false;
+            else rb.useGravity = true;
         }
     }
 }
