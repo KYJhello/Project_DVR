@@ -9,7 +9,6 @@ public class RawSalmon : MonoBehaviour
     GameObject knife;
 
     public List<GameObject> fishMeats;
-    public List<Collider> orderOfCutting;
 
     private void Awake()
     {
@@ -35,11 +34,5 @@ public class RawSalmon : MonoBehaviour
             }
         }
 
-    }
-
-    private void NextTurn()
-    {
-        orderOfCutting[0].enabled = true;
-        
     }
 }
