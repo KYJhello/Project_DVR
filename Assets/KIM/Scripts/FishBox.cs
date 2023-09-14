@@ -9,7 +9,7 @@ namespace KIM
     {
         // fish list <fishInfo> 
         // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
-        public List<List<string>> fishList = new List<List<string>>();
+        private List<List<string>> fishList = new List<List<string>>();
         private float totalWeight = 0f;
 
         public void AddFish(List<string> info)

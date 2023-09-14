@@ -13,7 +13,7 @@ namespace KIM {
         private void Update()
         {
             texts.text = null;
-            foreach(List<string> info in fishBox.fishList)
+            foreach(List<string> info in fishBox.ReturnFishBoxFishList())
             {
                 var items = info.Select(t => t.ToString());
                 texts.text += string.Join(", ", items);
