@@ -43,6 +43,7 @@ namespace KIM
                 }
                 isCreating = false;
                 fishList.Clear();
+                StopAllCoroutines();
                 yield return null;
             }
         }
