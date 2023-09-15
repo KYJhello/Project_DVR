@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 295801672}
   - component: {fileID: 295801671}
   - component: {fileID: 295801670}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: FishMeat_ForCutting (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 901284099}
   - component: {fileID: 901284098}
   - component: {fileID: 901284097}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: FishMeat_ForCutting (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 1469302412}
   - component: {fileID: 1469302411}
   - component: {fileID: 1469302410}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: FishMeat_ForCutting (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 202743979}
   - component: {fileID: 202743978}
   - component: {fileID: 202743981}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: FishMeat_ForCutting (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,7 +1096,7 @@ GameObject:
   - component: {fileID: 1174137199}
   - component: {fileID: 1174137198}
   - component: {fileID: 1174137197}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: FishMeat_ForCutting (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1363,7 +1363,7 @@ GameObject:
   - component: {fileID: 5497641346934198021}
   - component: {fileID: 7318845242205713598}
   - component: {fileID: 1512103735}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: FishMeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,7 +1397,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6564407505065350083}
-  m_Mesh: {fileID: 2534964839176971238, guid: 9e7f867c6b56de949b043031fc1e2c51, type: 3}
+  m_Mesh: {fileID: 2534964839176971238, guid: 86af2d864688bad4bbf981f6c43fa962, type: 3}
 --- !u!23 &4618874250361287190
 MeshRenderer:
   m_ObjectHideFlags: 0

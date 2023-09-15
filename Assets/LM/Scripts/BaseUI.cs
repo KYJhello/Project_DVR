@@ -13,6 +13,7 @@ namespace LM
         protected Dictionary<string, Image> images;
         protected Dictionary<string, Button> buttons;
         protected Dictionary<string, Toggle> toggles;
+        protected Dictionary<string, Slider> sliders;
 
         protected virtual void Awake()
         {
@@ -26,6 +27,7 @@ namespace LM
             images = new Dictionary<string, Image>();
             buttons = new Dictionary<string, Button>();
             toggles = new Dictionary<string, Toggle>();
+            sliders = new Dictionary<string, Slider>();
 
             RectTransform[] children = GetComponentsInChildren<RectTransform>();
             foreach (RectTransform child in children)
@@ -52,6 +54,10 @@ namespace LM
                 Toggle toggle = child.GetComponent<Toggle>();
                 if(toggle != null)
                     toggles.Add(key, toggle);
+
+                Slider slider = child.GetComponent<Slider>();
+                if(slider != null)
+                    sliders.Add(key, slider);
             }
         }
     }

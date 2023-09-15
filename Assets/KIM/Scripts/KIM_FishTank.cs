@@ -9,7 +9,7 @@ namespace KIM
         // fish list <fishInfo> 
         // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
 
-        private List<List<string>> fishList = new List<List<string>>();
+        public List<List<string>> fishList = new List<List<string>>();
         private bool isCreating = false;
 
         private void OnTriggerEnter(Collider other)
@@ -38,7 +38,7 @@ namespace KIM
                 }
                 foreach(List<string> fishInfo in fishList)
                 {
-                    GameManager.Resource.Instantiate<StoreFish>("KIM_Prefabs/StoreFish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
+                    GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Fish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
                     yield return new WaitForSeconds(0.2f);
                 }
                 isCreating = false;
