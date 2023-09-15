@@ -35,8 +35,6 @@ namespace AHN
             Debug.Log(fishs);
 
             // TODO : (나중에)물고기 하나 썰면 회가 3조각 (일단 3조각으로) 나오니까 총 fishInfo.Count() * 3이 주문할 수 있는 최대 개수.
-            // 카운트에서 랜덤으로 하나 뽑으면 List의 그 순서의 물고기 주문. 그러면서 그 순서는 삭제.
-            // 주문할 땐 0번인 "name" 초밥 이 주문서의 text에 써지면 됨. 결제 때문에 3번도 받아오면 됨.
             if (fishs.Count <= 0)
             {
                 animator.SetTrigger("GoOut");
@@ -45,13 +43,14 @@ namespace AHN
             {
                 int orderFishIndex = Random.Range(0, fishs.Count);    // 주문할 물고기 리스트 순서
                 fishInfo = fishs[orderFishIndex];   // 주문할 물고기의 4개 정보가 담겨있는 리스트
-                GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.identity);     // 주문서 출력
-
+                GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));     // 주문서 출력
                 Debug.Log(fishInfo);
 
-                // TODO : orderSheet의 text 변경
                 orderSheet.GetComponent<OrderSheet>().MenuTextInput(fishInfo[0], animator.gameObject.GetComponent<Customer>().mySeatNumber());
                 //                                                  물고기 이름              테이블 번호
+
+                // TODO : 나중에 주문서 없앨 때 Pool로 Release해서 없애야 함.
+
 
                 fishInfo.Clear();
                 fishs.RemoveAt(orderFishIndex);     // 주문한 물고기 인덱스 삭제
