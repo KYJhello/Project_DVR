@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009ed3d245b22bc45ad5ec87810ecf65, type: 3}
   m_Name: Shark
   m_EditorClassIdentifier: 
+  curFishType: 1
   name: Shark
   hp: 100
   weight: 800
@@ -21,4 +22,3 @@ MonoBehaviour:
   moveSpeed: 5
   escapeSpeed: 10
   isStopableFish: 0
-  curFishType: 1
