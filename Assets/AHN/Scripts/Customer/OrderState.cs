@@ -31,7 +31,7 @@ namespace AHN
             // fish list <fishInfo> 
             // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
             // 여기서 필요한 건 0, 3. (2는 나중에)
-            fishs = FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList();   // 수족관에 있는 물고기들 정보를 받아옴
+            fishs = GameObject.FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList();   // 수족관에 있는 물고기들 정보를 받아옴
             Debug.Log(fishs);
 
             // TODO : (나중에)물고기 하나 썰면 회가 3조각 (일단 3조각으로) 나오니까 총 fishInfo.Count() * 3이 주문할 수 있는 최대 개수.
@@ -46,6 +46,8 @@ namespace AHN
                 int orderFishIndex = Random.Range(0, fishs.Count);    // 주문할 물고기 리스트 순서
                 fishInfo = fishs[orderFishIndex];   // 주문할 물고기의 4개 정보가 담겨있는 리스트
                 GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.identity);     // 주문서 출력
+
+                Debug.Log(fishInfo);
 
                 // TODO : orderSheet의 text 변경
                 orderSheet.GetComponent<OrderSheet>().MenuTextInput(fishInfo[0], animator.gameObject.GetComponent<Customer>().mySeatNumber());
