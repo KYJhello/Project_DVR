@@ -14,7 +14,7 @@ namespace KIM
 
         public void AddFish(List<string> info)
         {
-            StopAllCoroutines();
+            //StopAllCoroutines();
             fishList.Add(info);
             AddWeight(float.Parse(info[1]));
             Debug.Log("FishBox TotalWeight : " +  totalWeight);
@@ -33,6 +33,7 @@ namespace KIM
         {
             totalWeight -= input;
         }
+        // 수족관에서 호출하는 함수
         public List<List<string>> GetFishList()
         {
             StartCoroutine(DeleteFishListRoutine());
@@ -50,8 +51,11 @@ namespace KIM
                 fishList.Clear();
                 totalWeight = 0f;
                 fishList = new List<List<string>>();
+                StopAllCoroutines();
             }
         }
+
+        // 1) 가장 먼저 실행됨
         private void OnTriggerEnter(Collider other)
         {
             // 죽은 물고기랑 닿으면
