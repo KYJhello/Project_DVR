@@ -28,6 +28,8 @@ namespace AHN
 
                 if (seat.name == "TableManager")     // 자기 자신은 제외
                     continue;
+                else if (seat.GetComponent<PlateRecognition>())     // 접시(음식)이 놓일 테이블 위치도 제외
+                    continue;
                 else if (SeatDic.ContainsKey(key))
                     continue;
 

@@ -25,9 +25,7 @@ namespace AHN
 
         public IEnumerator FoodWaitRoutine()    // 음식 기다리는 코루틴
         {
-            Debug.Log("Wait");
             yield return new WaitForSeconds(10f);
-            Debug.Log("Angry");
             anim.SetTrigger("Angry");
             yield return new WaitForSeconds(4f);
             anim.SetTrigger("GoOut");
