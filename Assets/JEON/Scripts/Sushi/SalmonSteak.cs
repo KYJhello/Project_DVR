@@ -7,18 +7,17 @@ public class SalmonSteak : MonoBehaviour
 {
     int grilling;
 
+    int currentScore;
+
     [SerializeField] Material goodGril;
     [SerializeField] Material burncGril;
 
     Coroutine grillingSteak;
 
-    RawSalmon rawSalmon;
-
     public void GrillingSteak() 
     {
         Debug.Log("구워지는중");
         grillingSteak = StartCoroutine(Grilling());
-        rawSalmon = GetComponent<RawSalmon>();
     }
 
     public void ExitSteak()
@@ -35,12 +34,15 @@ public class SalmonSteak : MonoBehaviour
             if (grilling == 10)
             {
                 gameObject.GetComponent<MeshRenderer>().material = goodGril;
+
+                currentScore = 5000;
             }
             else if (grilling >= 15)
             {
                 Debug.Log($"넘었다");
                 gameObject.GetComponent<MeshRenderer>().material = burncGril;
-                yield return null;
+
+                currentScore = 0;
 
                 StopCoroutine(grillingSteak);
             }
