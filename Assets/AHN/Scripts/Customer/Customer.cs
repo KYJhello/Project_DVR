@@ -48,5 +48,10 @@ namespace AHN
             mySeat = falseSeatList[randomSeat];
             tableManager.SeatDic[falseSeatList[randomSeat]] = true;
         }
+
+        public int mySeatNumber()
+        {
+            return int.Parse(mySeat.gameObject.name);
+        }
     }
 }
