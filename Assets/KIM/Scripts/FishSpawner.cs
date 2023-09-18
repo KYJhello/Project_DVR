@@ -26,9 +26,16 @@ namespace KIM
         private void Awake()
         { 
             // spawnNum만큼 프리팹 생성
-            for(int i = 0; i < spawnNum; i++) {
+            for(int i = 0; i < spawnNum/2; i++) {
                 GameManager.Resource.Instantiate<Fish>("KIM_Prefabs/Fish", transform.parent.position + Vector3.down*199.5f + new Vector3(randPM() * Random.Range(playerWidth, seaWidth), Random.Range(seaMinY, seaHeight),randPM() * Random.Range(playerWidth,seaWidth)), Quaternion.identity, transform.parent, true);
             }
+            for (int i = 0; i < spawnNum/2; i++)
+            {
+                GameManager.Resource.Instantiate<Fish>("KIM_Prefabs/SeaFish/Aji", transform.parent.position + Vector3.down * 199.5f + new Vector3(randPM() * Random.Range(playerWidth, seaWidth), Random.Range(seaMinY, seaHeight), randPM() * Random.Range(playerWidth, seaWidth)), Quaternion.identity, transform.parent, true);
+            }
+
+            GameManager.Resource.Instantiate<Fish>("KIM_Prefabs/SeaFish/Shark", transform.parent.position + Vector3.down * 199.5f + new Vector3(randPM() * Random.Range(playerWidth, seaWidth), seaMinY, randPM() * Random.Range(playerWidth, seaWidth)), Quaternion.identity, transform.parent, true);
+
         }
         private int randPM()
         {

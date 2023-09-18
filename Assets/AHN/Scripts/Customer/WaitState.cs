@@ -16,8 +16,11 @@ namespace AHN
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            // TODO : if (내 테이블에 음식이 올려졌다면)
-            // animator.Settrigger("Eat");
+            // if (내 테이블에 음식이 올려졌다면)
+            if (animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().IsPlate())
+            {
+                animator.SetTrigger("Eat");
+            }
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 009ed3d245b22bc45ad5ec87810ecf65, type: 3}
-  m_Name: Shark
+  m_Name: Otorowashi
   m_EditorClassIdentifier: 
-  name: Shark
-  hp: 100
-  weight: 800
-  length: 400
-  playerRecognitionRange: 0
-  wallRecognitionRange: 0
-  moveSpeed: 5
+  curFishType: 0
+  name: Otorowashi
+  hp: 1
+  weight: 0.2
+  length: 15
+  playerRecognitionRange: 10
+  wallRecognitionRange: 2
+  moveSpeed: 3
   escapeSpeed: 10
-  isStopableFish: 0
-  curFishType: 1
+  isStopableFish: 1

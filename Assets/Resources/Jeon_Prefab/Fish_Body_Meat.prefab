@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2103142069}
   - component: {fileID: -1389970579525396596}
   - component: {fileID: -2495765307736145885}
+  - component: {fileID: 1202663265}
   m_Layer: 10
   m_Name: Fish_Body_Meat
   m_TagString: Untagged
@@ -198,7 +199,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 1025
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -345,3 +346,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.021952536, y: 0.018490793, z: 0.021275064}
   m_Center: {x: 0, y: 0.00039078854, z: -0.0008236667}
+--- !u!114 &1202663265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903162347337499001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308d7ccd1be43844596f4b0a5c9d5e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: -0.15
+  timer: 0
+  firstHeadHit: 0
