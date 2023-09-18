@@ -60,7 +60,7 @@ public class KinfeRay : MonoBehaviour
         {
             Debug.Log("나가졌다");
 
-            fishBodyMeat.Op();
+            fishBodyMeat.TakePrefab();
         }
     }
 }

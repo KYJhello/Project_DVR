@@ -10,27 +10,28 @@ namespace KIM
 {
     public class NonAttackableFish : Fish
     {
+        // 인게임 테스트용 버튼
         [SerializeField] bool TESTDIEBUTTON;
         public enum State { Idle = 0, Move, Hit, Escape, Die }
-        private int curHitDamage;
-        private bool isHittable;
+        
 
         StateMachine<State, NonAttackableFish> stateMachine;
 
-        Coroutine nomalMoveRoutine;
+        Coroutine moveDirRoutine;
         Coroutine wallEscapeRoutine;
+
 
         protected override void Awake()
         {
             base.Awake();
 
-            StartCoroutine(MoveRoutine());
+            moveDirRoutine = StartCoroutine(MoveDirRoutine());
             stateMachine = new StateMachine<State, NonAttackableFish>(this);
-            stateMachine.AddState(State.Idle, new IdleState(this, stateMachine));
-            stateMachine.AddState(State.Move, new MoveState(this, stateMachine));
-            stateMachine.AddState(State.Hit, new HitState(this, stateMachine));
+            stateMachine.AddState(State.Idle,   new IdleState(this, stateMachine));
+            stateMachine.AddState(State.Move,   new MoveState(this, stateMachine));
+            stateMachine.AddState(State.Hit,    new HitState(this, stateMachine));
             stateMachine.AddState(State.Escape, new EscapeState(this, stateMachine));
-            stateMachine.AddState(State.Die, new DieState(this, stateMachine));
+            stateMachine.AddState(State.Die,    new DieState(this, stateMachine));
 
 
         }
@@ -46,9 +47,6 @@ namespace KIM
             }
             stateMachine.Update();
             transform.rotation = Quaternion.LookRotation(moveDir);
-        }
-        private void LateUpdate()
-        {
         }
 
         #region FishState
@@ -192,12 +190,12 @@ namespace KIM
 
             public override void Enter()
             {
-                owner.StartCoroutine(EscapeMoveRoutine());
+                owner.wallEscapeRoutine = owner.StartCoroutine(EscapeMoveRoutine());
             }
 
             public override void Exit()
             {
-                owner.StopCoroutine(EscapeMoveRoutine());
+                owner.StopCoroutine(owner.wallEscapeRoutine);
             }
 
             public override void Setup()
@@ -270,7 +268,7 @@ namespace KIM
         #endregion
 
 
-        IEnumerator MoveRoutine()
+        IEnumerator MoveDirRoutine()
         {
             while (true)
             {
@@ -310,14 +308,9 @@ namespace KIM
                 }
             }
         }
-        public string GetCurState()
+        public override string GetCurState()
         {
             return stateMachine.GetCurStateName();
         }
-
-        //protected override void Move()
-        //{
-        //    base.Move();
-        //}
     }
 }

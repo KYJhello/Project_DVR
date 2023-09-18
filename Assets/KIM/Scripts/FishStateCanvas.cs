@@ -7,7 +7,7 @@ namespace KIM
 {
     public class FishStateCanvas : MonoBehaviour
     {
-        [SerializeField] NonAttackableFish fish;
+        [SerializeField] Fish fish;
         [SerializeField] TMP_Text test;
 
         private void Update()

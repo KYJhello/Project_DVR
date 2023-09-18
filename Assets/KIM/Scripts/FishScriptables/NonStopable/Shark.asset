@@ -17,8 +17,8 @@ MonoBehaviour:
   hp: 100
   weight: 800
   length: 400
-  playerRecognitionRange: 0
+  playerRecognitionRange: 10
   wallRecognitionRange: 0
-  moveSpeed: 5
+  moveSpeed: 8
   escapeSpeed: 10
   isStopableFish: 0
