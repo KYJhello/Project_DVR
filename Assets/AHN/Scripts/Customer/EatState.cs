@@ -34,7 +34,6 @@ namespace AHN
                     int myScore = plateAndFood.gameObject.GetComponent<SushiScore>().sushiScore;  // 그 초밥의 점수를 받아옴
                     // PosManager.OnAddPayEvent?.Invoke(myScore);
                     PosManager.OnAddPayEvent?.Invoke(myScore);
-                    PosManager.OnPayEvent?.Invoke();
                 }
                 Destroy(plateAndFood);      // 테이블 위에 올려진 접시 및 초밥 없어짐
             }

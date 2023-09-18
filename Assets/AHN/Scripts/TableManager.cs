@@ -41,7 +41,7 @@ namespace AHN
         public List<Transform> FalseSeat()
         {
             List<Transform> falseSeatsList = new List<Transform>();
-
+            
             foreach (KeyValuePair<Transform, bool> seat in SeatDic)
             {
                 if(seat.Value == false)
@@ -53,10 +53,10 @@ namespace AHN
             return falseSeatsList;
         }
 
-        // 만석인지 아닌지. 만석이면 true
+        // 가게가 만석인지 아닌지. 만석이면 true
         public bool IsSeatFull()
         {
-            if (FalseSeat().Count == 0)
+            if (FalseSeat().Count <= 0)
                 return true;
             else
                 return false;

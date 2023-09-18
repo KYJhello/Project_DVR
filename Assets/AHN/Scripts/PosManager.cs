@@ -10,6 +10,7 @@ namespace AHN
     public class PosManager : MonoBehaviour
     {
         public static UnityEvent<int> OnPayEvent = new UnityEvent<int>();   // EatState에서 호출할 event
+        public static UnityEvent<int> OnAddPayEvent = new UnityEvent<int>();   // EatState에서 호출할 event
         public static UnityEvent OnClickTotalSalesButton = new UnityEvent();  // TotalSales 버튼을 눌렀을 때 호출될 event
         public static UnityEvent<int> OnClickFundButton = new UnityEvent<int>();    // Fund 버튼을 눌렀을 때 호출될 evnet
         [SerializeField] TMP_Text paymentAmountText;
