@@ -11,7 +11,7 @@ public class TrashDestroyOther : MonoBehaviour
         resetPoint = new Vector3(0, 0, 0);
         Debug.Log($"게임오브젝트의 레이어는 {other.gameObject.layer}");
 
-        if (other.gameObject.layer == 10 || other.gameObject.layer == 23)
+        if (other.gameObject.layer == 10 || other.gameObject.layer == 23 || other.gameObject.layer == 18)
         {
             Debug.Log(1);
             Destroy(other.gameObject);

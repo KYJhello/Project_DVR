@@ -13,8 +13,20 @@ public class Timer : MonoBehaviour
 
     private bool touchButton = true;
 
+    private static Timer timer;
+    public static Timer Instance { get { return timer; } }
+
     private void Awake()
     {
+        if (timer != null && timer != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            timer = this;
+        }
+
         textMesh = GetComponentsInChildren<TextMesh>();
     }
     public void StertSell()
