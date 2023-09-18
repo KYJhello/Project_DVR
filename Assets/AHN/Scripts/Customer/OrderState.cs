@@ -51,7 +51,6 @@ namespace AHN
 
                 // TODO : 나중에 주문서 없앨 때 Pool로 Release해서 없애야 함.
 
-
                 fishInfo.Clear();
                 fishs.RemoveAt(orderFishIndex);     // 주문한 물고기 인덱스 삭제
             }

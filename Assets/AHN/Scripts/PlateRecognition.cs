@@ -11,26 +11,37 @@ namespace AHN
 
         public bool isPlate = false;
         public GameObject plate;
+        public List<GameObject> plateAndFood;
+
+        private void Start()
+        {
+            plateAndFood = new List<GameObject>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer == 24)
             {
-                Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
                 plate = other.gameObject;
                 other.gameObject.transform.position = transform.position;
                 isPlate = true;
                 other.GetComponent<XRGrabInteractable>().enabled = false;
-                rb.isKinematic = true;
+                other.GetComponent<Rigidbody>().isKinematic = true;
 
                 // TODO : 접시 rotation의 z와 x가 freeze 되도록
+
                 other.gameObject.GetComponentInChildren<BoxCollider>().isTrigger = false;
             }
+            plateAndFood.Add(other.gameObject);
         }
-
         public bool IsPlate()
         {
             return isPlate;
+        }
+
+        public List<GameObject> PlateAndFood()
+        {
+            return plateAndFood;
         }
     }
 }

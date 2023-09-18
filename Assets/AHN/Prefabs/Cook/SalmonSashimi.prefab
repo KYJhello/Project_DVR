@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1055485714565320438}
   - component: {fileID: 1055485714565320437}
   m_Layer: 21
-  m_Name: Sashimi
+  m_Name: SalmonSashimi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
