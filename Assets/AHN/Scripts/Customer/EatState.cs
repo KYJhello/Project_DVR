@@ -29,8 +29,14 @@ namespace AHN
             // + 결제하면서 결제되는 사운드
             PosManager.OnPayEvent?.Invoke(amount);
 
-            // TODO :접시를 풀로 생성하는지 Inst그걸로 생성하는지 물어봐야함. 일단 destroy로 없어지게 해놨음
-            Destroy(animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().plate);
+            // TODO : 접시를 풀로 생성하는지 Inst그걸로 생성하는지 물어봐야함. 일단 destroy로 없어지게 해놨음
+
+            List<GameObject> plateAndFoods = animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().PlateAndFood();
+
+            foreach (GameObject plateAndFood in plateAndFoods)
+            {
+                Destroy(plateAndFood);
+            }
         }
     }
 }

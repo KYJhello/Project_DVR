@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class SushiGrabInteractable : MonoBehaviour
+public class SushiGrabInteractable : XRGrabInteractable
 {
-    // Start is called before the first frame update
-    void Start()
+
+    protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        
+        base.OnSelectEntered(args);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.layer == 24)
+        {
+            gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+        }
     }
 }
