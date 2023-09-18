@@ -29,6 +29,7 @@ namespace AHN
                 other.GetComponent<Rigidbody>().isKinematic = true;
 
                 // TODO : 접시 rotation의 z와 x가 freeze 되도록
+
                 other.gameObject.GetComponentInChildren<BoxCollider>().isTrigger = false;
             }
             plateAndFood.Add(other.gameObject);

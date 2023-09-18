@@ -7,11 +7,16 @@ namespace AHN
     public class WaitState : StateMachineBehaviour
     {
         StateCorutineManager corutineManager;
+        Transform table;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             corutineManager = animator.GetComponent<StateCorutineManager>();
             corutineManager.StartCoroutine(corutineManager.FoodWaitRoutine());  // 60초 세기 시작
+
+            // 테이블 방향을 바라보도록
+            table = animator.GetComponent<Customer>().mySeat.GetChild(0).transform;
+            animator.transform.LookAt(table);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

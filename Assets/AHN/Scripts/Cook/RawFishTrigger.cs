@@ -20,10 +20,25 @@ namespace AHN
                 //        그건 여기 밑에 sushi.gameObject.GetComponent<>()로, Sushi에서 등급을 매개변수로 하는 점수계산 함수를 만들어. 그 함수를 등급을 넣어서 호출하면됨.
                 //        그러면 만들어진 sushi에는 등급이 반영된 점수가 있을 것.
                 
+                GameObject sushi;
+
                 Destroy(other.gameObject);
-                GameObject sushi = GameManager.Resource.Instantiate<GameObject>("Sushi");
-                sushi.transform.parent = sushiManager.transform;
-                sushi.transform.position = rice.transform.position;
+
+                switch (other.gameObject.name)
+                {
+                    case "SalmonSashimi":
+                        sushi = GameManager.Resource.Instantiate<GameObject>("SalmonSushi");
+                        sushi.transform.parent = sushiManager.transform;
+                        sushi.transform.position = rice.transform.position;
+                        break;
+                    case "ASashimi":
+                        sushi = GameManager.Resource.Instantiate<GameObject>("ASushi");
+                        sushi.transform.parent = sushiManager.transform;
+                        sushi.transform.position = rice.transform.position;
+                        break;
+                    default:
+                        break;
+                }
                 Destroy(rice);
             }
         }
