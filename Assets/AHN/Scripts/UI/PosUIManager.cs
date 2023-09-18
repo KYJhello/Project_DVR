@@ -10,7 +10,6 @@ namespace AHN
         [SerializeField] GameObject TotalSalesScreen;
         [SerializeField] GameObject FundScreen;
         PosManager posManager;
-        int a = 0;
 
         private void Start()
         {
@@ -21,7 +20,6 @@ namespace AHN
 
         public void TotalSalesButton()
         {
-            Debug.Log("TotalSalesButton");
             mainScreen.SetActive(false);
             TotalSalesScreen.SetActive(true);
             
@@ -31,7 +29,6 @@ namespace AHN
 
         public void FundButton()
         {
-            Debug.Log("FundButton");
             mainScreen.SetActive(false);
             FundScreen.SetActive(true);
             // TODO : 가게의 총 자본금이 나와야 함

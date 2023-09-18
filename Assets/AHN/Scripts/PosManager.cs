@@ -39,13 +39,8 @@ namespace AHN
             StopAllCoroutines();
         }
 
-        // 1. TODO : 주문출력함수
-        public void PrintOrderSheet()
+        public void PrintOrderSheet()   // 주문서 출력하는 함수
         {
-            // Customer의 Orderstate-Exit()에서 호출할 주문출력함수()
-            // 주문출력함수()에는 포스기 앞에 메뉴가 적힌 주문서가 뿅하고 생기는 함수.
-            // 주문서가 손님 수만큼 생성되니까 주문서도 풀링으로 해야하나?
-            // 주문서는 손님이 Seat를 참조하는 것처럼 이미 있는 메뉴중 랜덤값을 참조
             orderSheet = GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.identity);
 
             // TODO : 주문서 나중에 Release 해줘야 하는데 그건 나중에,,,
@@ -59,11 +54,10 @@ namespace AHN
 
             // TODO : 하루마다 매출 초기화 -> 타이머 누르면 초기화 되도록.
         }
-
-
+        
         void FundText(int totalSales)   // 총 자산
         {
-            fund = totalSales;
+            fund += totalSales;
             fundText.text = $"Fund : {fund}";
         }
 
