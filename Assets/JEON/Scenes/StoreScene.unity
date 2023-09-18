@@ -352,7 +352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436287939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.857, y: 1.379, z: 2.434}
+  m_LocalPosition: {x: -2.913, y: 1.27, z: 2.462}
   m_LocalScale: {x: 0.2736098, y: 0.120066606, z: 0.32141975}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -902,27 +902,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1202663258 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 903162347337499001, guid: cf10f1a36d2f74c428518ee8d290fcd9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1720252889}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1202663265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202663258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308d7ccd1be43844596f4b0a5c9d5e97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: -0.15
-  timer: 0
-  firstHeadHit: 0
 --- !u!1001 &1247478605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1371,11 +1350,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1389970579525396596, guid: cf10f1a36d2f74c428518ee8d290fcd9,
-        type: 3}
-      propertyPath: m_InteractionLayers.m_Bits
-      value: 1025
-      objectReference: {fileID: 0}
     - target: {fileID: 559429258087177155, guid: cf10f1a36d2f74c428518ee8d290fcd9,
         type: 3}
       propertyPath: m_RootOrder
