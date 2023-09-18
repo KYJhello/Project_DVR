@@ -8,7 +8,7 @@ public class Sushi : MonoBehaviour
     [SerializeField] int sushiLevel;
     [SerializeField] int sushiWidth;
 
-    private void Graded()
+    private void Grabed()
     {
 
     }

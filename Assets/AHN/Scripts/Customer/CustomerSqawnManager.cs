@@ -15,6 +15,13 @@ namespace AHN
             tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
             customer = GameManager.Resource.Load<GameObject>("Customer");
 
+            StartCoroutine(CustomerSpawnRoutine());
+
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
         }
 
 

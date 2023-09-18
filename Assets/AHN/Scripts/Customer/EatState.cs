@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,9 +25,12 @@ namespace AHN
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             // TODO : 결제.
+            // KIM_FishTank 리스트에서 물고기 등급을 받아옴. 등급에 따라 결제금액이 달라짐.
             // + 결제하면서 결제되는 사운드
-            // + Pos의 AddText에 amout 가 적혀야함. 한 3초 동안~
             PosManager.OnPayEvent?.Invoke(amount);
+
+            // TODO :접시를 풀로 생성하는지 Inst그걸로 생성하는지 물어봐야함. 일단 destroy로 없어지게 해놨음
+            Destroy(animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().plate);
         }
     }
 }
