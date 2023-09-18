@@ -27,21 +27,21 @@ namespace LM
         }
         public void UpToggle(bool isOn)
         {
-            if (isOn)
+            if (isOn && device.platform.enabled)
                 device.PlatformUp();
             else
                 device.PlatformStop();
         }
         public void DownToggle(bool isOn)
         {
-            if (isOn)
+            if (isOn && device.platform.enabled)
                 device.PlatformDown();
             else
                 device.PlatformStop();
         }
         public void StopToggle(bool isOn)
         {
-            if (isOn)
+            if (isOn && device.platform.enabled)
                 device.PlatformStop();
         }
     }
