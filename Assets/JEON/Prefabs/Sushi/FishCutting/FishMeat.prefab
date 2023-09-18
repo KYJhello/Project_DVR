@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3873876285862473496}
   - component: {fileID: 3873876285862473495}
   - component: {fileID: 3873876285862473494}
+  - component: {fileID: 1620954966483868445}
   m_Layer: 21
   m_Name: FishMeat_ForCutting (3)
   m_TagString: Untagged
@@ -267,6 +268,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &1620954966483868445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069202241857652877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59cd362f08bfd64082213f0b665a7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7069202242755265148
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +294,7 @@ GameObject:
   - component: {fileID: 3873876286468095315}
   - component: {fileID: 3873876286468095314}
   - component: {fileID: 3873876286468095313}
+  - component: {fileID: 8879777606320179543}
   m_Layer: 21
   m_Name: FishMeat_ForCutting (4)
   m_TagString: Untagged
@@ -534,6 +548,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &8879777606320179543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069202242755265148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59cd362f08bfd64082213f0b665a7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7069202242963808249
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,10 +571,10 @@ GameObject:
   - component: {fileID: 7069202242963808248}
   - component: {fileID: 7069202242963808230}
   - component: {fileID: 7069202242963808231}
+  - component: {fileID: 3873876285802437882}
   - component: {fileID: 3873876285802437884}
   - component: {fileID: 3873876285802437883}
-  - component: {fileID: 3873876285802437882}
-  - component: {fileID: 3873876285802437885}
+  - component: {fileID: 3758686982855152541}
   m_Layer: 21
   m_Name: FishMeat_ForCutting (1)
   m_TagString: Untagged
@@ -621,6 +647,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3873876285802437882
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069202242963808249}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.021985857, y: 0.0065116915, z: 0.020000005}
+  m_Center: {x: -0.0013388031, y: 0.0032558457, z: 0.000000014901161}
 --- !u!54 &3873876285802437884
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -789,32 +828,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!65 &3873876285802437882
-BoxCollider:
+--- !u!114 &3758686982855152541
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7069202242963808249}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.021985857, y: 0.0065116915, z: 0.020000005}
-  m_Center: {x: -0.0013388031, y: 0.0032558457, z: 0.000000014901161}
---- !u!65 &3873876285802437885
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7069202242963808249}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.021985857, y: 0.0065116915, z: 0.020000005}
-  m_Center: {x: -0.0013388031, y: 0.0032558457, z: 0.000000014901161}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59cd362f08bfd64082213f0b665a7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7069202242983307276
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +854,7 @@ GameObject:
   - component: {fileID: 3873876286968838876}
   - component: {fileID: 3873876286968838875}
   - component: {fileID: 3873876286968838874}
+  - component: {fileID: 8502659135124048702}
   m_Layer: 21
   m_Name: FishMeat_ForCutting (5)
   m_TagString: Untagged
@@ -1082,6 +1108,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &8502659135124048702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069202242983307276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59cd362f08bfd64082213f0b665a7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7069202243400349786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1134,7 @@ GameObject:
   - component: {fileID: 3873876286740763967}
   - component: {fileID: 3873876286740763966}
   - component: {fileID: 3873876286740763965}
+  - component: {fileID: 3484858005363622780}
   m_Layer: 21
   m_Name: FishMeat_ForCutting (2)
   m_TagString: Untagged
@@ -1349,6 +1388,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &3484858005363622780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069202243400349786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59cd362f08bfd64082213f0b665a7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7988172074064670611
 GameObject:
   m_ObjectHideFlags: 0

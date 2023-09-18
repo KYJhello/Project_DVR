@@ -1,7 +1,8 @@
+using KIM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// 2번째 분리
 public class RawSalmon : MonoBehaviour
 {
     float cuttingCount;
@@ -9,6 +10,9 @@ public class RawSalmon : MonoBehaviour
     GameObject knife;
 
     public List<GameObject> fishMeats;
+    private string fishTier;
+
+    public string FishTier { get { return fishTier; } set { fishTier = value; } }
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class RawSalmon : MonoBehaviour
                 {
                     salmon.SetActive(true);
                     salmon.transform.SetParent(null);
+                    salmon.GetComponent<RawFishForCutting>().FishTier = fishTier;
                 }
                 gameObject.SetActive(false);
             }

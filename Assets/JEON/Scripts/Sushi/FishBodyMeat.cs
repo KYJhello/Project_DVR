@@ -4,12 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+// 1번째 분리
 public class FishBodyMeat : MonoBehaviour
 {
     // TODO : 분리되는 부분 가져와서 스크립트 분리하기
     public float x = -0.15f;
     public float timer = 0;
+
+    private string fishTier;
+
+    public string FishTier { get { return fishTier; } set { fishTier = value; } }
 
     public bool firstHeadHit = false;
 
@@ -31,7 +35,7 @@ public class FishBodyMeat : MonoBehaviour
 
             for (int i = 0; i < 2; i++)
             {
-                GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/FishMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/FishMeat", kinfeRay.hitInfoPos, Quaternion.identity).GetComponent<RawSalmon>().FishTier = fishTier;
             }
             Debug.Log($"{kinfeRay.fish.transform.parent.name}");
 
@@ -63,7 +67,7 @@ public class FishBodyMeat : MonoBehaviour
 
     }
 
-    public void Op()
+    public void TakePrefab()
     {
         if (timer < 2)
         {
