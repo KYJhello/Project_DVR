@@ -6,8 +6,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Knife : MonoBehaviour
 {
-    int fishTier;
-
     Transform fishPos;
     Quaternion quaternion;
 
@@ -32,6 +30,7 @@ public class Knife : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         float colliders = fishBody.GetComponentsInChildren<BoxCollider>().Length;
+        Transform fishBodyPos = other.transform;
 
         if (other.gameObject == headCuttingPoint)
         {
@@ -43,7 +42,7 @@ public class Knife : MonoBehaviour
         }
         if (other.gameObject == fishBody && colliders == 3)
         {
-            fishPos = other.transform;
+            fishPos = fishBodyPos;
             GetRawFishPrefab(other);
         }
     }
@@ -76,15 +75,4 @@ public class Knife : MonoBehaviour
         GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Fish_Body_Meat", fishPos.position, quaternion, false);
         Destroy(other.gameObject);
     }
-
-    /*private void GetRawFishPrefab(Collider other)
-    {
-        // TODO : 물고기의 등급에 따라서 for문을 돌려서 나오는 프리팹의 개수가 달라지도록
-        for (fishTier = 1; fishTier < 5; fishTier++)
-        {
-            GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Salmon_Meat2", fishPos.position, Quaternion.identity, false);
-
-        }
-        Destroy(other.gameObject);
-    }*/
 }
