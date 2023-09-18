@@ -11,11 +11,6 @@ namespace KIM
         private string weight;
         private string length;
         private string fishRank;
-        private FishBody body;
-        private void Awake()
-        {
-            body = GetComponentInChildren<FishBody>();
-        }
 
         public void SetFishInfo(List<string> info)
         {
@@ -25,7 +20,10 @@ namespace KIM
             length = info[2];
             fishRank = info[3];
             Debug.Log("StoreFishInfo : " + name + ", " + weight + ", " + fishRank);
-            body.Rank = fishRank;
+        }
+        public string ReturnFishRank()
+        {
+            return fishRank;
         }
     }
 }
