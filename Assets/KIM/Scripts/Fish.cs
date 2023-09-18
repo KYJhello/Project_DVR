@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 namespace KIM
 {
     public enum FishRank { Normal = 0, Rare, SuperRare, Special }
-    public class Fish : MonoBehaviour, IHittable
+    public abstract class Fish : MonoBehaviour, IHittable
     {
         // 이름, 무게, 길이, 랭크
         List<string> fishInfo = new List<string>();
@@ -27,6 +27,8 @@ namespace KIM
         protected bool isDie = false;
         protected bool isDirChangeActive = false;
         protected XRGrabInteractable grabInteractable;
+        protected int curHitDamage;
+        protected bool isHittable;
 
         public int CurHp { get { return curHp; } }
 
@@ -174,5 +176,6 @@ namespace KIM
                 Destroy(this.gameObject);
             }
         }
+        public abstract string GetCurState();
     }
 }
