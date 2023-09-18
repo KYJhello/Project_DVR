@@ -27,6 +27,8 @@ namespace AHN
         {
             // 기다리던 코루틴 Stop
             corutineManager.StopCoroutine(corutineManager.FoodWaitRoutine());
+
+            // TODO : 타이머 시간 감소시켜야 함. 일단 -10초로
         }
     }
 }

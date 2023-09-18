@@ -24,18 +24,21 @@ namespace AHN
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            // TODO : 결제.
-            // KIM_FishTank 리스트에서 물고기 등급을 받아옴. 등급에 따라 결제금액이 달라짐.
-            // + 결제하면서 결제되는 사운드
-            PosManager.OnPayEvent?.Invoke(amount);
 
             // TODO : 접시를 풀로 생성하는지 Inst그걸로 생성하는지 물어봐야함. 일단 destroy로 없어지게 해놨음
+
 
             List<GameObject> plateAndFoods = animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().PlateAndFood();
 
             foreach (GameObject plateAndFood in plateAndFoods)
             {
-                Destroy(plateAndFood);
+                // 결제
+                if (plateAndFood.layer == 23)   // 먹은 음식 중 초밥이 있다면
+                {
+                    int myScore = plateAndFood.gameObject.GetComponent<SushiScore>().sushiScore;  // 그 초밥의 점수를 받아옴
+                    PosManager.OnPayEvent?.Invoke(myScore);
+                }
+                Destroy(plateAndFood);      // 테이블 위에 올려진 접시 및 초밥 없어짐
             }
         }
     }
