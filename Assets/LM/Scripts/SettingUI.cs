@@ -55,8 +55,6 @@ namespace LM
         }
         private void OnBGMVolumeChanged(float value)
         {
-            
-                
             texts["BGMVolumeCurValueText"].text = ((int)value).ToString();
             float sound;
             if (value <= 0)
@@ -64,5 +62,9 @@ namespace LM
             else
                 sound = Mathf.Lerp(-40, 0, value * 0.01f);
         }
+        public float MasterVolume { get { return sliders["MasterVolumeSlider"].value; } set { sliders["MasterVolumeSlider"].value = value; } }
+
+        public float SFXVolume { get { return sliders["SFXVolumeSlider"].value; } set { sliders["SFXVolumeSlider"].value = value; } }
+        public float BGMVolume { get { return sliders["BGMVolumeSlider"].value; } set { sliders["BGMVolumeSlider"].value = value; } }
     }
 }

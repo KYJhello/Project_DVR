@@ -38,11 +38,12 @@ namespace LM
             rb.useGravity = false;
             rb.isKinematic = false;
             Vector3 v3 = dir.normalized;
-            rb.AddForce(v3 * speed);
+            rb.AddForce(v3 * speed, ForceMode.Impulse);
             while (Vector3.Distance(startPos, transform.position) < maxRange * 2)
             {
                 Debug.Log("Firing...");
                 rb.useGravity = false;
+                rb.AddForce(v3 * speed);
                 rb.velocity = v3 * speed;
                 transform.LookAt(v3 * maxRange * 2);
                 if (Physics.SphereCast(castPos.position, 0.05f, transform.forward, out hit, 0.1f, mask))

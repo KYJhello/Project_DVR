@@ -106,16 +106,21 @@ namespace LM
             rb.useGravity = false;
             rb.isKinematic = false;
             Vector3 v3 = dir.normalized;
-            float dis = Vector3.Distance(returnPos.position, transform.position);
             transform.rotation = returnPos.rotation;
-            rb.AddForce(v3 * speed, ForceMode.Impulse);
+            rb.AddForce(v3 * speed, ForceMode.Impulse); 
+            rb.velocity = v3 * speed;
+            float dis = Vector3.Distance(returnPos.position, transform.position);
             while (dis < maxRange)
             {
                 if (isPulling || pullEnd)
+                {
+                    rb.velocity = Vector3.zero;
                     yield break;
+                } 
+                rb.AddForce(v3);
                 rb.velocity = v3 * speed;
                 dis = Vector3.Distance(returnPos.position, transform.position);
-                transform.rotation = returnPos.rotation;
+                transform.LookAt(v3 * maxRange * 2);
                 yield return new WaitForFixedUpdate();
             }
             rb.velocity = Vector3.zero;
@@ -128,7 +133,7 @@ namespace LM
                 {
                     Vector3 dir = returnPos.position - transform.position;
                     transform.Translate(dir.normalized * pullForce * Time.fixedDeltaTime, Space.World);
-                    transform.LookAt(dir.normalized * maxRange * -1);
+                    transform.LookAt(dir + new Vector3(180, 180, 180));
                 }
                 yield return new WaitForFixedUpdate();
             }
