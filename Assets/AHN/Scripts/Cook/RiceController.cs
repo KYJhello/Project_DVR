@@ -32,8 +32,6 @@ namespace AHN
         /// <param name="currentScore"></param>
         public void ScoreUP(ActivateEventArgs args)
         {
-            // TODO : 세 번째까지 클릭할 때마다 밥의 scale이 조금씩 줄어듦.
-
             if (threeButton)    // 세 번을 다 채웠으니 더 이상 점수 못올리고 return
             {
                 Debug.Log(currentScore);
@@ -44,29 +42,28 @@ namespace AHN
             {
                 riceMeshRenderer.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
                 threeButton = true;
-                currentScore += 500;
+                currentScore += 200;
                 twoButton = false;                 // canScoreUp = false, oneButton = false, twoButton = false, threeButton = true;
                 ActivateHaptic(args);
-                Debug.Log(currentScore);
             }
             else if (oneButton)     // 두 번째 클릭
             {
                 riceMeshRenderer.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
                 twoButton = true;
-                currentScore += 500;
+                currentScore += 200;
                 oneButton = false;                 // canScoreUp = false, oneButton = false, twoButton = true, threeButton = false;
                 ActivateHaptic(args);
-                Debug.Log(currentScore);
             }
             if (canScroeUp)     // 첫 번째 클릭
             {
                 riceMeshRenderer.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
                 oneButton = true;
-                currentScore += 500;
+                currentScore += 200;
                 canScroeUp = false;                 // canScoreUp = false, oneButton = true, twoButton = false, threeButton = false;
                 ActivateHaptic(args);
-                Debug.Log(currentScore);
             }
+
+            PosManager.OnAddPayEvent?.Invoke(currentScore);
         }
 
         void ActivateHaptic(ActivateEventArgs args)

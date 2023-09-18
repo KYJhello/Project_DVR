@@ -20,18 +20,6 @@ namespace AHN
             agent = GetComponent<NavMeshAgent>();
         }
 
-        private void Start()
-        {/*
-            tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
-            kioskDestination = GameObject.Find("KioskDestnation").GetComponent<Transform>();
-            customerSpawnPoint = GameObject.Find("CustomerSpawnPoint").GetComponent<Transform>();
-            
-            SelectSeat();
-
-            agent.enabled = true;
-            GetComponent<Animator>().enabled = true;*/
-        }
-
         private void OnEnable()
         {
             tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
