@@ -13,20 +13,23 @@ public class Timer : MonoBehaviour
 
     private bool touchButton = true;
 
-    private static Timer timer;
-    public static Timer Instance { get { return timer; } }
+    private static Timer timerTime;
+    private static bool close;
+    public static Timer TimerTime { get { return timerTime; } }
+    public static bool Close { get { return close; } }
 
     private void Awake()
     {
-        if (timer != null && timer != this)
+        if (timerTime != null && timerTime != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            timer = this;
+            timerTime = this;
         }
 
+        close = true;
         textMesh = GetComponentsInChildren<TextMesh>();
     }
     public void StertSell()
@@ -41,6 +44,25 @@ public class Timer : MonoBehaviour
         if (minute >= 3)
             StartCoroutine(StartTimer());
     }
+
+    public void PenaltyTime()
+    {
+        if (second >= 11)
+        {
+            second -= 10;
+        }
+        else if (second <= 10)
+        {
+            minute -= 1;
+            second += 50;
+        }
+        
+    }
+    public void FnishTime()
+    {
+        close = false;
+    }
+
     IEnumerator StartTimer()
     {
         if (minute == 0 && second == 0)

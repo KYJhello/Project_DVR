@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SalmonSteak : MonoBehaviour
@@ -30,15 +31,18 @@ public class SalmonSteak : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             grilling++;
+            Debug.Log($"{grilling}");
             if (grilling == 10)
             {
                 gameObject.GetComponent<MeshRenderer>().material = goodGril;
+            }
+            else if (grilling >= 15)
+            {
+                Debug.Log($"³Ñ¾ú´Ù");
+                gameObject.GetComponent<MeshRenderer>().material = burncGril;
+                yield return null;
 
-                if (grilling >= 15)
-                {
-                    gameObject.GetComponent<MeshRenderer>().material = burncGril;
-                    StopCoroutine(grillingSteak);
-                }
+                StopCoroutine(grillingSteak);
             }
         }
     }
