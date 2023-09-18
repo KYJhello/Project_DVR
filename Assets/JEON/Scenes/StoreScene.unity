@@ -528,6 +528,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &778130454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8213613077434180423, guid: e1f614ce8e612e54382335c8dabe92ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 8213613078250930439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &778130462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 778130462, guid: e1f614ce8e612e54382335c8dabe92ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 8213613078250930439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778130454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba676782182a08749995d72d3af06fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &903348749
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907670681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -669,8 +687,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.33479795, y: 0.31452006, z: 0.30415416}
-  m_Center: {x: -0.048440546, y: 0.004564176, z: -0.025860967}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &907670684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,10 +720,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778130462}
+        m_TargetAssemblyTypeName: SalmonSteak, Assembly-CSharp
+        m_MethodName: GrillingSteak
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778130454}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_OnHoverEntered:
@@ -1418,7 +1460,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30530
+  m_Name: pb_Mesh84956
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2769,6 +2811,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 778130462, guid: e1f614ce8e612e54382335c8dabe92ed, type: 3}
+      propertyPath: color
+      value: 
+      objectReference: {fileID: 2100000, guid: 413a2385c512962409203474a3812306, type: 2}
     - target: {fileID: 8213613077434180416, guid: e1f614ce8e612e54382335c8dabe92ed,
         type: 3}
       propertyPath: m_RootOrder
@@ -2824,6 +2870,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8213613077434180418, guid: e1f614ce8e612e54382335c8dabe92ed,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213613077434180418, guid: e1f614ce8e612e54382335c8dabe92ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 9e7f867c6b56de949b043031fc1e2c51,
+        type: 3}
+    - target: {fileID: 8213613077434180418, guid: e1f614ce8e612e54382335c8dabe92ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 413a2385c512962409203474a3812306, type: 2}
     - target: {fileID: 8213613077434180423, guid: e1f614ce8e612e54382335c8dabe92ed,
         type: 3}
       propertyPath: m_Name

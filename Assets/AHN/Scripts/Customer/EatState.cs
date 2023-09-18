@@ -24,10 +24,6 @@ namespace AHN
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
-            // TODO : 접시를 풀로 생성하는지 Inst그걸로 생성하는지 물어봐야함. 일단 destroy로 없어지게 해놨음
-
-
             List<GameObject> plateAndFoods = animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().PlateAndFood();
 
             foreach (GameObject plateAndFood in plateAndFoods)
@@ -36,7 +32,9 @@ namespace AHN
                 if (plateAndFood.layer == 23)   // 먹은 음식 중 초밥이 있다면
                 {
                     int myScore = plateAndFood.gameObject.GetComponent<SushiScore>().sushiScore;  // 그 초밥의 점수를 받아옴
-                    PosManager.OnPayEvent?.Invoke(myScore);
+                    // PosManager.OnAddPayEvent?.Invoke(myScore);
+                    PosManager.OnAddPayEvent?.Invoke(myScore);
+                    PosManager.OnPayEvent?.Invoke();
                 }
                 Destroy(plateAndFood);      // 테이블 위에 올려진 접시 및 초밥 없어짐
             }

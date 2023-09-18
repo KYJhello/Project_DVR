@@ -24,7 +24,7 @@ namespace AHN
         {
             if (Vector3.Distance(animator.transform.position, customer.customerSpawnPoint.position) < 2f)
             {
-                GameManager.Pool.Release(customer.gameObject);
+                GameManager.Pool.Release(animator.gameObject);
             }
         }
 

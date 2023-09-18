@@ -21,10 +21,23 @@ namespace AHN
         }
 
         private void Start()
+        {/*
+            tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
+            kioskDestination = GameObject.Find("KioskDestnation").GetComponent<Transform>();
+            customerSpawnPoint = GameObject.Find("CustomerSpawnPoint").GetComponent<Transform>();
+            
+            SelectSeat();
+
+            agent.enabled = true;
+            GetComponent<Animator>().enabled = true;*/
+        }
+
+        private void OnEnable()
         {
             tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
             kioskDestination = GameObject.Find("KioskDestnation").GetComponent<Transform>();
             customerSpawnPoint = GameObject.Find("CustomerSpawnPoint").GetComponent<Transform>();
+
             SelectSeat();
 
             agent.enabled = true;
@@ -47,6 +60,7 @@ namespace AHN
             // 3. 고른 좌석의 value값은 true로 변경
             mySeat = falseSeatList[randomSeat];
             tableManager.SeatDic[falseSeatList[randomSeat]] = true;
+            Debug.Log(tableManager.SeatDic[falseSeatList[randomSeat]]);
         }
 
         public int mySeatNumber()

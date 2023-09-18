@@ -1,5 +1,4 @@
 using KIM;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 // 2번째 분리
@@ -9,6 +8,9 @@ public class RawSalmon : MonoBehaviour
 
     GameObject knife;
 
+    Material baseColor;
+    MeshRenderer meshRenderer;
+
     public List<GameObject> fishMeats;
     private string fishTier;
 
@@ -17,6 +19,10 @@ public class RawSalmon : MonoBehaviour
     private void Awake()
     {
         knife = GameObject.Find("Knife");
+        meshRenderer = GetComponent<MeshRenderer>();
+
+        baseColor = meshRenderer.material;
+        meshRenderer.material = baseColor;
     }
 
     private void OnTriggerEnter(Collider other)
