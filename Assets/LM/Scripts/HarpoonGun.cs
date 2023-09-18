@@ -150,16 +150,19 @@ namespace LM
                 {
                     Debug.Log("Fire");
                     StartCoroutine(SocketTrigger());
+                    attackSpear.rb.useGravity = false;
                     attackSpear.OnFire(spearSocket.forward, spearForce);
                 }
                 else if (rsType == RoadedSpearType.Return)
                 {
+                    Debug.Log("Fire");
                     rope.endPos = returnSpear.ropePos;
                     rope.RopeOn();
                     StartCoroutine(SocketTrigger());
                     StartCoroutine(CanPullTrigger());
                     returnSpear.pullEnd = false;
                     objectRope.gameObject.SetActive(false);
+                    returnSpear.rb.useGravity = false;
                     returnSpear.OnFire(spearSocket.forward, spearForce);
                 }
             }

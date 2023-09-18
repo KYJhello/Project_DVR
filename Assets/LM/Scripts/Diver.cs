@@ -9,6 +9,7 @@ namespace LM
     {
         [SerializeField] Canvas HUDCanvas;
         [SerializeField] GameObject helmet;
+        [SerializeField] GameObject helmetLight;
         
         public Material glassMat;
         public UnityEvent OnDived;
@@ -45,6 +46,9 @@ namespace LM
             CurWeight = 0;
             Depth = 0;
 
+            device = transform.parent.GetComponentInChildren<Device>();
+            device.gameObject.SetActive(false);
+
             HUDCanvas.enabled = false;
             HUD = HUDCanvas.GetComponent<DiverHelmetHUD>();
 
@@ -55,6 +59,8 @@ namespace LM
             
             if(platform != null)
                 platform.gameObject.SetActive(false);
+
+            helmetLight.SetActive(false);
         }
         private void OnEnable()
         {
@@ -77,7 +83,7 @@ namespace LM
                 OnDiveEnd();
             
             if(transform.position.y < 0)
-                Depth = transform.position.y * 5;
+                Depth = transform.position.y * 2;
             else
                 Depth = 0;
         }
@@ -95,6 +101,7 @@ namespace LM
             {
                 OnDived?.Invoke();
                 isDived = true;
+                helmetLight.SetActive(true);
                 BreathRoutine = StartCoroutine(Breath());
                 OnPlateEnable();
             }
@@ -105,6 +112,7 @@ namespace LM
             {
                 OnDiveEnded?.Invoke();
                 isDived = false;
+                helmetLight.SetActive(false);
                 StopCoroutine(BreathRoutine);
                 CurO2 = MaxO2;
                 OnPlateDisable();
@@ -131,7 +139,7 @@ namespace LM
         // -> 그걸 o2change로 연결
         public void OnDied()
         {
-            OnPlateDisable();
+            // OnPlateDisable();
             // 집으로 이동
             // 인벤 비우기
             // 필요한것들 재생시키기
@@ -146,8 +154,13 @@ namespace LM
                 platform.gameObject.SetActive(true);
             }
             else
+            {
                 platform = GameManager.Resource.Instantiate<Platform>("Platform", transform.position - new Vector3(0, 5f, 0), Quaternion.identity);
+                platform.gameObject.SetActive(true);
+            }
+                
             device.platform = platform;
+            device.FindPlatform();
         }
         public void OnPlateDisable()
         {
@@ -169,6 +182,7 @@ namespace LM
             HUDCanvas.enabled = true;
             HUD.enabled = true;
             helmet.SetActive(true);
+            device.gameObject.SetActive(true);
         }
         public void HUDOff(SelectExitEventArgs args)
         {
@@ -181,6 +195,7 @@ namespace LM
             HUDCanvas.enabled = false;
             HUD.enabled = false;
             helmet.SetActive(false);
+            device.gameObject.SetActive(false);
         }
         IEnumerator InvisibleRoutine()
         {
