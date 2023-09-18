@@ -43,7 +43,8 @@ namespace AHN
             {
                 int orderFishIndex = Random.Range(0, fishs.Count);    // 주문할 물고기 리스트 순서
                 fishInfo = fishs[orderFishIndex];   // 주문할 물고기의 4개 정보가 담겨있는 리스트
-                GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));     // 주문서 출력
+                //GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));     // 주문서 출력
+                GameManager.Instantiate(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));
                 Debug.Log(fishInfo);
 
                 orderSheet.GetComponent<OrderSheet>().MenuTextInput(fishInfo[0], animator.gameObject.GetComponent<Customer>().mySeatNumber());
