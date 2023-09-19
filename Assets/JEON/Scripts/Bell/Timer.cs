@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using LM;
 
 public class Timer : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Timer : MonoBehaviour
     private int curTime;
     private int minute;
     [SerializeField] int second;
+    [SerializeField] GameObject nextDay;
+    [SerializeField] GameObject gameEnd;
 
     private bool touchButton = true;
 
@@ -82,6 +85,17 @@ public class Timer : MonoBehaviour
             }
 
             second -= 1;
+
+            if (minute < 0)
+            {
+                
+                nextDay.gameObject.SetActive(true);
+                //yield return new WaitForSeconds(10f);
+                //Time.timeScale = 0;
+                //player.GetComponentInChildren<LM.GameEnd>().gameObject.SetActive(true);
+
+
+            }
 
             if (second <= 9)
             {

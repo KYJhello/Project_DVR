@@ -7,10 +7,12 @@ namespace LM
 {
     public class NextDay : BaseUI
     {
-        int day;
+        [SerializeField] KIM.GameSceneManager gsManager;
+        int day = 0;
         int yesterDayFund;
         int todayIncome;
         int totalMoney;
+        public int Day {get{return day;}}
         protected override void Awake()
         {
             base.Awake();
@@ -19,6 +21,7 @@ namespace LM
         private void OnEnable()
         {
             // day = 
+            day++;
             yesterDayFund = PosManager.Fund - PosManager.TotalSales;
             todayIncome = PosManager.TotalSales;
             totalMoney = PosManager.Fund;
@@ -27,5 +30,11 @@ namespace LM
             texts["TodayIncome"].text = $"Today Income    |   +{todayIncome.ToString()}";
             texts["TodayFund"].text = $"Total Fund        |   {totalMoney.ToString()}";
         }
+        public void NextDayButtonClicked()
+        {
+            gsManager.SetPlayerPoint();
+            //this.gameObject.SetActive(false);
+        }
+        
     }
 }
