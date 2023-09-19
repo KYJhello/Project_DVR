@@ -39,12 +39,9 @@ namespace AHN
 
                 Destroy(other.gameObject);
 
-                switch (other.gameObject.name)
+                switch (other.gameObject.GetComponent<RawFishForCutting>().FishName)
                 {
-                    // TODO : 회에 붙어있는 RawFishForCutting에서 Fish등급말고 FishName을 불러와서 그 이름을 가지고 case 하면 될듯.
-                    // switch (other.gameObject.GetComponent<RawFishForCutting>().이름불러오는 거)
-
-                    case "SalmonSashimi":
+                    case "Salmon":
                         sushi = GameManager.Resource.Instantiate<GameObject>("SalmonSushi");
                         sushi.GetComponent<SushiScore>().sushiScore = AddSushiScore.currentSushiScore;      // 초밥 점수 반영
                         sushi.transform.parent = sushiManager.transform;
