@@ -8,18 +8,21 @@ using UnityEngine;
 public class FishBodyMeat : MonoBehaviour
 {
     // TODO : 분리되는 부분 가져와서 스크립트 분리하기
-    public float x = -0.15f;
+    public float x = -0.01f;
     public float timer = 0;
 
-    private string fishTier;
-
+    [SerializeField] private string fishTier;
+    [SerializeField] private string fishName;
     public string FishTier { get { return fishTier; } set { fishTier = value; } }
+    public string FishName { get { return fishName; } set { fishName = value; } }
 
     public bool firstHeadHit = false;
 
     Coroutine check;
 
     KinfeRay kinfeRay;
+
+    GameObject fishPrefab;
 
     private void Awake()
     {
@@ -35,9 +38,9 @@ public class FishBodyMeat : MonoBehaviour
 
             for (int i = 0; i < 2; i++)
             {
-                GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/FishMeat", kinfeRay.hitInfoPos, Quaternion.identity).GetComponent<RawSalmon>().FishTier = fishTier;
+                fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/FishMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                TakeFishInfo();
             }
-            Debug.Log($"{kinfeRay.fish.transform.parent.name}");
 
             Destroy(kinfeRay.fish.transform.parent.gameObject);
 
@@ -52,13 +55,18 @@ public class FishBodyMeat : MonoBehaviour
             StopCoroutine(check);
         }
     }
+    private void TakeFishInfo()
+    {
+        fishPrefab.GetComponent<RawSalmon>().FishTier = fishTier;
+        fishPrefab.GetComponent<RawSalmon>().FishName = fishName;
+    }
 
     public void CuttingFish()
     {
         if (!firstHeadHit)
             return;
 
-        if (kinfeRay.collisionNormal.x < x)
+        if (kinfeRay.collisionNormal.x <= x)
         {
             Debug.Log("쭉 진행중");
 
@@ -69,7 +77,7 @@ public class FishBodyMeat : MonoBehaviour
 
     public void TakePrefab()
     {
-        if (timer < 2)
+        if (timer < 5)
         {
             Debug.Log("프리팹가져와");
 
@@ -84,7 +92,7 @@ public class FishBodyMeat : MonoBehaviour
             StopCoroutine(check);
             timer = 0;
         }
-        else if (timer >= 2)
+        else if (timer >= 5)
         {
             Debug.Log("다시잘라");
 
