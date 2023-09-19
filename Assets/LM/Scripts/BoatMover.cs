@@ -5,11 +5,13 @@ namespace LM
 {
     public class BoatMover : MonoBehaviour
     {
-        [SerializeField] Vector3 portPos;
-        [SerializeField] Vector3 seaPos;
+        [SerializeField] public Transform portPos;
+        [SerializeField] public Transform seaPos;
         [SerializeField] Vector3 startPosOffset = new Vector3(0, 0.5f, 0);
         [SerializeField] float moveSpeed;
         [SerializeField] GameObject portTeleportAnchor;
+
+        public bool isHome;
 
         CharacterController controller;
         Collider col;
@@ -21,10 +23,12 @@ namespace LM
         }
         public void MoveToDive()
         {
+            isHome = false;
             StartCoroutine(Move(1));
         }
         public void MoveToHome() 
         {
+            isHome = true;
             StartCoroutine(Move(0));
         }
         IEnumerator Move(int i)
@@ -35,7 +39,7 @@ namespace LM
             if (i == 0)
             {
                 // 나중에 거리로 바꾸기
-                moveDir = (portPos - startPos).normalized;
+                moveDir = (portPos.position - startPos).normalized;
                 while(t <= 180)
                 {
                     transform.position += (moveDir * moveSpeed * Time.fixedDeltaTime);
@@ -51,7 +55,7 @@ namespace LM
             }
             else if (i == 1)
             {
-                moveDir = (seaPos - startPos).normalized;
+                moveDir = (seaPos.position - startPos).normalized;
                 portTeleportAnchor.SetActive(false);
                 while (t <= 180)
                 {

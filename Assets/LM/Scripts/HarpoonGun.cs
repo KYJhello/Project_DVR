@@ -68,7 +68,7 @@ namespace LM
 
         public void GrabOn(SelectEnterEventArgs args)
         {
-            if(args.interactorObject.transform.GetComponentInChildren<Diver>() == null)
+            if(args.interactorObject.transform.parent.transform.parent.GetComponentInChildren<Diver>() == null)
                 return;
             lineRenderer.enabled = true;
             renderRay = StartCoroutine(RenderRay());
@@ -99,7 +99,7 @@ namespace LM
         }
         public void GrabOff(SelectExitEventArgs args)
         {
-            if (args.interactorObject.transform.GetComponentInChildren<Diver>() == null)
+            if (args.interactorObject.transform.parent.transform.parent.GetComponentInChildren<Diver>() == null)
                 return;
             lineRenderer.enabled = false;
             StopCoroutine(renderRay);
