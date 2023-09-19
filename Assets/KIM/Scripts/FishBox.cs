@@ -36,24 +36,21 @@ namespace KIM
         // 수족관에서 호출하는 함수
         public List<List<string>> GetFishList()
         {
-            StartCoroutine(DeleteFishListRoutine());
-            return fishList;
+            List<List<string>> tempFishList = new List<List<string>>();
+            foreach(List<string> fishInfo in fishList)
+            {
+                tempFishList.Add(fishInfo);
+            }
+            fishList.Clear();
+            totalWeight = 0f;
+            fishList = new List<List<string>>();
+            return tempFishList;
         }
         public List<List<string>> ReturnFishBoxFishList()
         {
             return fishList;
         }
-        IEnumerator DeleteFishListRoutine()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(0.05f);
-                fishList.Clear();
-                totalWeight = 0f;
-                fishList = new List<List<string>>();
-                StopAllCoroutines();
-            }
-        }
+
 
         // 1) 가장 먼저 실행됨
         private void OnTriggerEnter(Collider other)

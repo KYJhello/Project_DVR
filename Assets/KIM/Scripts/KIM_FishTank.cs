@@ -15,16 +15,44 @@ namespace KIM
         // 통안에 들어있는 물고기 리스트
         public List<List<string>> totalFishList = new List<List<string>>();
         private bool isCreating = false;
+        Coroutine createFishRoutine;
 
         private void OnTriggerEnter(Collider other)
         {
             // 만약 충돌한 물체의 레이어가 피쉬박스라면
             if(other.gameObject.layer == 15 && !isCreating)
             {
-                if(other.gameObject.GetComponent<FishBox>().GetFishList().Count <= 0) { return; }
+                //if(other.gameObject.GetComponent<FishBox>().GetFishList().Count <= 0) { return; }
                 isCreating = true;
-                fishList = new List<List<string>>();
-                StartCoroutine(CreateFishRoutine(other));
+                //fishList = new List<List<string>>();
+                List<List<string>> fishBoxFishList = new List<List<string>>();
+                fishBoxFishList = other.gameObject.GetComponent<FishBox>().GetFishList();
+                if(fishBoxFishList == null) { return; }
+                createFishRoutine = StartCoroutine(CreateFishRoutine(fishBoxFishList));
+            }
+            //else if(other.gameObject.layer == 16)
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            // 나간 물체의 레이어가 StoreFish고, 
+            if(other.gameObject.layer == 16)
+            {
+                int index = 0;
+                foreach(List<string> fishInfo in totalFishList)
+                {
+                    //물고기의 모든 정보가 같은경우
+                    if(other.gameObject.GetComponent<StoreFish>().FishName == fishInfo[0] &&
+                        other.gameObject.GetComponent<StoreFish>().Weight == fishInfo[1] &&
+                        other.gameObject.GetComponent<StoreFish>().Length == fishInfo[2] &&
+                        other.gameObject.GetComponent<StoreFish>().FishRank == fishInfo[3])
+                    {
+                        Debug.Log("TotalFishExit" + totalFishList.Count
+                            + "\n fishList : " + fishList.Count);
+                        totalFishList.RemoveAt(index);
+                        return;
+                    }
+                    index++;
+                }
             }
         }
         public List<List<string>> ReturnFishTankFishList()
@@ -33,7 +61,6 @@ namespace KIM
         }
         public void AddFishTankFishList(List<List<string>> fishes)
         {
-            if (fishes.Count <= 0) { return; }
             isCreating = true;
             fishList = new List<List<string>>();
             StartCoroutine(CreateFishRoutine(fishes));
@@ -43,47 +70,48 @@ namespace KIM
             totalFishList.Clear();
         }
 
-        IEnumerator CreateFishRoutine(Collider other)
-        {
-            while (true)
-            {
-                foreach (List<string> fishInfo in other.gameObject.GetComponent<FishBox>().GetFishList())
-                {
-                    fishList.Add(fishInfo);
-                    totalFishList.Add(fishInfo);
-                }
-                foreach(List<string> fishInfo in fishList)
-                {
-                    GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Fish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
-                    yield return new WaitForSeconds(0.2f);
-                }
-                isCreating = false;
+        //IEnumerator CreateFishRoutine(Collider other)
+        //{
+        //    List<List<string>> fishBoxFishList = new List<List<string>>();
+        //    fishBoxFishList = other.gameObject.GetComponent<FishBox>().GetFishList();
+        //    foreach (List<string> fishInfo in fishBoxFishList)
+        //    {
+        //        fishList.Add(fishInfo);
+        //        //totalFishList.Add(fishInfo);
+        //    }
+        //    foreach (List<string> fishInfo in fishList)
+        //    {
+        //        totalFishList.Add(fishInfo);
+        //        GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Fish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
+        //        yield return new WaitForSeconds(0.2f);
+        //    }
+        //    isCreating = false;
 
-                fishList.Clear();
-                StopAllCoroutines();
-                yield return null;
-            }
-        }
+        //    fishList.Clear();
+        //    //StopAllCoroutines();
+        //    yield return null;
+
+        //}
         IEnumerator CreateFishRoutine(List<List<string>> fishes)
         {
-            while (true)
-            {
-                foreach (List<string> fishInfo in fishes)
-                {
-                    fishList.Add(fishInfo);
-                    totalFishList.Add(fishInfo);
-                }
-                foreach (List<string> fishInfo in fishList)
-                {
-                    GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Fish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
-                    yield return new WaitForSeconds(0.2f);
-                }
-                isCreating = false;
 
-                fishList.Clear();
-                StopAllCoroutines();
-                yield return null;
+            foreach (List<string> fishInfo in fishes)
+            {
+                fishList.Add(fishInfo);
+                //totalFishList.Add(fishInfo);
             }
+            foreach (List<string> fishInfo in fishList)
+            {
+                totalFishList.Add(fishInfo);
+                GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Fish", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
+                yield return new WaitForSeconds(0.2f);
+            }
+            isCreating = false;
+
+            fishList.Clear();
+            StopCoroutine(createFishRoutine);
+            yield return null;
+
         }
 
     }
