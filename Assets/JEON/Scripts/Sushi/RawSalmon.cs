@@ -24,8 +24,6 @@ public class RawSalmon : MonoBehaviour
 
         baseColor = meshRenderer.material;
         meshRenderer.material = baseColor;
-
-        Debug.Log($"fishTier = {fishTier}");
     }
 
     private void OnTriggerEnter(Collider other)
