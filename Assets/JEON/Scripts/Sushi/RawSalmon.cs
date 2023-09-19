@@ -13,8 +13,9 @@ public class RawSalmon : MonoBehaviour
 
     public List<GameObject> fishMeats;
     private string fishTier;
-
+    private string fishName;
     public string FishTier { get { return fishTier; } set { fishTier = value; } }
+    public string FishName { get { return fishName; } set { fishName = value; } }
 
     private void Awake()
     {
@@ -23,6 +24,8 @@ public class RawSalmon : MonoBehaviour
 
         baseColor = meshRenderer.material;
         meshRenderer.material = baseColor;
+
+        Debug.Log($"fishTier = {fishTier}");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +43,7 @@ public class RawSalmon : MonoBehaviour
                     salmon.SetActive(true);
                     salmon.transform.SetParent(null);
                     salmon.GetComponent<RawFishForCutting>().FishTier = fishTier;
+                    salmon.GetComponent<RawFishForCutting>().FishName = fishName;
                 }
                 gameObject.SetActive(false);
             }
