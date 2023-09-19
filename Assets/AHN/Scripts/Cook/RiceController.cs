@@ -17,7 +17,6 @@ namespace AHN
         bool oneButton = false;
         bool twoButton = false;
         bool threeButton = false;
-        int currentScore = 0;   // 디버깅하기 위한 예시. 현재 점수
 
         XRBaseController xrController;
 
@@ -34,7 +33,6 @@ namespace AHN
         {
             if (threeButton)    // 세 번을 다 채웠으니 더 이상 점수 못올리고 return
             {
-                Debug.Log(currentScore);
                 ActivateHaptic(args);
                 return;
             }
@@ -42,7 +40,7 @@ namespace AHN
             {
                 riceMeshRenderer.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
                 threeButton = true;
-                currentScore += 200;
+                AddSushiScore.currentSushiScore += 200;
                 twoButton = false;                 // canScoreUp = false, oneButton = false, twoButton = false, threeButton = true;
                 ActivateHaptic(args);
             }
@@ -50,7 +48,7 @@ namespace AHN
             {
                 riceMeshRenderer.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
                 twoButton = true;
-                currentScore += 200;
+                AddSushiScore.currentSushiScore += 200;
                 oneButton = false;                 // canScoreUp = false, oneButton = false, twoButton = true, threeButton = false;
                 ActivateHaptic(args);
             }
@@ -58,12 +56,15 @@ namespace AHN
             {
                 riceMeshRenderer.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
                 oneButton = true;
-                currentScore += 200;
+                AddSushiScore.currentSushiScore += 200;
                 canScroeUp = false;                 // canScoreUp = false, oneButton = true, twoButton = false, threeButton = false;
                 ActivateHaptic(args);
             }
+        }
 
-            PosManager.OnAddPayEvent?.Invoke(currentScore);
+        public int AddScore(int sushiScore)
+        {
+            return sushiScore; 
         }
 
         void ActivateHaptic(ActivateEventArgs args)

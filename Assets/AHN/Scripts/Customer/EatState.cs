@@ -24,19 +24,29 @@ namespace AHN
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            List<GameObject> plateAndFoods = animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().PlateAndFood();
+            List<GameObject> plateAndFoods = animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<FoodRecognitionOnTable>().PlateAndFood();
 
             foreach (GameObject plateAndFood in plateAndFoods)
             {
+                if (plateAndFoods.Count <= 0)
+                {
+                    return;
+                }    
+
                 // 결제
                 if (plateAndFood.layer == 23)   // 먹은 음식 중 초밥이 있다면
                 {
                     int myScore = plateAndFood.gameObject.GetComponent<SushiScore>().sushiScore;  // 그 초밥의 점수를 받아옴
-                    // PosManager.OnAddPayEvent?.Invoke(myScore);
                     PosManager.OnAddPayEvent?.Invoke(myScore);
+                    Destroy(plateAndFood);      // 테이블 위에 올려진 접시 및 초밥 없어짐
                 }
-                Destroy(plateAndFood);      // 테이블 위에 올려진 접시 및 초밥 없어짐
+                else
+                {
+                    animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<FoodRecognitionOnTable>().IsPlateFalse();
+                    Destroy(plateAndFood);      // 테이블 위에 올려진 접시 및 초밥 없어짐
+                }
             }
+            plateAndFoods.Clear();
         }
     }
 }
