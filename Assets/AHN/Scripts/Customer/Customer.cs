@@ -28,7 +28,14 @@ namespace AHN
 
             SelectSeat();
 
+            StartCoroutine(InitRoutine());
+        }
+
+        IEnumerator InitRoutine()
+        {
+            yield return new WaitForEndOfFrame();
             agent.enabled = true;
+            yield return new WaitForEndOfFrame();
             GetComponent<Animator>().enabled = true;
         }
 

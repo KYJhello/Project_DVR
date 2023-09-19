@@ -41,7 +41,6 @@ namespace LM
             rb.AddForce(v3 * speed, ForceMode.Impulse);
             while (Vector3.Distance(startPos, transform.position) < maxRange * 2)
             {
-                Debug.Log("Firing...");
                 rb.useGravity = false;
                 rb.AddForce(v3 * speed);
                 rb.velocity = v3 * speed;
@@ -53,8 +52,8 @@ namespace LM
                 }
                 yield return new WaitForFixedUpdate();
             }
-            rb.velocity = Vector3.zero;
-            Debug.Log("End");
+            yield return new WaitForSeconds(3);
+            GameManager.Resource.Destroy(gameObject);
         }
         private void GrabOutCheck(SelectExitEventArgs args)
         {

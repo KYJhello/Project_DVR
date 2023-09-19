@@ -177,5 +177,6 @@ namespace KIM
             }
         }
         public abstract string GetCurState();
+
     }
 }

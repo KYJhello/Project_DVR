@@ -31,29 +31,29 @@ namespace AHN
         {
             // fish list <fishInfo> 
             // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
-            // ¿©±â¼­ ÇÊ¿äÇÑ °Ç 0, 3. (2´Â ³ªÁß¿¡)
-            fishs = GameObject.FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList();   // ¼öÁ·°ü¿¡ ÀÖ´Â ¹°°í±âµé Á¤º¸¸¦ ¹Ş¾Æ¿È
+            // ì—¬ê¸°ì„œ í•„ìš”í•œ ê±´ 0, 3. (2ëŠ” ë‚˜ì¤‘ì—)
+            fishs = GameObject.FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList();   // ìˆ˜ì¡±ê´€ì— ìˆëŠ” ë¬¼ê³ ê¸°ë“¤ ì •ë³´ë¥¼ ë°›ì•„ì˜´
             List<List<string>> fishsCopy = new List<List<string>>(fishs);
             for (int i = 0; i < 5; i++) 
             {
-                fishs.AddRange(fishsCopy);      // ¹°°í±â ÇÏ³ª ´ç »ìÁ¡ÀÌ 5°³ ³ª¿À¹Ç·Î ¹è¿­ 5°³ º¹»ç
+                fishs.AddRange(fishsCopy);      // ë¬¼ê³ ê¸° í•˜ë‚˜ ë‹¹ ì‚´ì ì´ 5ê°œ ë‚˜ì˜¤ë¯€ë¡œ ë°°ì—´ 5ê°œ ë³µì‚¬
             }
 
             if (fishs.Count <= 0)
             {
-                Debug.Log("¹°°í±â°¡ ¾ø¾î ÁÖ¹®ÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù.");
+                Debug.Log("ë¬¼ê³ ê¸°ê°€ ì—†ì–´ ì£¼ë¬¸ì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.");
             }
             else
             {
-                int orderFishIndex = Random.Range(0, fishs.Count);    // ÁÖ¹®ÇÒ ¹°°í±â ¸®½ºÆ® ¼ø¼­
-                fishInfo = fishs[orderFishIndex];   // ÁÖ¹®ÇÒ ¹°°í±âÀÇ 4°³ Á¤º¸°¡ ´ã°ÜÀÖ´Â ¸®½ºÆ®
+                int orderFishIndex = Random.Range(0, fishs.Count);    // ì£¼ë¬¸í•  ë¬¼ê³ ê¸° ë¦¬ìŠ¤íŠ¸ ìˆœì„œ
+                fishInfo = fishs[orderFishIndex];   // ì£¼ë¬¸í•  ë¬¼ê³ ê¸°ì˜ 4ê°œ ì •ë³´ê°€ ë‹´ê²¨ìˆëŠ” ë¦¬ìŠ¤íŠ¸
 
-                // ÁÖ¹®¼­ Ãâ·Â
+                // ì£¼ë¬¸ì„œ ì¶œë ¥
                 GameManager.Instantiate(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));
                 orderSheet.GetComponent<OrderSheet>().MenuTextInput(fishInfo[0], animator.gameObject.GetComponent<Customer>().mySeatNumber());
-                //                                                  ¹°°í±â ÀÌ¸§              Å×ÀÌºí ¹øÈ£
+                //                                                  ë¬¼ê³ ê¸° ì´ë¦„              í…Œì´ë¸” ë²ˆí˜¸
 
-                fishs.RemoveAt(orderFishIndex);     // ÁÖ¹®ÇÑ ¹°°í±â ÀÎµ¦½º »èÁ¦
+                fishs.RemoveAt(orderFishIndex);     // ì£¼ë¬¸í•œ ë¬¼ê³ ê¸° ì¸ë±ìŠ¤ ì‚­ì œ
             }
         }
     }

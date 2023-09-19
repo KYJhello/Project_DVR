@@ -306,6 +306,12 @@ namespace KIM
                     curHitDamage = collision.gameObject.GetComponent<AttackSpear>().Damage;
                     stateMachine.ChangeState(State.Hit);
                 }
+                if (collision.gameObject.GetComponent<ReturnSpear>() != null)
+                {
+                    if (!isHittable) return;
+                    curHitDamage = collision.gameObject.GetComponent<ReturnSpear>().Damage;
+                    stateMachine.ChangeState(State.Hit);
+                }
             }
         }
         public override string GetCurState()

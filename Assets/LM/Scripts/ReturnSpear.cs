@@ -36,7 +36,6 @@ namespace LM
             socketInteractor.selectExited.AddListener(RemoveGetFish);
             socketInteractor.allowSelect = false;
 
-            interactable.selectEntered.AddListener(GrabInCheck);
             interactable.selectExited.AddListener(GrabOutCheck);
         }
         private void OnDisable()
@@ -45,7 +44,6 @@ namespace LM
             socketInteractor.selectEntered?.RemoveListener(GetFish);
             socketInteractor.selectExited?.RemoveListener(RemoveGetFish);
 
-            interactable.selectEntered.RemoveListener(GrabInCheck);
             interactable.selectExited.RemoveListener(GrabOutCheck);
         }
 
@@ -54,14 +52,12 @@ namespace LM
             Fish fish = args.interactableObject.transform.gameObject?.GetComponent<Fish>();
             if (fish != null)
             {
-                if (true)
+                if (fish.CurHp > 0)
                 {
-                    //만약 체력이 남았으면 데미지 주기
                     socketInteractor.allowSelect = false;
                 }
                 else
                 {
-                    //아니라면
                     socketInteractor.allowSelect = true;
                 }
             }
@@ -78,12 +74,10 @@ namespace LM
         public override void OnFire(Vector3 dir, float force)
         {
             rb.useGravity = false;
-            Debug.Log("OnFire");
             socketInteractor.allowSelect = false;
             isPulling = false;
             pullEnd = false;
-            // 계속 레이캐스트 하다가 최대사거리 도달/ 충돌/ 물고기 잡힘 중 하나가 확인되면 돌아오기
-            // 혹은 직접 당기기
+
             StartCoroutine(FireRoutine(dir, force));
             StartCoroutine(FishCast());
             StartCoroutine(Return());
@@ -148,15 +142,13 @@ namespace LM
                     Fish fish = hit.collider.gameObject.GetComponent<Fish>();
                     if (fish != null)
                     {
-                        if (false)
+                        if (fish.CurHp > 0)
                         {
-                            //만약 체력이 남았으면 데미지 주기
                             socketInteractor.allowSelect = false;
                             rb.AddForce(hit.point * 5, ForceMode.Impulse);
                         }
                         else
                         {
-                            //아니라면
                             socketInteractor.allowSelect = true;
                         }
                     }
@@ -164,10 +156,6 @@ namespace LM
                 }
                 yield return new WaitForFixedUpdate();
             }
-        }
-        private void GrabInCheck(SelectEnterEventArgs args)
-        {
-
         }
         private void GrabOutCheck(SelectExitEventArgs args) 
         {

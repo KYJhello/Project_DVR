@@ -10,6 +10,7 @@ namespace LM
         [SerializeField] Canvas HUDCanvas;
         [SerializeField] GameObject helmet;
         [SerializeField] GameObject helmetLight;
+        [SerializeField] ParticleSystem bubble;
         
         public Material glassMat;
         public UnityEvent OnDived;
@@ -40,7 +41,7 @@ namespace LM
             isDived = false;
             invisible = false;
             invisibleTime = 1;
-            MaxO2 = 60;
+            MaxO2 = 180;
             CurO2 = MaxO2;
             MaxWeight = 80;
             CurWeight = 0;
@@ -100,6 +101,8 @@ namespace LM
             if (!isDived)
             {
                 OnDived?.Invoke();
+                GameManager.Sound.Play("Sounds/sfx_abyss", Define.Sound.Effect, 0.7f);
+                bubble.Play();
                 isDived = true;
                 helmetLight.SetActive(true);
                 BreathRoutine = StartCoroutine(Breath());
@@ -205,9 +208,17 @@ namespace LM
         }
         IEnumerator Breath()
         {
+            float count = 0;
             while(CurO2 <= MaxO2)
             {
                 CurO2 -= Time.fixedDeltaTime;
+                count += Time.fixedDeltaTime;
+                if(count > 10)
+                {
+                    count = count % 10;
+                    bubble.Play();
+                    GameManager.Sound.Play("Sounds/msfx_abyss_portal");
+                }
                 if (CurO2 < 0)
                 {
                     OnDied();

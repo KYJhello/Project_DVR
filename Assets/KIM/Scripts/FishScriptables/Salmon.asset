@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009ed3d245b22bc45ad5ec87810ecf65, type: 3}
   m_Name: Salmon
   m_EditorClassIdentifier: 
+  curFishType: 0
   name: Salmon
   hp: 1
   weight: 8.7
   length: 80
   playerRecognitionRange: 10
   wallRecognitionRange: 2
-  moveSpeed: 3
-  escapeSpeed: 10
+  moveSpeed: 1
+  escapeSpeed: 5
   isStopableFish: 1
-  curFishType: 0
