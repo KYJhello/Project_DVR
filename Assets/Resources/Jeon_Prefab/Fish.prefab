@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6843898332067004309}
   - component: {fileID: 6843898332067004310}
   - component: {fileID: 6843898332067004311}
-  - component: {fileID: 1824624813447183236}
+  - component: {fileID: 620451328744779028}
   m_Layer: 10
   m_Name: FishBody
   m_TagString: Untagged
@@ -273,7 +273,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1824624813447183236
+--- !u!114 &620451328744779028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 620451328744779020}
   - component: {fileID: 6996760554415744652}
   - component: {fileID: 620451328744779021}
-  - component: {fileID: 1396797907764220622}
+  - component: {fileID: 620451328744779027}
   m_Layer: 10
   m_Name: Fish
   m_TagString: Untagged
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &1396797907764220622
+--- !u!114 &620451328744779027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
