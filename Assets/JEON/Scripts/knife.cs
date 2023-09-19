@@ -1,4 +1,5 @@
 using KIM;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -6,7 +7,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Knife : MonoBehaviour
 {
+    private string fishRank;
+    private string fishName;
+
     Transform fishPos;
+    Transform fishBodyPos;
     Quaternion quaternion;
 
     GameObject headCuttingPoint;
@@ -16,6 +21,8 @@ public class Knife : MonoBehaviour
 
     GameObject fishHead;
     GameObject fishTail;
+
+    float colliders;
     private void Awake()
     {
         headCuttingPoint = GameObject.Find("HeadLine");
@@ -29,8 +36,10 @@ public class Knife : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        float colliders = fishBody.GetComponentsInChildren<BoxCollider>().Length;
-        Transform fishBodyPos = other.transform;
+        colliders = fishBody.GetComponentsInChildren<BoxCollider>().Length;
+        fishBodyPos = other.transform;
+        fishRank = other.GetComponent<StoreFish_Body>().FishRank;
+        fishName = other.GetComponent<StoreFish_Body>().FishName;
 
         if (other.gameObject == headCuttingPoint)
         {
@@ -40,11 +49,7 @@ public class Knife : MonoBehaviour
         {
             TailCutting();
         }
-        if (other.gameObject == fishBody && colliders == 3)
-        {
-            fishPos = fishBodyPos;
-            GetRawFishPrefab(other);
-        }
+        StartCoroutine(InstantiateFish(other));
     }
 
     private void HeadCutting()
@@ -72,7 +77,23 @@ public class Knife : MonoBehaviour
     private void GetRawFishPrefab(Collider other)
     {
         quaternion = Quaternion.Euler(0, -90, 0);
-        GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Fish_Body_Meat", fishPos.position, quaternion, false);
+        GameObject fishBodyMeat = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Fish_Body_Meat", fishPos.position, quaternion, false);
+        fishBodyMeat.GetComponent<FishBodyMeat>().FishTier = fishRank;
+        fishBodyMeat.GetComponent<FishBodyMeat>().FishName = fishName;
+
+
         Destroy(other.gameObject);
+    }
+
+    IEnumerator InstantiateFish(Collider other)
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        if (other.gameObject == fishBody && colliders == 3)
+        {
+            fishPos = fishBodyPos;
+            GetRawFishPrefab(other);
+        }
+
     }
 }

@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 8213613077551244494}
   - component: {fileID: 8213613077551244495}
   m_Layer: 21
-  m_Name: FishMeat_ForCutting (2)
+  m_Name: SalmonSashimi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 8213613078047905765}
   - component: {fileID: 8213613078047905766}
   m_Layer: 21
-  m_Name: FishMeat_ForCutting (3)
+  m_Name: SalmonSashimi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 8213613078493246889}
   - component: {fileID: 8213613078493246890}
   m_Layer: 21
-  m_Name: FishMeat_ForCutting (5)
+  m_Name: SalmonSashimi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,7 +1163,7 @@ GameObject:
   - component: {fileID: 8213613078981598588}
   - component: {fileID: 8213613078981598589}
   m_Layer: 21
-  m_Name: FishMeat_ForCutting (4)
+  m_Name: SalmonSashimi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1443,7 +1443,7 @@ GameObject:
   - component: {fileID: 8213613079114248624}
   - component: {fileID: 8213613079114248625}
   m_Layer: 21
-  m_Name: FishMeat_ForCutting (1)
+  m_Name: SalmonSashimi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

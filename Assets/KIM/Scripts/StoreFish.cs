@@ -12,6 +12,11 @@ namespace KIM
         private string length;
         private string fishRank;
 
+        public string FishName { get { return name; } set { name = value; } }
+        public string Weight { get { return weight; } set { weight = value; } }
+        public string Length { get { return length; } set { length = value; } }
+        public string FishRank { get { return fishRank; } set { fishRank = value; } }
+
         public void SetFishInfo(List<string> info)
         {
             fishInfo = info;
