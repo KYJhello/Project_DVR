@@ -19,6 +19,6 @@ MonoBehaviour:
   length: 17
   playerRecognitionRange: 10
   wallRecognitionRange: 2
-  moveSpeed: 3
-  escapeSpeed: 10
+  moveSpeed: 1
+  escapeSpeed: 5
   isStopableFish: 1
