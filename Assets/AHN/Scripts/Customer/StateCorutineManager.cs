@@ -29,8 +29,8 @@ namespace AHN
             anim.SetTrigger("Angry");
             yield return new WaitForSeconds(4f);
             anim.SetTrigger("GoOut");
-            // TODO : 여기서 게임시간을 감소시켜야 할듯 (15초 정도)
-            // 손님이 게임시간을 참조해서 그 시간을 차감하도록
+
+            Timer.TimerTime.PenaltyTime();  // 10초 시간 차감
         }
 
         public IEnumerator EatRoutine()     // 먹는 코루틴
