@@ -16,7 +16,7 @@ namespace AHN
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             // if (내 테이블에 음식이 올려졌다면)
-            if (animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<PlateRecognition>().IsPlate())
+            if (animator.GetComponent<Customer>().mySeat.gameObject.GetComponentInChildren<FoodRecognitionOnTable>().IsPlate())
             {
                 Debug.Log("Angry -> Eat");
                 animator.SetTrigger("Eat");

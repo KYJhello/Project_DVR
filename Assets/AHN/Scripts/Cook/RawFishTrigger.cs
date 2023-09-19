@@ -26,45 +26,44 @@ namespace AHN
                 switch (other.gameObject.GetComponent<RawFishForCutting>().FishTier)
                 {
                     case "Normal":
-                        sushiScore = 1000;
+                        AddSushiScore.currentSushiScore += 1000;
                         break;
                     case "Rare":
-                        sushiScore = 1500;
+                        AddSushiScore.currentSushiScore += 1500;
                         break;
                     case "SuperRare":
-                        sushiScore = 2000;
+                        AddSushiScore.currentSushiScore += 2000;
                         break;
                     case "Special":
-                        sushiScore = 2500;
+                        AddSushiScore.currentSushiScore += 2500;
                         break;
                     default:
-                        sushiScore = 5;
+                        AddSushiScore.currentSushiScore += 5;
                         break;
                 }
-
-
                 GameObject sushi;
 
                 Destroy(other.gameObject);
 
                 switch (other.gameObject.name)
                 {
+                    // TODO : 생성되는 초밥의 최종 점수를 결정함 
+
                     case "SalmonSashimi":
                         sushi = GameManager.Resource.Instantiate<GameObject>("SalmonSushi");
-                        sushi.GetComponent<SushiScore>().sushiScore = sushiScore;
+                        sushi.GetComponent<SushiScore>().sushiScore = AddSushiScore.currentSushiScore;
                         sushi.transform.parent = sushiManager.transform;
                         sushi.transform.position = rice.transform.position;
                         break;
                     case "ASashimi":
                         sushi = GameManager.Resource.Instantiate<GameObject>("ASushi");
-                        sushi.GetComponent<SushiScore>().sushiScore = sushiScore;
+                        sushi.GetComponent<SushiScore>().sushiScore = AddSushiScore.currentSushiScore;
                         sushi.transform.parent = sushiManager.transform;
                         sushi.transform.position = rice.transform.position;
                         break;
                     default:
                         break;
                 }
-
 
                 Destroy(rice);
             }

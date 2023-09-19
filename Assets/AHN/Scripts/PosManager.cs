@@ -9,15 +9,16 @@ namespace AHN
 {
     public class PosManager : MonoBehaviour
     {
-        public static UnityEvent<int> OnPayEvent = new UnityEvent<int>();   // EatState에서 호출할 event
-        public static UnityEvent<int> OnAddPayEvent = new UnityEvent<int>();   // EatState에서 호출할 event
-        public static UnityEvent OnClickTotalSalesButton = new UnityEvent();  // TotalSales 버튼을 눌렀을 때 호출될 event
-        public static UnityEvent<int> OnClickFundButton = new UnityEvent<int>();    // Fund 버튼을 눌렀을 때 호출될 evnet
+        public static UnityEvent<int> OnPayEvent = new UnityEvent<int>();     // 결제 금액. EatState에서 호출할 event
+        public static UnityEvent<int> OnAddPayEvent = new UnityEvent<int>();  // 누적 점수. EatState에서 호출할 event
+        // public static UnityEvent OnClickTotalSalesButton = new UnityEvent();  // TotalSales 버튼을 눌렀을 때 호출될 event
+        // public static UnityEvent<int> OnClickFundButton = new UnityEvent<int>();    // Fund 버튼을 눌렀을 때 호출될 evnet
         [SerializeField] TMP_Text paymentAmountText;
         [SerializeField] TMP_Text totalSalesText;
         [SerializeField] TMP_Text fundText;
         [SerializeField] Transform orderSheetPoolPosition;
         GameObject orderSheet;     // 주문서
+
         private static int totalSales;
         public static int TotalSales { get { return totalSales; } set { totalSales = value; } }
         private static int fund;
@@ -27,12 +28,15 @@ namespace AHN
         {
             orderSheet = GameManager.Resource.Load<GameObject>("OrderSheet");
             orderSheetPoolPosition = GameObject.Find("OrderSheetPoolPosition").GetComponent<Transform>();
+            fund = 0;
+            totalSales = 0;
         }
 
         private void OnEnable()
         {
-            OnPayEvent.AddListener(TotalSalesText);
-            OnPayEvent.AddListener(PaymentAmountText);
+            // OnPayEvent.AddListener(TotalSalesText);
+            // OnPayEvent.AddListener(PaymentAmountText);
+            OnAddPayEvent.AddListener(PaymentAmountText);
         }
 
         private void OnDisable()
@@ -40,18 +44,12 @@ namespace AHN
             StopAllCoroutines();
         }
 
-        public void PrintOrderSheet()   // 주문서 출력하는 함수
-        {
-            orderSheet = GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.identity);
-
-            // TODO : 주문서 나중에 Release 해줘야 하는데 그건 나중에,,,
-        }
 
         void TotalSalesText(int amount)   // 총 매출
         {
+            FundText(amount);   // 자산도 증가
             totalSales += amount;
             totalSalesText.text = $"Total Sales : {totalSales}";
-            FundText(totalSales);   // 자산도 증가
 
             // TODO : 하루마다 매출 초기화 -> 타이머 누르면 초기화 되도록.
         }
@@ -68,6 +66,13 @@ namespace AHN
             TotalSalesText(amount);
             
             PrintOrderSheet();
+        }
+
+        public void PrintOrderSheet()   // 주문서 출력하는 함수
+        {
+            orderSheet = GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.identity);
+
+            // TODO : 주문서 나중에 Release 해줘야 하는데 그건 나중에,,,
         }
 
         IEnumerator AppearPaymentAmountRoutine(int amount)      // 결제금액이 뜨는 기간. 5초 동안만 화면에 뜨도록
