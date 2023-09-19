@@ -48,12 +48,11 @@ namespace AHN
             // 3. 고른 좌석의 value값은 true로 변경
             mySeat = falseSeatList[randomSeat];
             tableManager.SeatDic[falseSeatList[randomSeat]] = true;
-            Debug.Log(tableManager.SeatDic[falseSeatList[randomSeat]]);
         }
 
         public int mySeatNumber()
         {
-            return int.Parse(mySeat.gameObject.name);
+            return int.Parse(mySeat.name);
         }
     }
 }
