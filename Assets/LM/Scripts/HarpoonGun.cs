@@ -22,6 +22,7 @@ namespace LM
         public bool canPull;
         public float pullForce = 3;
         public float maxRange = 5;
+        public int damage;
 
         RoadedSpearType rsType;
         XRSocketInteractor socketInteractor;
@@ -78,21 +79,25 @@ namespace LM
                     spearForce = 10;
                     pullForce = 3;
                     maxRange = 5;
+                    damage = 3;
                     break;
                 case 1:
                     spearForce = 15;
                     pullForce = 5;
                     maxRange = 10;
+                    damage = 5;
                     break;
                 case 2:
                     spearForce = 20;
                     pullForce = 8;
                     maxRange = 15;
+                    damage = 8;
                     break;
                 default:
                     spearForce = 25;
                     pullForce = 10;
                     maxRange = 20;
+                    damage = 10;
                     break;
             }
             playerPos = args.interactorObject.transform;
@@ -108,6 +113,7 @@ namespace LM
 
         public void OnSpearLoad(SelectEnterEventArgs args)
         {
+            GameManager.Sound.Play("Sounds/Handling_Gun_01_Clip_In_SFX");
             roadedSpear = args.interactableObject.transform?.GetComponent<HarpoonSpear>();
             attackSpear = roadedSpear?.GetComponent<AttackSpear>();
             returnSpear = roadedSpear?.GetComponent<ReturnSpear>();
@@ -118,6 +124,7 @@ namespace LM
                 canPull = false;
                 rope.RopeOff();
                 attackSpear.maxRange = maxRange;
+                attackSpear.damage = damage * 2;
             }
             else
             {
@@ -129,12 +136,14 @@ namespace LM
                 canPull = false;
                 returnSpear.pullForce = pullForce;
                 returnSpear.maxRange = maxRange;
+                returnSpear.damage = damage;
                 rope.RopeOff();
                 objectRope.gameObject.SetActive(true);
             }
         }
         public void OnSpearOut(SelectExitEventArgs args)
         {
+            GameManager.Sound.Play("Sounds/Handling_Gun_01_Clip_Out_SFX");
             gunUpBodyCollider.isTrigger = false;
             objectRope.gameObject.SetActive(false);
             if (rsType == RoadedSpearType.Attack)
@@ -142,20 +151,18 @@ namespace LM
         }
         public void TriggerOn(ActivateEventArgs args)
         {
-            Debug.Log($"Trigger, rsType : {rsType}");
             if (socketInteractor.hasSelection && !canPull)
             {
                 // ¹ß»çÀ½¼º Ãâ·Â
                 if (rsType == RoadedSpearType.Attack)
                 {
-                    Debug.Log("Fire");
                     StartCoroutine(SocketTrigger());
                     attackSpear.rb.useGravity = false;
+                    GameManager.Sound.Play("Sounds/Flare gun 5-2");
                     attackSpear.OnFire(spearSocket.forward, spearForce);
                 }
                 else if (rsType == RoadedSpearType.Return)
                 {
-                    Debug.Log("Fire");
                     rope.endPos = returnSpear.ropePos;
                     rope.RopeOn();
                     StartCoroutine(SocketTrigger());
@@ -163,6 +170,7 @@ namespace LM
                     returnSpear.pullEnd = false;
                     objectRope.gameObject.SetActive(false);
                     returnSpear.rb.useGravity = false;
+                    GameManager.Sound.Play("Sounds/Pistol_01_Mountain_Tail_SFX");
                     returnSpear.OnFire(spearSocket.forward, spearForce);
                 }
             }
@@ -173,6 +181,7 @@ namespace LM
             }
             else
             {
+                GameManager.Sound.Play("Sounds/Handling_Gun_01_Arming_SFX", Define.Sound.Effect, 1.3f);
                 // ºó ÂûÄ¬ ¼Ò¸®
             }
             gunUpBodyCollider.isTrigger = true;
