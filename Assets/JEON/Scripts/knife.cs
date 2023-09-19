@@ -1,5 +1,6 @@
 using KIM;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -22,38 +23,49 @@ public class Knife : MonoBehaviour
     GameObject fishHead;
     GameObject fishTail;
 
-    float colliders;
-    private void Awake()
-    {
-        headCuttingPoint = GameObject.Find("HeadLine");
-        tailCuttingPoint = GameObject.Find("TailLine");
-
-        fishBody = GameObject.Find("FishBody");
-
-        fishHead = GameObject.Find("CuttingPoint_1");
-        fishTail = GameObject.Find("CuttingPoint_2");
-    }
+    int groomCount;
+    bool isHeadCutting = false;
+    bool isTailCutting = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        colliders = fishBody.GetComponentsInChildren<BoxCollider>().Length;
+        Debug.Log($"콜라이더 {other}가 들어옴");
         fishBodyPos = other.transform;
-        fishRank = other.GetComponent<StoreFish_Body>().FishRank;
-        fishName = other.GetComponent<StoreFish_Body>().FishName;
+        if (other.gameObject.name == "HeadLine")
+        {
+            HeadCutting(other.gameObject);
 
-        if (other.gameObject == headCuttingPoint)
-        {
-            HeadCutting();
         }
-        if (other.gameObject == tailCuttingPoint)
+        else if (other.gameObject.name == "TailLine")
         {
-            TailCutting();
+            if (isHeadCutting)
+                TailCutting(other.gameObject);
         }
-        StartCoroutine(InstantiateFish(other));
+
+        if (other.gameObject.name == "Fish")
+        { 
+            fishBody = other.gameObject;
+            fishPos = other.transform;
+            if (isHeadCutting && isTailCutting)
+                groomCount++;
+
+            Debug.Log($"{groomCount}");
+            
+            if (groomCount >= 3)
+            {
+                GetRawFishPrefab();
+            }
+        }
+        /*fishRank = other.GetComponent<StoreFish_Body>().FishRank;
+        fishName = other.GetComponent<StoreFish_Body>().FishName;*/
     }
 
-    private void HeadCutting()
+    private void HeadCutting(GameObject go)
     {
+        headCuttingPoint = go;
+        fishHead = go.transform.GetChild(0).gameObject;
+
+        Debug.Log("HeadCutting함수 실행");
         headCuttingPoint.GetComponent<BoxCollider>().enabled = false;
         fishHead.transform.SetParent(null);
         fishHead.GetComponent<BoxCollider>().enabled = true;
@@ -61,10 +73,16 @@ public class Knife : MonoBehaviour
         fishHead.GetComponent<Rigidbody>().isKinematic = false;
         fishHead.GetComponent<XRGrabInteractable>().enabled = true;
         fishHead.GetComponent<XRGrabInteractable>().attachTransform = fishHead.transform;
+
+        isHeadCutting = true;
     }
 
-    private void TailCutting()
+    private void TailCutting(GameObject go)
     {
+        tailCuttingPoint = go;
+        fishTail = go.transform.GetChild(0).gameObject;
+
+        Debug.Log("TailCutting함수 실행");
         tailCuttingPoint.GetComponent<BoxCollider>().enabled = false;
         fishTail.transform.SetParent(null);
         fishTail.GetComponent<BoxCollider>().enabled = true;
@@ -72,28 +90,26 @@ public class Knife : MonoBehaviour
         fishTail.GetComponent<Rigidbody>().isKinematic = false;
         fishTail.GetComponent<XRGrabInteractable>().enabled = true;
         fishTail.GetComponent<XRGrabInteractable>().attachTransform = fishTail.transform;
+
+        isTailCutting = true;
     }
 
-    private void GetRawFishPrefab(Collider other)
+    private void GetRawFishPrefab()
     {
         quaternion = Quaternion.Euler(0, -90, 0);
         GameObject fishBodyMeat = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Fish_Body_Meat", fishPos.position, quaternion, false);
-        fishBodyMeat.GetComponent<FishBodyMeat>().FishTier = fishRank;
-        fishBodyMeat.GetComponent<FishBodyMeat>().FishName = fishName;
+        /*fishBodyMeat.GetComponent<FishBodyMeat>().FishTier = fishRank;
+        fishBodyMeat.GetComponent<FishBodyMeat>().FishName = fishName;*/
 
+        Debug.Log($"없애기 {fishBody}");
+        Destroy(fishBody);
 
-        Destroy(other.gameObject);
+        FishCuttingReset();
+
     }
-
-    IEnumerator InstantiateFish(Collider other)
+    public void FishCuttingReset()
     {
-        yield return new WaitForSeconds(0.01f);
-
-        if (other.gameObject == fishBody && colliders == 3)
-        {
-            fishPos = fishBodyPos;
-            GetRawFishPrefab(other);
-        }
-
+        isHeadCutting = false;
+        isTailCutting = false;
     }
 }
