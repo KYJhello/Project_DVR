@@ -20,6 +20,8 @@ public class JsonSL : MonoBehaviour
     [Serializable]
     public class SaveData
     {
+        public string saveTime;
+
         public int day;
         public bool isHome;
         public int money;
@@ -37,6 +39,7 @@ public class JsonSL : MonoBehaviour
     public void Save(int slot)
     {
         SaveData save = new SaveData();
+        save.saveTime = DateTime.Now.ToString(("yy-MM-dd\nHH:mm:ss"));
         // save.day =
         save.isHome = FindObjectOfType<BoatMover>().isHome;
         // save.money =
@@ -90,7 +93,7 @@ public class JsonSL : MonoBehaviour
             // 배도 바다로
         }
         // save.money =
-        // save.fishTank
+        FindObjectOfType<KIM_FishTank>().AddFishTankFishList(save.fishTank);
         FindObjectOfType<Diver>().CurWeight = save.curWeight;
         FindObjectOfType<HarpoonGun>().Level = save.harpoonLevel;
         FishBox box = FindObjectOfType<FishBox>();

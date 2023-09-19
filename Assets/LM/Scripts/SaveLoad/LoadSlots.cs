@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static JsonSL;
 
 namespace LM
 {
@@ -28,10 +29,14 @@ namespace LM
                 string path = Path.Combine(Application.dataPath, $"save{i}.json");
                 if (File.Exists(path))
                 {
+                    string loadJson = File.ReadAllText(path);
+                    SaveData save = JsonUtility.FromJson<SaveData>(loadJson);
+                    texts[$"LoadSlot{i}Explain"].text = $"Day {save.day}\n{save.saveTime}";
                     images[$"LoadSlot{i}"].color = Color.green;
                 }
                 else
                 {
+                    texts[$"LoadSlot{i}Explain"].text = "";
                     images[$"LoadSlot{i}"].color = Color.white;
                 }
             }
