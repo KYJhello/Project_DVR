@@ -35,8 +35,6 @@ namespace AHN
 
             // TODO : 살점이 5개씩 나오니까 fishs 리스트를 5개 복사해야함 
 
-            Debug.Log(fishs);
-
             if (fishs.Count <= 0)
             {
                 animator.SetTrigger("GoOut");    // TODO : 얘 왜 안 나가지
@@ -47,14 +45,14 @@ namespace AHN
                 int orderFishIndex = Random.Range(0, fishs.Count);    // 주문할 물고기 리스트 순서
                 fishInfo = fishs[orderFishIndex];   // 주문할 물고기의 4개 정보가 담겨있는 리스트
                 GameManager.Instantiate(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));
-                Debug.Log(fishInfo);
 
-                orderSheet.GetComponent<OrderSheet>().MenuTextInput(fishInfo[0], animator.gameObject.GetComponent<Customer>().mySeatNumber());      // TODO : argumnet 오류뜸
+                // TODO : argumnet 오류뜸 -> 테이블 번호 다 똑같이 출력됨
+                orderSheet.GetComponent<OrderSheet>().MenuTextInput(fishInfo[0], animator.gameObject.GetComponent<Customer>().mySeatNumber());
                 //                                                  물고기 이름              테이블 번호
 
-                // TODO : 나중에 주문서 없앨 때 Pool로 Release해서 없애야 함.
 
-                fishInfo.Clear();
+                Debug.Log(animator.gameObject.GetComponent<Customer>().mySeatNumber());
+
                 fishs.RemoveAt(orderFishIndex);     // 주문한 물고기 인덱스 삭제
             }
         }
