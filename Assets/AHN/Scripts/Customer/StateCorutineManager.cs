@@ -30,7 +30,7 @@ namespace AHN
             yield return new WaitForSeconds(4f);
             anim.SetTrigger("GoOut");
 
-            Timer.TimerTime.PenaltyTime();  // 10초 시간 차감
+            // Timer.TimerTime.PenaltyTime();  // 10초 시간 차감 -> error 나서 주석처리
         }
 
         public IEnumerator EatRoutine()     // 먹는 코루틴

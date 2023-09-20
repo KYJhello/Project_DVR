@@ -51,7 +51,11 @@ namespace AHN
             totalSales += amount;
             totalSalesText.text = $"Total Sales : {totalSales}";
 
-            // TODO : 하루마다 매출 초기화 -> 타이머 누르면 초기화 되도록.
+            if (Timer.Close)   // close가 true라면, 즉 가게 영엽이 종료됐다면
+            {
+                totalSales = 0;
+                totalSalesText.text = $"Total Sales : {totalSales}";
+            }
         }
         
         void FundText(int totalSales)   // 총 자산
@@ -65,14 +69,6 @@ namespace AHN
             StartCoroutine(AppearPaymentAmountRoutine(amount));
             TotalSalesText(amount);
             
-            PrintOrderSheet();
-        }
-
-        public void PrintOrderSheet()   // 주문서 출력하는 함수
-        {
-            orderSheet = GameManager.Pool.Get(orderSheet, orderSheetPoolPosition.position, Quaternion.identity);
-
-            // TODO : 주문서 나중에 Release 해줘야 하는데 그건 나중에,,,
         }
 
         IEnumerator AppearPaymentAmountRoutine(int amount)      // 결제금액이 뜨는 기간. 5초 동안만 화면에 뜨도록
