@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 
@@ -43,13 +44,15 @@ namespace AHN
                 {
                     case "Salmon":
                         sushi = GameManager.Resource.Instantiate<GameObject>("SalmonSushi");
-                        sushi.GetComponent<SushiScore>().sushiScore = AddSushiScore.currentSushiScore;      // 초밥 점수 반영
+                        sushi.GetComponent<SushiInfo>().sushiScore = AddSushiScore.currentSushiScore;      // 초밥 점수 반영
+                        sushi.GetComponent<SushiInfo>().fishName = other.gameObject.GetComponent<RawFishForCutting>().FishName;
                         sushi.transform.parent = sushiManager.transform;
                         sushi.transform.position = rice.transform.position;
                         break;
                     case "ASashimi":
                         sushi = GameManager.Resource.Instantiate<GameObject>("ASushi");
-                        sushi.GetComponent<SushiScore>().sushiScore = AddSushiScore.currentSushiScore;
+                        sushi.GetComponent<SushiInfo>().sushiScore = AddSushiScore.currentSushiScore;
+                        sushi.GetComponent<SushiInfo>().fishName = other.gameObject.GetComponent<RawFishForCutting>().FishName;
                         sushi.transform.parent = sushiManager.transform;
                         sushi.transform.position = rice.transform.position;
                         break;

@@ -11,7 +11,7 @@ namespace AHN
         StateCorutineManager corutineManager;
         //List<List<string>> fishs = new List<List<string>>();
         //List<List<string>> fishsCopy = new List<List<string>>();
-        List<string> fishInfo = new List<string>();
+        public static List<string> fishInfo = new List<string>();
         GameObject orderSheet;
         Transform orderSheetPoolPosition;
 
@@ -62,6 +62,7 @@ namespace AHN
              if (MenuManager.fishs.Count > 0)       // 만약 현재 수족관에 물고기가 있다면,
              {       
                  int randomFishIndex = Random.Range(0, MenuManager.fishs.Count - 1);     // 수족관에 있는 물고기의 종류 중 하나고름. 주문할 물고기 리스트 순서
+
                  fishInfo = MenuManager.fishs[randomFishIndex];   // 주문할 물고기의 4개 정보가 담겨있는 리스트
                  
                  // 수족관에 있는 물고기 종류중 하나 골랐고,
@@ -92,8 +93,8 @@ namespace AHN
                          {
                              if (innerList[0] == fishInfo[0])    // 만약 잘려있는 회의 리스트 중에 주문한 회의 이름이 있다면,
                              {
-                                 // innerList[1]을 확인해서 이게 >= 이라면, 이걸 -- 해줌. 한 조각 사라짐
-                                 if (int.Parse(innerList[1]) >= 0)
+                                 // innerList[1]을 확인해서 이게 > 이라면, 이걸 -- 해줌. 한 조각 사라짐
+                                 if (int.Parse(innerList[1]) > 0)
                                  {
                                      int count = int.Parse(innerList[1]);
                                      count--;
