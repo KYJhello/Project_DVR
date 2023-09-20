@@ -11,12 +11,7 @@ namespace KIM
         public string FishRank { get { return fishRank; } set { fishRank = value; } }
         public string FishName { get { return fishName; } set { fishName = value; } }
 
-        private void Awake()
-        {
-            fishRank = GetComponent<StoreFish>().FishRank;
-            fishName = GetComponent<StoreFish>().FishName;
 
-        }
         public void SetRank(string rank)
         {
             rank = fishRank;

@@ -22,7 +22,7 @@ public class Bell : MonoBehaviour
     private bool freeze = false;
 
     private Timer timer;
-    private AHN.CustomerSqawnManager customerSqawn;
+    [SerializeField] GameObject customerSpawn;
 
     private void Start()
     {
@@ -73,7 +73,9 @@ public class Bell : MonoBehaviour
         {
             freeze = true;
             timer.StertSell();
-            customerSqawn.CustomerSpawnRoutine();   // 颊丛 积己
+            //customerSqawn.CustomerSpawnRoutine();   // 颊丛 积己
+            customerSpawn.gameObject.SetActive(true);
+            MenuManager.StoreFishListInTankRoutine();
         }
     }
 
