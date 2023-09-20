@@ -17,38 +17,9 @@ public class MenuManager : MonoBehaviour
     // public static List<string> sasimiCounts = new List<string>();    // 물고기에서 나온 살점 관리. [0] = A물고기, [1] = 4, [2] = B물고기, [3] = 7  이런식으로.
     // public static string[] sasimiCounts;
 
-    // TImer 시작할 때 해야 될듯.
-    private void Start()
+    // Timer Bell을 누를 때 실행.
+    public static void StoreFishListInTankRoutine()
     {
-        StartCoroutine(StoreFishListInTankRoutine());
-
-        /*
-        // fish list <fishInfo> 
-        // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
-        fishs = GameObject.FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList();   // 수족관에 있는 물고기들 정보를 받아옴
-    
-        List<string> countInit = new List<string>();    // sasimiCounts 리스트에 넣을 InnerList
-
-        foreach (List<string> currentFishs in fishs)
-        {
-            // if (중복 이름이 있다면 continue)
-
-            string fishName = currentFishs[0];     // 첫번째 물고기 name
-            countInit.Add(fishName);
-            countInit.Add("0");
-
-            List<string> list = new List<string>();
-            list = countInit;
-
-            sasimiCounts.Add(list);     // { 물고기 이름, 0 } .. . .. 의 정보들이 있는 리스트
-        }*/
-
-    }
-
-    IEnumerator StoreFishListInTankRoutine()
-    {
-        yield return new WaitForSeconds(4f);
-
         // fish list <fishInfo> 
         // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
         fishs = GameObject.FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList();   // 수족관에 있는 물고기들 정보를 받아옴
@@ -84,38 +55,5 @@ public class MenuManager : MonoBehaviour
             }
 
         }
-        
-
-
-        /*
-        // fishInfo = name = 0, weight = 1, length = 2, FishRank = 3
-        fishs = GameObject.FindObjectOfType<KIM_FishTank>().ReturnFishTankFishList();   // 수족관에 있는 물고기들 정보를 받아옴
-
-
-        string[] countInit = new string[fishs.Count];   // sasimiCounts 리스트에 넣을 inner
-        int countInitIndex = 0;
-
-        foreach (List<string> currentFishs in fishs)
-        {
-            // TODO : if (중복 이름이 있다면 continue)
-
-            string fishName = currentFishs[0];     // 물고기 name
-            countInit[countInitIndex++] = fishName;
-            countInit[countInitIndex++] = "0";
-        }
-
-        sasimiCounts = new string[countInit.Length];
-        int sasimiCountIndex = 0;
-
-        foreach (string sasimiInner in countInit)
-        {
-            // List인 sasimiCounts에 위 countInit 를 다 Add 해줌.
-            // sasimiCounts[0] = Asasimi, [1] = 0, [2] = Bsasimi, [3] = 0 이런식으로 다 넣어짐.
-            sasimiCounts[sasimiCountIndex++] = sasimiInner;
-            sasimiCounts[sasimiCountIndex++] = "0";
-        }
-        */
-
-
     }
 }
