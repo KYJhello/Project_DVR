@@ -17,7 +17,7 @@ MonoBehaviour:
   hp: 100
   weight: 800
   length: 400
-  playerRecognitionRange: 10
+  playerRecognitionRange: 50
   wallRecognitionRange: 0
   moveSpeed: 8
   escapeSpeed: 10

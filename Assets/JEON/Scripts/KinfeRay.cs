@@ -44,11 +44,14 @@ public class KinfeRay : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Vector3 v = collisionNormal - transform.forward;
+        float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+        Debug.Log(angle);
         // 닿은 오브젝트의 레이어가 29번이고, 트루상태라면
-        if (other.gameObject.layer == 29 && fishBodyMeat.firstHeadHit && collisionNormal.x < fishBodyMeat.x)
+        if (other.gameObject.layer == 29 && fishBodyMeat.firstHeadHit && angle > 70 && angle <120)
         {
-            Debug.Log("트리거 됐다");
-            Debug.Log($"{collisionNormal.x < fishBodyMeat.x}");
+            //Debug.Log("트리거 됐다");
+            //Debug.Log($"{collisionNormal.x < fishBodyMeat.x}");
 
             fishBodyMeat.CuttingFish();
         }
@@ -56,7 +59,10 @@ public class KinfeRay : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if ((other.gameObject.layer == 29) && !fishBodyMeat.firstHeadHit && collisionNormal.x < fishBodyMeat.x)
+        Vector3 v = collisionNormal - transform.forward;
+        float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+        Debug.Log(angle);
+        if ((other.gameObject.layer == 29) && !fishBodyMeat.firstHeadHit && angle > -210 && angle < -150)
         {
             Debug.Log("나가졌다");
 

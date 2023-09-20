@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8371680900906617100}
   - component: {fileID: 6982362246784073698}
   - component: {fileID: 2412136459972174366}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FishSoket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2412136459972174366
 MonoBehaviour:
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1154302307667066548}
   - component: {fileID: 613901757016836927}
   - component: {fileID: 1078464338260163566}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6437804412439551015}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RopePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 658494653841460023}
   - component: {fileID: 2236302262540483505}
   - component: {fileID: 2565456063601822853}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ReturnSpear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,8 @@ MonoBehaviour:
   damage: 0
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
+  rb: {fileID: 0}
   ropePos: {fileID: 6437804412439551015}
   returnPos: {fileID: 0}
   pullForce: 3
