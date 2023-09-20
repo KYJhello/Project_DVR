@@ -71,18 +71,18 @@ namespace AHN
                  {
                      case 0:     // 스테이크으로 만들기
                          // 주문서 출력
-                         GameManager.Instantiate(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));
                          string menuName1 = $"{fishInfo[0]}\nSteak";
                          orderSheet.GetComponent<OrderSheet>().MenuTextInput(menuName1, animator.gameObject.GetComponent<Customer>().mySeatNumber());
+                         GameManager.Instantiate(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));
                  
                          MenuManager.fishs.RemoveAt(randomMenuIndex);     // 주문한 물고기 인덱스 삭제
                          break;
                  
                      case 1:     // 초밥으로 만들기
                          // 주문서 출력
-                         GameManager.Instantiate(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));
                          string menuName2 = $"{fishInfo[0]}\nSushi";
                          orderSheet.GetComponent<OrderSheet>().MenuTextInput(menuName2, animator.gameObject.GetComponent<Customer>().mySeatNumber());
+                         GameManager.Instantiate(orderSheet, orderSheetPoolPosition.position, Quaternion.Euler(90f, 0, 0));
                  
                  
                          // 주문한 물고기 인덱스를 삭제하지 않고, 만약 이미 잘라놓은 이 종류의 회가 있다면,
@@ -110,7 +110,7 @@ namespace AHN
                          newSasimiCountList.Add(fishInfo[0]);
                          newSasimiCountList.Add("4");
                          MenuManager.sasimiCounts.Add(newSasimiCountList);
-                         MenuManager.fishs.RemoveAt(randomMenuIndex);     // 주문한 물고기 인덱스 삭제
+                         MenuManager.fishs.RemoveAt(randomMenuIndex);     // 주문한 물고기 인덱스 삭제     TODO : error. 인덱스 벗어났다고 뜸
                         break;
 
                      default:
