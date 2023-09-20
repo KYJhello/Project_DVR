@@ -24,7 +24,6 @@ namespace AHN
             StopAllCoroutines();
         }
 
-
         public IEnumerator CustomerSpawnRoutine()
         {
             while (true)

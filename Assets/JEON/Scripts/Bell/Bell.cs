@@ -75,6 +75,7 @@ public class Bell : MonoBehaviour
             timer.StertSell();
             //customerSqawn.CustomerSpawnRoutine();   // ¼Õ´Ô »ý¼º
             customerSpawn.gameObject.SetActive(true);
+            MenuManager.StoreFishListInTankRoutine();
         }
     }
 
