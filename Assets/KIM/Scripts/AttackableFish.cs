@@ -11,9 +11,14 @@ namespace KIM
         StateMachine<State, AttackableFish> stateMachine;
 
         Coroutine moveDirRoutine;
+        SphereCollider recogRangeTrigger;
+
+        Vector3 playerPos;
 
         protected override void Awake()
         {
+            recogRangeTrigger = GetComponent<SphereCollider>();
+            recogRangeTrigger.radius = data.PlayerRecognitionRange;
             base.Awake();
             moveDirRoutine = StartCoroutine(MoveDirRoutine());
 
@@ -185,6 +190,8 @@ namespace KIM
 
             public override void Update()
             {
+                transform.LookAt(owner.playerPos);
+                transform.Translate((owner.playerPos - transform.position).normalized * owner.data.MoveSpeed * Time.deltaTime, Space.World);
 
             }
         }
@@ -249,6 +256,15 @@ namespace KIM
         public override string GetCurState()
         {
             return stateMachine.GetCurStateName();
+        }
+        private void OnTriggerStay(Collider other)
+        {
+            if(other.gameObject.layer == 2)
+            {
+                Debug.Log("Player Detected");
+                playerPos = other.transform.position;
+                stateMachine.ChangeState(State.Attack);
+            }
         }
     }
 }
