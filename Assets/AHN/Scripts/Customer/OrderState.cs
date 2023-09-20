@@ -101,19 +101,21 @@ namespace AHN
                                      innerList[1] = count.ToString();
                                      break;
                                  }
-                             }
-                         }
-                 
-                         // 여기로 왔다면 남은 횟조각이 없는 거임.
-                         // 즉 수족관에서 새 물고기를 꺼낼테니, 그 물고기를 리스트에서 제거해주고 count는 4로 만들기.
-                         // MenuManager.sasimiCounts.Add(주문한 물고기 이름, 4)
-                         List<string> newSasimiCountList = new List<string>();
-                         newSasimiCountList.Add(fishInfo[0]);
-                         newSasimiCountList.Add("4");
-                         MenuManager.sasimiCounts.Add(newSasimiCountList);
-                         MenuManager.fishs.RemoveAt(randomMenuIndex);     // 주문한 물고기 인덱스 삭제     TODO : error. 인덱스 벗어났다고 뜸
-                        break;
 
+                                // 여기로 왔다면 남은 횟조각이 없는 거임.
+                                // 즉 수족관에서 새 물고기를 꺼낼테니, 그 물고기를 리스트에서 제거해주고 그 물고기의 count는 9로 만들기. (총 10점이 나오고 한 점은 썼으니 9점으로)
+                                foreach (List<string> count in MenuManager.sasimiCounts)    
+                                {
+                                    if (count[0] == fishInfo[0])    // 살점을 카운트하는 리스트에서 같은 이름의 물고기를 찾아 그 물고기의 살점 카운트를 9로 해줌.
+                                    {
+                                        count[1] = "9";
+                                    }
+                                }
+                                MenuManager.fishs.RemoveAt(randomMenuIndex);    // 주문한 물고기는 fishs 리스트에서 삭제.
+                            }
+                         }
+                        break;
+                 
                      default:
                      break;
                  }
