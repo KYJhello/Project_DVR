@@ -34,8 +34,6 @@ namespace AHN
 
         private void OnEnable()
         {
-            // OnPayEvent.AddListener(TotalSalesText);
-            // OnPayEvent.AddListener(PaymentAmountText);
             OnAddPayEvent.AddListener(PaymentAmountText);
         }
 
