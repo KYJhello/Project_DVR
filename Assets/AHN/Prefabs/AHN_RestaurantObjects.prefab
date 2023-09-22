@@ -412,7 +412,7 @@ Transform:
   m_Children:
   - {fileID: 7154659373192105355}
   - {fileID: 7154659372334924700}
-  - {fileID: 7154659372109684336}
+  - {fileID: 174892446321638243}
   - {fileID: 4005778588957016214}
   - {fileID: 8785349672650422851}
   - {fileID: 8021082710239130656}
@@ -2276,11 +2276,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4652134780508971015, guid: dcf35c63754cf3043a16e0070ec1ff20,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcf35c63754cf3043a16e0070ec1ff20, type: 3}
---- !u!4 &7154659372109684336 stripped
+--- !u!4 &174892446321638243 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2425347713300694292, guid: dcf35c63754cf3043a16e0070ec1ff20,
+  m_CorrespondingSourceObject: {fileID: 4652134780508971015, guid: dcf35c63754cf3043a16e0070ec1ff20,
     type: 3}
   m_PrefabInstance: {fileID: 4819665444298054500}
   m_PrefabAsset: {fileID: 0}
