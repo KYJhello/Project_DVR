@@ -42,7 +42,7 @@ public class Knife : MonoBehaviour
                 TailCutting(other.gameObject);
         }
 
-        if (other.gameObject.name == "Fish")
+        if (other.gameObject.name == "Fish(Clone)" || other.gameObject.name == "Fish")
         { 
             fishBody = other.gameObject;
             fishPos = other.transform;

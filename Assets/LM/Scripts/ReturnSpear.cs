@@ -137,7 +137,7 @@ namespace LM
             RaycastHit hit;
             while (!pullEnd && !isPulling)
             {
-                if (Physics.SphereCast(socketInteractor.gameObject.transform.position, 0.1f, transform.forward, out hit, 0, mask))
+                if (Physics.SphereCast(socketInteractor.gameObject.transform.position, 0.2f, transform.forward, out hit, 0, mask))
                 {
                     Fish fish = hit.collider.gameObject.GetComponent<Fish>();
                     if (fish != null)
@@ -152,7 +152,6 @@ namespace LM
                             socketInteractor.allowSelect = true;
                         }
                     }
-                    yield break;
                 }
                 yield return new WaitForFixedUpdate();
             }
