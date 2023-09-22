@@ -110,6 +110,10 @@ namespace AHN
 
             else   // 수족관에 물고기가 없다면, 스시로만 주문해야 하며, 현재 잘라놓은 회Count가 있는 지 확인해야함. 
             {
+                if (MenuManager.fishs.Count <= 0)
+                {
+                    animator.SetTrigger("GoOut");
+                }
                 randomFishIndex = Random.Range(0, MenuManager.fishs.Count - 1);     // 수족관에 있는 물고기의 종류 중 하나고름. 주문할 물고기 리스트 순서
 
                 fishInfo = MenuManager.fishs[randomFishIndex];   // 주문할 물고기의 4개 정보가 담겨있는 리스트
