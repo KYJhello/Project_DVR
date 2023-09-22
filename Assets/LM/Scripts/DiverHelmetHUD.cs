@@ -64,7 +64,7 @@ namespace LM
             diver.OnDived.AddListener(Dive);
             diver.OnDiveEnded.AddListener(DiveEnd);
             diver.OnChangedO2.AddListener(ChangeO2);
-            diver.OnChangeWeight.AddListener(ChangeWeight);
+            diver.OnChangedWeight.AddListener(ChangeWeight);
 
             diver.glassMat.color = new Color(diver.glassMat.color.r, diver.glassMat.color.g, diver.glassMat.color.b, 1);
             StartCoroutine(EnableRoutine());
@@ -76,7 +76,7 @@ namespace LM
             diver.OnDived.RemoveListener(Dive);
             diver.OnDiveEnded.RemoveListener(DiveEnd);
             diver.OnChangedO2.RemoveListener(ChangeO2);
-            diver.OnChangeWeight.RemoveListener(ChangeWeight);
+            diver.OnChangedWeight.RemoveListener(ChangeWeight);
         }
 
         private void Dive()

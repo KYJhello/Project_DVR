@@ -71,6 +71,7 @@ namespace LM
         {
             if(args.interactorObject.transform.parent.transform.parent.GetComponentInChildren<Diver>() == null)
                 return;
+            // Level = 
             lineRenderer.enabled = true;
             renderRay = StartCoroutine(RenderRay());
             switch(Level)
@@ -151,6 +152,7 @@ namespace LM
         }
         public void TriggerOn(ActivateEventArgs args)
         {
+            gunUpBodyCollider.isTrigger = true;
             if (socketInteractor.hasSelection && !canPull)
             {
                 // ¹ß»çÀ½¼º Ãâ·Â
@@ -184,8 +186,6 @@ namespace LM
                 GameManager.Sound.Play("Sounds/Handling_Gun_01_Arming_SFX", Define.Sound.Effect, 1.3f);
                 // ºó ÂûÄ¬ ¼Ò¸®
             }
-            gunUpBodyCollider.isTrigger = true;
-
         }
         public void TriggerOff(DeactivateEventArgs args)
         {
@@ -237,5 +237,6 @@ namespace LM
                 yield return new WaitForSeconds(1);
             }
         }
+
     }
 }
