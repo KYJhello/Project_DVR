@@ -71,7 +71,7 @@ namespace LM
         {
             if(args.interactorObject.transform.parent.transform.parent.GetComponentInChildren<Diver>() == null)
                 return;
-            // Level = 
+            Level = GameManager.Data.Level; 
             lineRenderer.enabled = true;
             renderRay = StartCoroutine(RenderRay());
             switch(Level)
