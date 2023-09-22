@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8213613077434180421}
   - component: {fileID: 8213613077434180422}
   - component: {fileID: 778130462}
+  - component: {fileID: 5575030775900880313}
   m_Layer: 18
   m_Name: FishMeat
   m_TagString: Untagged
@@ -307,6 +308,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodGril: {fileID: 2100000, guid: 413a2385c512962409203474a3812306, type: 2}
   burncGril: {fileID: 2100000, guid: 9bce67c79ec2767498eb5f9194ecd82a, type: 2}
+--- !u!114 &5575030775900880313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8213613077434180423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c193a5ce46ac9c498ebd37ea881bd72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steakScore: 0
+  fishName: 
 --- !u!1 &8213613077551244480
 GameObject:
   m_ObjectHideFlags: 0

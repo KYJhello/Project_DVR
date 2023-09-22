@@ -28,7 +28,6 @@ namespace AHN
         {
             orderSheet = GameManager.Resource.Load<GameObject>("OrderSheet");
             orderSheetPoolPosition = GameObject.Find("OrderSheetPoolPosition").GetComponent<Transform>();
-            fund = 0;
             totalSales = 0;
         }
 

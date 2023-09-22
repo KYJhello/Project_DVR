@@ -1,3 +1,4 @@
+using AHN;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -46,6 +47,8 @@ public class SalmonSteak : MonoBehaviour
 
                 StopCoroutine(grillingSteak);
             }
+
+            gameObject.GetComponent<SteakInfo>().steakScore = currentScore;
         }
     }
 }
