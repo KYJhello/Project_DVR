@@ -16,7 +16,6 @@ namespace AHN
             customer = GameManager.Resource.Load<GameObject>("Customer");
 
             StartCoroutine(CustomerSpawnRoutine());
-
         }
 
         private void OnDisable()
@@ -35,7 +34,7 @@ namespace AHN
                 }
                 else if (!tableManager.IsSeatFull())
                 {
-                    GameObject newCustomer = GameManager.Pool.Get(customer, transform.position, Quaternion.identity);
+                    GameManager.Pool.Get(customer, transform.position, Quaternion.identity);
                     yield return new WaitForSeconds(5f);
                 }
             }
