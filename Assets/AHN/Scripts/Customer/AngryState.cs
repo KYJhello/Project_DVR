@@ -30,13 +30,6 @@ namespace AHN
             // 기다리던 코루틴 Stope
             corutineManager.StopCoroutine(corutineManager.FoodWaitRoutine());
 
-            // 주문했던 물고기를 (1)리스트에서 RemoveAt했다면 다시 Add 해주고
-            if (animator.GetComponent<OrderState>().isUseNewFish)
-            {
-                // 주문한 물고기 인덱스를 받아와서 Add리스트(인덱스) 해줌
-                MenuManager.fishs.Add(OrderState.fishInfo);
-            }
-            
             // (2) 횟 점 count-- 해줬다면 다시 count++ 해야함.   
             // if (animator.GetCom<OrderState>().bool 함수를 찾아서 사시미를 이용한 bool이 true면, foreach로 내가 주문한 생선을 찾아서 기존의 값으로 돌려줘야함
             if (animator.GetComponent<OrderState>().isUseSasimi)
@@ -52,12 +45,21 @@ namespace AHN
 
                             count++;
                             innerSushiCounts[1] = count.ToString();
+                            Debug.Log("count++");
 
                             break;
                         }
                     }
                 }
             }
+            // 주문했던 물고기를 (1)리스트에서 RemoveAt했다면 다시 Add 해주고
+            if (animator.GetComponent<OrderState>().isUseNewFish == true)
+            {
+                // 주문한 물고기 인덱스를 받아와서 Add리스트(인덱스) 해줌
+                Debug.Log("Add orderfishindex");
+                MenuManager.fishs.Add(OrderState.fishInfo);
+            }
+            
         }
     }
 }
