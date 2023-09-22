@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace KIM
 {
@@ -17,6 +18,10 @@ namespace KIM
             //GameObject.Destroy(seaObjects);
             //GameManager.Resource.Instantiate<GameObject>("KIM_Prefabs/ReCreatable_Rest");
             //GameManager.Resource.Instantiate<GameObject>("KIM_Prefabs/BoatPrefabs");
+        }
+        public void ReloadScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }                     
