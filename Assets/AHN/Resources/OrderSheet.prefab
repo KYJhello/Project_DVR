@@ -83,7 +83,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7573751113877572391}
+
   m_Text: "Salmon\nSushi\n3\uBC88 \uC88C\uC11D"
+
   m_OffsetZ: 0
   m_CharacterSize: 0.8
   m_LineSpacing: 1
