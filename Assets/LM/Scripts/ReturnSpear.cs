@@ -79,7 +79,7 @@ namespace LM
             pullEnd = false;
 
             StartCoroutine(FireRoutine(dir, force));
-            StartCoroutine(FishCast());
+            // StartCoroutine(FishCast());
             StartCoroutine(Return());
         }
         public void OnPullStart()

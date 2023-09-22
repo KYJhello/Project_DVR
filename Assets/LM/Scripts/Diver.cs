@@ -1,4 +1,6 @@
+using KIM;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -11,18 +13,23 @@ namespace LM
         [SerializeField] GameObject helmet;
         [SerializeField] GameObject helmetLight;
         [SerializeField] ParticleSystem bubble;
+        [SerializeField] Mask mask;
         
         public Material glassMat;
         public UnityEvent OnDived;
         public UnityEvent OnDiveEnded;
-        public UnityEvent OnChangeWeight;
+        public UnityEvent OnChangedWeight;
         public UnityEvent<float> OnChangedO2;
         
         public Device device;
         public Platform platform;
+        public int level;
 
+        FishBox box;
+        ResetPos resetPos;
         DiverHelmetHUD HUD;
         XRSocketInteractor socketInteractor;
+        CharacterController characterController;
         Coroutine BreathRoutine;
         Vector3 prevPos;
         bool isDived;
@@ -46,6 +53,11 @@ namespace LM
             MaxWeight = 80;
             CurWeight = 0;
             Depth = 0;
+            level = 0;
+
+            box = FindObjectOfType<FishBox>();
+
+            resetPos = GameManager.Resource.Load<ResetPos>("ResetPos");
 
             device = transform.parent.GetComponentInChildren<Device>();
             device.gameObject.SetActive(false);
@@ -57,6 +69,8 @@ namespace LM
             HUD.enabled = false;
 
             socketInteractor = GetComponentInChildren<XRSocketInteractor>();
+
+            characterController = transform.parent.parent.GetComponent<CharacterController>();
             
             if(platform != null)
                 platform.gameObject.SetActive(false);
@@ -77,7 +91,11 @@ namespace LM
         private void Update()
         {
             if (!socketInteractor.hasSelection)
+            {
+                if (!isDived && prevPos.y > transform.position.y && transform.position.y < 0)
+                    OnDied();
                 return;
+            }
             if (!isDived && prevPos.y > transform.position.y && transform.position.y < 0)
                 OnDive();
             else if (isDived && prevPos.y < transform.position.y && transform.position.y > 0)
@@ -93,7 +111,6 @@ namespace LM
         {
             prevPos = transform.position;
         }
-
 
 
         private void OnDive()
@@ -140,13 +157,24 @@ namespace LM
         }
         // 공격물고기 생기면 상호작용용 온히트 필요
         // -> 그걸 o2change로 연결
+        public void OnChangeWeight()
+        {
+            OnChangedWeight?.Invoke();
+        }
         public void OnDied()
         {
-            // OnPlateDisable();
-            // 집으로 이동
+            mask.gameObject.SetActive(true);
+            OnPlateDisable();
+            OnDiveEnded?.Invoke();
+            isDived = false;
+            helmetLight.SetActive(false);
+            StopCoroutine(BreathRoutine);
+            CurO2 = MaxO2;
+            characterController.Move(resetPos.PlayerInBoatPos);
+            
             // 인벤 비우기
             // 필요한것들 재생시키기
-            // 각종 일시적 변동 스텟 초기화
+            mask.gameObject.SetActive(false);
         }
 
         public void OnPlateEnable()
@@ -176,6 +204,36 @@ namespace LM
 
         public void HUDOn(SelectEnterEventArgs args)
         {
+            // level = 
+            switch(level)
+            {
+                case 0:
+                    MaxO2 = 120;
+                    CurO2 = MaxO2;
+                    MaxWeight = 60;
+                    break;
+                case 1:
+                    MaxO2 = 180;
+                    CurO2 = MaxO2;
+                    MaxWeight = 120;
+                    break;
+                case 2:
+                    MaxO2 = 240;
+                    CurO2 = MaxO2;
+                    MaxWeight = 200;
+                    break;
+                default:
+                    MaxO2 = 360;
+                    CurO2 = MaxO2;
+                    MaxWeight = 300;
+                    break;
+            }
+            CurWeight = 0;
+            foreach(List<string> list in box.fishList)
+            {
+                CurWeight += int.Parse(list[1]);
+            }
+            
             MeshRenderer[] renderers = args.interactableObject.transform.gameObject.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
             {
@@ -199,6 +257,8 @@ namespace LM
             HUD.enabled = false;
             helmet.SetActive(false);
             device.gameObject.SetActive(false);
+            if(transform.position.y < 0)
+                OnDied();
         }
         IEnumerator InvisibleRoutine()
         {
