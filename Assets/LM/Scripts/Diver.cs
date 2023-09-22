@@ -1,6 +1,7 @@
 using KIM;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.TestTools.CodeCoverage;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -204,7 +205,7 @@ namespace LM
 
         public void HUDOn(SelectEnterEventArgs args)
         {
-            // level = 
+            level = GameManager.Data.Level;
             switch(level)
             {
                 case 0:
