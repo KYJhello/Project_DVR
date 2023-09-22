@@ -38,7 +38,7 @@ namespace KIM
                 GameManager.Resource.Instantiate<Fish>("KIM_Prefabs/SeaFish/Hirame", transform.parent.position + Vector3.down * 199.5f + new Vector3(randPM() * Random.Range(playerWidth, seaWidth), Random.Range(seaMinY, seaMinY+10f), randPM() * Random.Range(playerWidth, seaWidth)), Quaternion.identity, transform.parent, true);
             }
 
-            GameManager.Resource.Instantiate<Fish>("KIM_Prefabs/SeaFish/Shark", transform.parent.position + Vector3.down * 199.5f + new Vector3(randPM() * Random.Range(playerWidth, seaWidth), seaMinY, randPM() * Random.Range(playerWidth, seaWidth)), Quaternion.identity, transform.parent, true);
+            //GameManager.Resource.Instantiate<Fish>("KIM_Prefabs/SeaFish/Shark", transform.parent.position + Vector3.down * 199.5f + new Vector3(randPM() * Random.Range(playerWidth, seaWidth), seaMinY, randPM() * Random.Range(playerWidth, seaWidth)), Quaternion.identity, transform.parent, true);
 
         }
         private int randPM()

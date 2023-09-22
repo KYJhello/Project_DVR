@@ -28,14 +28,11 @@ namespace AHN
         {
             orderSheet = GameManager.Resource.Load<GameObject>("OrderSheet");
             orderSheetPoolPosition = GameObject.Find("OrderSheetPoolPosition").GetComponent<Transform>();
-            fund = 0;
             totalSales = 0;
         }
 
         private void OnEnable()
         {
-            // OnPayEvent.AddListener(TotalSalesText);
-            // OnPayEvent.AddListener(PaymentAmountText);
             OnAddPayEvent.AddListener(PaymentAmountText);
         }
 
