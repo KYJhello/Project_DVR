@@ -33,6 +33,7 @@ namespace LM
         {
             gsManager.ReloadScene();
             StopCoroutine(customerSqawn.CustomerSpawnRoutine());
+            PosManager.OnInitTotalSales?.Invoke();
             //this.gameObject.SetActive(false);
         }
     }
