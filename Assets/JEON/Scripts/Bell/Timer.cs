@@ -92,7 +92,7 @@ public class Timer : MonoBehaviour
                 second = 60;
             }
 
-            second -= 30;
+            second -= 1;
 
             if (minute < 0)
             {

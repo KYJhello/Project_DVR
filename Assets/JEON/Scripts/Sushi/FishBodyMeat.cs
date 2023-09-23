@@ -48,8 +48,8 @@ public class FishBodyMeat : MonoBehaviour
                 {
                     fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/AjiMeat", this.transform.position, Quaternion.identity);
                 }
+                TakeFishInfo();
             }
-            TakeFishInfo();
 
             Destroy(this.gameObject);
 
