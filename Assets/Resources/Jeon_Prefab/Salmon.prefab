@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3704621979314557584}
   - component: {fileID: 3691555504472013975}
   - component: {fileID: 7314366614775647463}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SALMON.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3162340815503600548}
   - component: {fileID: 6468442505413127327}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: HeadLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1611353002309826684}
   - component: {fileID: 84903156076073412}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: TailLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 7309057084454394753}
   - component: {fileID: 2756092256368148884}
   - component: {fileID: 5828424908328125835}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SALMON.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -871,7 +871,7 @@ GameObject:
   - component: {fileID: 1485475647370336269}
   - component: {fileID: 7515308166262925330}
   - component: {fileID: 5956792183731876253}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: FishBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
