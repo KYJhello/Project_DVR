@@ -22,14 +22,14 @@ namespace AHN
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (Vector3.Distance(animator.transform.position, customer.customerSpawnPoint.position) < 2f)
-            {
-                GameManager.Pool.Release(animator.gameObject);
-            }
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if (Vector3.Distance(animator.transform.position, customer.customerSpawnPoint.position) < 2f)
+            {
+                GameManager.Pool.Release(animator.gameObject);
+            }
         }
     }
 }

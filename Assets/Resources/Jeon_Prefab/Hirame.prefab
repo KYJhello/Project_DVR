@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4634025254398215921}
   - component: {fileID: 6286552935745630025}
+  - component: {fileID: 1706215602}
   m_Layer: 16
   m_Name: TailLine
   m_TagString: Untagged
@@ -44,8 +45,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03042221, y: 1, z: 1}
-  m_Center: {x: -0.05791291, y: 0, z: 0}
+  m_Size: {x: 0.01, y: 0.13, z: 0.06}
+  m_Center: {x: -0.77, y: 0.02, z: 0.04}
+--- !u!114 &1706215602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865514787163588888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e808d75fc585e438065f9cf95c6b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  self: {fileID: 0}
 --- !u!1 &2127979404933518497
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +73,7 @@ GameObject:
   - component: {fileID: 2127979404933518502}
   - component: {fileID: 8362388924697599783}
   - component: {fileID: 8362388924697599801}
+  - component: {fileID: 5955557976371558162}
   m_Layer: 16
   m_Name: Hirame
   m_TagString: Untagged
@@ -109,8 +124,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5.493062, y: 0.5, z: 2.9999998}
+  m_Center: {x: -0.70475256, y: -0.3, z: 0.2}
 --- !u!114 &8362388924697599783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +291,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47add87fcf8d5314f9f2c9a7cf663b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5955557976371558162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127979404933518497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c3426b9e1588e45b4585cef0589639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4030012855974313772
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4030012855974313772}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.48899993, y: 0, z: -0.0009799958}
+  m_LocalPosition: {x: 0.382, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -373,8 +400,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.09, y: 0.18, z: 0.07}
+  m_Center: {x: 0.26, y: 0.023, z: 0.04}
 --- !u!54 &8082953216875085593
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -559,7 +586,7 @@ GameObject:
   - component: {fileID: 4492424859141691039}
   - component: {fileID: 340363171818540816}
   m_Layer: 16
-  m_Name: FishBody
+  m_Name: HirameBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -810,10 +837,10 @@ BoxCollider:
   m_GameObject: {fileID: 4338705916956242335}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.3, y: 0.28, z: 0.06}
+  m_Center: {x: -0.05, y: 0.02, z: 0.03}
 --- !u!114 &340363171818540816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +853,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8052c81050f874fa3aa541eb2725d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishRank: 
+  fishName: 
+  storeFish: {fileID: 0}
+  isHeadCutting: 0
+  isTailCutting: 0
 --- !u!1 &7314453553446799167
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9075057099166733609}
   - component: {fileID: 1141511055996359186}
+  - component: {fileID: 962815014}
   m_Layer: 16
   m_Name: HeadLine
   m_TagString: Untagged
@@ -870,8 +903,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01943526, y: 1, z: 1}
-  m_Center: {x: -0.010826794, y: 0, z: 0}
+  m_Size: {x: 0.01, y: 0.2, z: 0.06}
+  m_Center: {x: 0.59, y: 0.02, z: 0.028}
+--- !u!114 &962815014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7314453553446799167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9fbc7c720c13b4f93cca5e2c4248ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  self: {fileID: 0}
 --- !u!1 &9175119609991452972
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9175119609991452972}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.55700004, y: 0, z: 0.0007099915}
+  m_LocalPosition: {x: -0.49, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -969,8 +1015,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.13, y: 0.15, z: 0.04}
+  m_Center: {x: -0.35, y: 0.01, z: 0.03}
 --- !u!54 &7289351159050322458
 Rigidbody:
   m_ObjectHideFlags: 0

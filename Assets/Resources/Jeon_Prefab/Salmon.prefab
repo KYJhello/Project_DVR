@@ -277,6 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3162340815503600548}
   - component: {fileID: 6468442505413127327}
+  - component: {fileID: 182363231}
   m_Layer: 16
   m_Name: HeadLine
   m_TagString: Untagged
@@ -313,6 +314,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0005, y: 0.0007, z: 0.0001}
   m_Center: {x: 0.0001, y: 0, z: 0.0015}
+--- !u!114 &182363231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715989412845042098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9fbc7c720c13b4f93cca5e2c4248ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  self: {fileID: 0}
 --- !u!1 &5448204981446322732
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,6 +340,7 @@ GameObject:
   - component: {fileID: 5448204981446322731}
   - component: {fileID: 2458644364058239402}
   - component: {fileID: 2458644364058239412}
+  - component: {fileID: 1216412851}
   m_Layer: 16
   m_Name: Salmon
   m_TagString: Untagged
@@ -376,8 +391,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.851507, y: 1, z: 0.571785}
+  m_Center: {x: 0.8565644, y: 0, z: 0.012874603}
 --- !u!114 &2458644364058239402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +558,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47add87fcf8d5314f9f2c9a7cf663b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1216412851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448204981446322732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8161ab73b516b489b008cfa7487875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHeadCutting: 0
+  isTailCutting: 0
 --- !u!1 &5760196002051536789
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1611353002309826684}
   - component: {fileID: 84903156076073412}
+  - component: {fileID: 1535645911}
   m_Layer: 16
   m_Name: TailLine
   m_TagString: Untagged
@@ -589,6 +619,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0005, y: 0.0007, z: 0.0001}
   m_Center: {x: -0.0002, y: 0, z: -0.003}
+--- !u!114 &1535645911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5760196002051536789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e808d75fc585e438065f9cf95c6b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  self: {fileID: 0}
 --- !u!1 &7061234343471792545
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,7 +915,7 @@ GameObject:
   - component: {fileID: 7515308166262925330}
   - component: {fileID: 5956792183731876253}
   m_Layer: 16
-  m_Name: FishBody
+  m_Name: SalmonBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,7 +1107,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 2115709726468015935}
   m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 0
   m_MatchAttachPosition: 1
@@ -1123,7 +1166,7 @@ BoxCollider:
   m_GameObject: {fileID: 7648764069074702098}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.0005, y: 0.001, z: 0.0031}
   m_Center: {x: 0, y: 0, z: -0.00078}

@@ -1,3 +1,4 @@
+using AHN;
 using KIM;
 using LM;
 using System;
@@ -27,7 +28,7 @@ public class JsonSL : MonoBehaviour
         public int money;
         public List<List<string>> fishTank;
         public float curWeight;
-        public int harpoonLevel;
+        public int level;
         public List<List<string>> fishBox;
 
         public float masterVolume;
@@ -40,15 +41,15 @@ public class JsonSL : MonoBehaviour
     {
         SaveData save = new SaveData();
         save.saveTime = DateTime.Now.ToString(("yy-MM-dd\nHH:mm:ss"));
-        // save.day =
+        save.day = GameManager.Data.Day;
         save.isHome = FindObjectOfType<BoatMover>().isHome;
-        // save.money =
+        save.money = PosManager.Fund;
         foreach (List<string> list in FindObjectOfType<KIM_FishTank>().fishList)
         {
             save.fishTank.Add(list);
         }
         save.curWeight = FindObjectOfType<Diver>().CurWeight;
-        save.harpoonLevel = FindObjectOfType<HarpoonGun>().Level;
+        save.level = GameManager.Data.Level;
         foreach(List<string> list in FindObjectOfType<FishBox>().fishList)
         {
             save.fishBox.Add(list);
@@ -75,7 +76,7 @@ public class JsonSL : MonoBehaviour
 
         string loadJson = File.ReadAllText(path);
         SaveData save = JsonUtility.FromJson<SaveData>(loadJson);
-        // save.day =
+        // GameManager.Data.Day = save.day;
         if(save.isHome)
         {
             FindObjectOfType<CharacterController>().Move(homePos.position);
@@ -95,7 +96,7 @@ public class JsonSL : MonoBehaviour
         // save.money =
         FindObjectOfType<KIM_FishTank>().AddFishTankFishList(save.fishTank);
         FindObjectOfType<Diver>().CurWeight = save.curWeight;
-        FindObjectOfType<HarpoonGun>().Level = save.harpoonLevel;
+        // GameManager.Data.Level = save.level;
         FishBox box = FindObjectOfType<FishBox>();
         foreach (List<string> list in save.fishBox)
         {

@@ -10,7 +10,6 @@ namespace AHN
     {
         [SerializeField] GameObject sushiManager;
         [SerializeField] GameObject rice;
-        public int sushiScore;
 
         private void OnTriggerEnter(Collider other)
         {

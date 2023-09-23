@@ -56,8 +56,16 @@ public class Timer : MonoBehaviour
         }
         else if (second <= 10)
         {
-            minute -= 1;
-            second += 50;
+            if (minute > 0 && second <= 10)
+            {
+                second -= second;
+                StopCoroutine(StartTimer());
+            }
+            else
+            {
+                minute -= 1;
+                second += 50;
+            }
         }
         
     }
@@ -74,7 +82,7 @@ public class Timer : MonoBehaviour
             minute = 3;
             second = 0;
         }
-        while (true)
+        while (minute > 0 && second > 0)
         {
             yield return new WaitForSeconds(1);
 
@@ -88,13 +96,10 @@ public class Timer : MonoBehaviour
 
             if (minute < 0)
             {
-                
                 nextDay.gameObject.SetActive(true);
                 //yield return new WaitForSeconds(10f);
                 //Time.timeScale = 0;
                 //player.GetComponentInChildren<LM.GameEnd>().gameObject.SetActive(true);
-
-
             }
 
             if (second <= 9)

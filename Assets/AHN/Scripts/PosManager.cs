@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using LM;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ namespace AHN
     {
         public static UnityEvent<int> OnPayEvent = new UnityEvent<int>();     // 결제 금액. EatState에서 호출할 event
         public static UnityEvent<int> OnAddPayEvent = new UnityEvent<int>();  // 누적 점수. EatState에서 호출할 event
+        public static UnityEvent OnInitTotalSales = new UnityEvent();   // NextDay로 넘어가면 totalSales 초기화
         // public static UnityEvent OnClickTotalSalesButton = new UnityEvent();  // TotalSales 버튼을 눌렀을 때 호출될 event
         // public static UnityEvent<int> OnClickFundButton = new UnityEvent<int>();    // Fund 버튼을 눌렀을 때 호출될 evnet
         [SerializeField] TMP_Text paymentAmountText;
@@ -29,19 +31,18 @@ namespace AHN
             orderSheet = GameManager.Resource.Load<GameObject>("OrderSheet");
             orderSheetPoolPosition = GameObject.Find("OrderSheetPoolPosition").GetComponent<Transform>();
             fund = 0;
-            totalSales = 0;
         }
 
         private void OnEnable()
         {
-            // OnPayEvent.AddListener(TotalSalesText);
-            // OnPayEvent.AddListener(PaymentAmountText);
             OnAddPayEvent.AddListener(PaymentAmountText);
+            OnInitTotalSales.AddListener(InitTotalSales);
         }
 
-        private void OnDisable()
+        void InitTotalSales()   // 다음날로 넘어가면 총 매출 초기화. 이벤트로 넣어서 NextDay에서 호출
         {
-            StopAllCoroutines();
+            totalSales = 0;
+            totalSalesText.text = $"Total Sales : {totalSales}";
         }
 
 
@@ -50,12 +51,6 @@ namespace AHN
             FundText(amount);   // 자산도 증가
             totalSales += amount;
             totalSalesText.text = $"Total Sales : {totalSales}";
-
-            if (Timer.Close)   // close가 true라면, 즉 가게 영엽이 종료됐다면
-            {
-                totalSales = 0;
-                totalSalesText.text = $"Total Sales : {totalSales}";
-            }
         }
         
         void FundText(int totalSales)   // 총 자산

@@ -11,36 +11,42 @@ public class FishBodyMeat : MonoBehaviour
     public float x = -0.01f;
     public float timer = 0;
 
-    [SerializeField] private string fishTier;
-    [SerializeField] private string fishName;
-    public string FishTier { get { return fishTier; } set { fishTier = value; } }
-    public string FishName { get { return fishName; } set { fishName = value; } }
+    public string fishName;
+    public string fishTier;
 
     public bool firstHeadHit = false;
 
     Coroutine check;
 
-    KinfeRay kinfeRay;
+    KnifeRay kinfeRay;
 
     GameObject fishPrefab;
 
     private void Awake()
     {
-        kinfeRay = GameObject.Find("KnifeRayCast").GetComponent<KinfeRay>();
+        kinfeRay = GameObject.Find("KnifeRayCast").GetComponent<KnifeRay>();
     }
+
     public void ChackTimer()
     {
-        Debug.Log("나가졌다");
-
         if (timer < 2)
         {
-            Debug.Log("프리팹가져와");
-
             for (int i = 0; i < 2; i++)
             {
-                fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/FishMeat", kinfeRay.hitInfoPos, Quaternion.identity);
-                TakeFishInfo();
+                if (fishName == "Salmon")
+                {
+                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/SalmonMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                }
+                else if (fishName == "Hirame")
+                {
+                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/HirameMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                }
+                else if (fishName == "Aji")
+                {
+                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/AjiMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                }
             }
+            TakeFishInfo();
 
             Destroy(kinfeRay.fish.transform.parent.gameObject);
 
@@ -49,7 +55,6 @@ public class FishBodyMeat : MonoBehaviour
         }
         else if (timer >= 2)
         {
-            Debug.Log("다시잘라");
 
             timer = 0;
             StopCoroutine(check);
@@ -79,8 +84,7 @@ public class FishBodyMeat : MonoBehaviour
     {
         if (timer < 5)
         {
-            Debug.Log("프리팹가져와");
-
+            // 프리팹을 가져옵니다
             for (int i = 0; i < 2; i++)
             {
                 GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/FishMeat", kinfeRay.hitInfoPos, Quaternion.identity);
@@ -94,8 +98,7 @@ public class FishBodyMeat : MonoBehaviour
         }
         else if (timer >= 5)
         {
-            Debug.Log("다시잘라");
-
+            // 다시 자르도록 시간을 0초로 맞춰주고 코루틴은 정지
             timer = 0;
             StopCoroutine(check);
         }
@@ -103,8 +106,7 @@ public class FishBodyMeat : MonoBehaviour
 
     IEnumerator CheckSecondHitTime()
     {
-        Debug.Log("2초안에 자르기");
-
+        // 시간마다 타임을 증가
         while (true)
         {
             timer += Time.deltaTime;
