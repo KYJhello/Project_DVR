@@ -1,3 +1,4 @@
+using AHN;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,12 +23,12 @@ public class Bell : MonoBehaviour
     private bool freeze = false;
 
     private Timer timer;
-    [SerializeField] GameObject customerSpawn;
+    CustomerSqawnManager customerSqawn;
 
     private void Start()
     {
         timer = GameObject.Find("Clock").GetComponent<Timer>();
-        //customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<AHN.CustomerSqawnManager>();
+        customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<AHN.CustomerSqawnManager>();
 
         initialLocalPos = visualTarget.localPosition;
 
@@ -73,9 +74,9 @@ public class Bell : MonoBehaviour
         {
             freeze = true;
             timer.StertSell();
-            //customerSqawn.CustomerSpawnRoutine();   // 손님 생성
-            customerSpawn.gameObject.SetActive(true);
-            MenuManager.StoreFishListInTankRoutine();
+            StartCoroutine(customerSqawn.CustomerSpawnRoutine());   // 손님 생성 시작
+            
+            MenuManager.StoreFishListInTankRoutine();   // 수족관의 물고기 정보를 받아오기 시작
         }
     }
 
