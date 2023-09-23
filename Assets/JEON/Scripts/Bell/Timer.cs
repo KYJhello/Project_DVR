@@ -83,9 +83,8 @@ public class Timer : MonoBehaviour
             minute = 3;
             second = 0;
         }
-        while (minute > 0 && second > 0)
+        while (minute > 0 || second >= 0)
         {
-            yield return new WaitForSeconds(1);
 
             if (second <= 0)
             {
@@ -98,7 +97,9 @@ public class Timer : MonoBehaviour
             if (minute < 0)
             {
                 nextDay.gameObject.SetActive(true);
-                textMesh[2].text = GameManager.Data.Day.ToString();
+                yield return new WaitForSeconds(10f);
+
+                //textMesh[2].text = GameManager.Data.Day.ToString();
                 //yield return new WaitForSeconds(10f);
                 //Time.timeScale = 0;
                 //player.GetComponentInChildren<LM.GameEnd>().gameObject.SetActive(true);
@@ -114,7 +115,9 @@ public class Timer : MonoBehaviour
                 textMesh[0].text = ($"{minute} : ");
                 textMesh[1].text = ($"{second}");
             }
-            
+            yield return new WaitForSeconds(1);
+
+
         }
     }
 }

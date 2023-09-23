@@ -44,10 +44,10 @@ namespace KIM
                 foreach(List<string> fishInfo in totalFishList)
                 {
                     //물고기의 모든 정보가 같은경우
-                    if(other.gameObject.GetComponent<StoreFishInfo>().FishName == fishInfo[0] &&
-                        other.gameObject.GetComponent<StoreFishInfo>().Weight == fishInfo[1] &&
-                        other.gameObject.GetComponent<StoreFishInfo>().Length == fishInfo[2] &&
-                        other.gameObject.GetComponent<StoreFishInfo>().FishRank == fishInfo[3])
+                    if(other.gameObject.GetComponent<StoreFishInfo>()?.FishName == fishInfo[0] &&
+                        other.gameObject.GetComponent<StoreFishInfo>()?.Weight == fishInfo[1] &&
+                        other.gameObject.GetComponent<StoreFishInfo>()?.Length == fishInfo[2] &&
+                        other.gameObject.GetComponent<StoreFishInfo>()?.FishRank == fishInfo[3])
                     {
                         Debug.Log("TotalFishExit" + totalFishList.Count
                             + "\n fishList : " + fishList.Count);
