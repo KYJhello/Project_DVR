@@ -7,6 +7,5 @@ namespace KIM
     public class Salmon : NonAttackableFish
     {
 
-
     }
 }

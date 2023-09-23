@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LM;
+using UnityEngine.Events;
 
 namespace KIM
 {
     public class AttackableFish : Fish, IAttackable
     {
-        
+        protected float attackDamage;
+        protected float attackCoolTime;
+
         public enum State { Idle = 0, Move, Hit, Attack, Die }
         StateMachine<State, AttackableFish> stateMachine;
 
         Coroutine moveDirRoutine;
         SphereCollider recogRangeTrigger;
 
-        Vector3 playerPos;
+        GameObject player;
+        Diver diver;
+
+        bool isAttackable = true;
 
         protected override void Awake()
         {
@@ -31,12 +38,15 @@ namespace KIM
         }
         private void Start()
         {
+            player = GameObject.Find("XR Origin (XR Rig)");
+            diver = player.GetComponentInChildren<Diver>();
             stateMachine.SetUp(State.Idle);
         }
         private void Update()
         {
             stateMachine.Update();
             transform.rotation = Quaternion.LookRotation(moveDir);
+            Debug.Log(stateMachine.GetCurStateName());
         }
 
         #region FishState
@@ -52,7 +62,7 @@ namespace KIM
 
             protected AttackableFishState(AttackableFish owner, StateMachine<State, AttackableFish> stateMachine) : base(owner, stateMachine)
             {
-
+                
             }
         }
 
@@ -90,7 +100,6 @@ namespace KIM
         }
         private class MoveState : AttackableFishState
         {
-            RaycastHit hit;
             public MoveState(AttackableFish owner, StateMachine<State, AttackableFish> stateMachine) : base(owner, stateMachine)
             {
 
@@ -114,10 +123,12 @@ namespace KIM
             public override void Transition()
             {
                 // ignore raycast 레이어와 만나면
-                if (Physics.SphereCast(transform.position, 0, Vector3.zero, out hit, data.PlayerRecognitionRange, 1 << 2))
-                {
-                    stateMachine.ChangeState(State.Attack);
-                }
+                //if (Physics.SphereCast(transform.position, 0, Vector3.zero, out hit, data.PlayerRecognitionRange, 1 << 2))
+                //{
+                //    Debug.Log("Detected Diver");
+                //    owner.diver = hit.transform.gameObject.GetComponent<Diver>();
+                //    stateMachine.ChangeState(State.Attack);
+                //}
             }
 
             public override void Update()
@@ -138,7 +149,8 @@ namespace KIM
 
             public override void Enter()
             {
-
+                owner.isHittable = false;
+                owner.curHp -= owner.curHitDamage;
             }
 
             public override void Exit()
@@ -153,16 +165,29 @@ namespace KIM
 
             public override void Transition()
             {
-
+                if (owner.curHp <= 0)
+                {
+                    stateMachine.ChangeState(State.Die);
+                }
+                else if (owner.curHp > 0)
+                {
+                    stateMachine.ChangeState(State.Attack);
+                }
             }
 
             public override void Update()
             {
+                
+            }
+            IEnumerator HitRoutine()
+            {
 
+                yield return new WaitForSeconds(3f);
             }
         }
         private class AttackState : AttackableFishState
         {
+            Vector3 attackMoveDir;
             public AttackState(AttackableFish owner, StateMachine<State, AttackableFish> stateMachine) : base(owner, stateMachine)
             {
 
@@ -170,7 +195,7 @@ namespace KIM
 
             public override void Enter()
             {
-
+                owner.isAttackable = false;
             }
 
             public override void Exit()
@@ -185,15 +210,21 @@ namespace KIM
 
             public override void Transition()
             {
-
+                if(Vector3.Distance(owner.player.transform.position, transform.position) < 2)
+                {
+                    owner.StartCoroutine(owner.AttackRoutine());
+                    stateMachine.ChangeState(State.Idle);
+                }
+                
             }
 
             public override void Update()
             {
-                transform.LookAt(owner.playerPos);
-                transform.Translate((owner.playerPos - transform.position).normalized * owner.data.MoveSpeed * Time.deltaTime, Space.World);
-
+                attackMoveDir = (owner.player.transform.position - transform.position).normalized;
+                // escapeSpeed 보단 extraSpeed를 공용으로 사용해야했다
+                transform.Translate(attackMoveDir * owner.data.EscapeSpeed * Time.deltaTime, Space.World);
             }
+
         }
         private class DieState : AttackableFishState
         {
@@ -249,21 +280,46 @@ namespace KIM
                 yield return new WaitForSeconds(Random.Range(3f, 5f));
             }
         }
+        IEnumerator AttackRoutine()
+        {
+            Attack();
+            yield return new WaitForSeconds(attackCoolTime);
+            isAttackable = true;
+        }
         public void Attack()
         {
 
+            diver.OnChangeO2(-attackDamage);
         }
+        
         public override string GetCurState()
         {
             return stateMachine.GetCurStateName();
         }
         private void OnTriggerStay(Collider other)
         {
-            if(other.gameObject.layer == 2)
+            if (other.gameObject.layer == 2 && isAttackable)
             {
-                Debug.Log("Player Detected");
-                playerPos = other.transform.position;
                 stateMachine.ChangeState(State.Attack);
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.layer == 12)
+            {
+                if (collision.gameObject.GetComponent<AttackSpear>() != null)
+                {
+                    if (!isHittable) return;
+                    curHitDamage = collision.gameObject.GetComponent<AttackSpear>().Damage;
+                    stateMachine.ChangeState(State.Hit);
+                }
+                if (collision.gameObject.GetComponent<ReturnSpear>() != null)
+                {
+                    if (!isHittable) return;
+                    curHitDamage = collision.gameObject.GetComponent<ReturnSpear>().Damage;
+                    stateMachine.ChangeState(State.Hit);
+                }
             }
         }
     }

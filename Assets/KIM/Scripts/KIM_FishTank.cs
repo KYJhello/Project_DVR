@@ -31,6 +31,9 @@ namespace KIM
                 createFishRoutine = StartCoroutine(CreateFishRoutine(fishBoxFishList));
             }
             //else if(other.gameObject.layer == 16)
+            //{
+            //    foreach()
+            //}
         }
         private void OnTriggerExit(Collider other)
         {
@@ -41,10 +44,10 @@ namespace KIM
                 foreach(List<string> fishInfo in totalFishList)
                 {
                     //물고기의 모든 정보가 같은경우
-                    if(other.gameObject.GetComponent<StoreFish>().FishName == fishInfo[0] &&
-                        other.gameObject.GetComponent<StoreFish>().Weight == fishInfo[1] &&
-                        other.gameObject.GetComponent<StoreFish>().Length == fishInfo[2] &&
-                        other.gameObject.GetComponent<StoreFish>().FishRank == fishInfo[3])
+                    if(other.gameObject.GetComponent<StoreFishInfo>().FishName == fishInfo[0] &&
+                        other.gameObject.GetComponent<StoreFishInfo>().Weight == fishInfo[1] &&
+                        other.gameObject.GetComponent<StoreFishInfo>().Length == fishInfo[2] &&
+                        other.gameObject.GetComponent<StoreFishInfo>().FishRank == fishInfo[3])
                     {
                         Debug.Log("TotalFishExit" + totalFishList.Count
                             + "\n fishList : " + fishList.Count);
@@ -105,17 +108,17 @@ namespace KIM
                 totalFishList.Add(fishInfo);
                 if (fishInfo[0] == "Salmon")
                 {
-                    GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Salmon", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
+                    GameManager.Resource.Instantiate<StoreFishInfo>("Jeon_Prefab/Salmon", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
 
                 }
                 else if (fishInfo[0] == "Aj")
                 {
-                    GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Aji", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
+                    GameManager.Resource.Instantiate<StoreFishInfo>("Jeon_Prefab/Aji", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
 
                 }
                 else if (fishInfo[0] == "Hirame")
                 {
-                    GameManager.Resource.Instantiate<StoreFish>("Jeon_Prefab/Hirame", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
+                    GameManager.Resource.Instantiate<StoreFishInfo>("Jeon_Prefab/Hirame", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
 
                 }
 
