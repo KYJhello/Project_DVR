@@ -42,6 +42,6 @@ public class DataManager : MonoBehaviour
     }
     public void SetFishTankList(List<List<string>> fishList)
     {
-        fishTankList = fishList.
+        fishTankList = fishList;
     }
 }

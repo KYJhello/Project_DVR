@@ -46,7 +46,7 @@ namespace KIM
         {
             stateMachine.Update();
             transform.rotation = Quaternion.LookRotation(moveDir);
-            Debug.Log(stateMachine.GetCurStateName());
+            //Debug.Log(stateMachine.GetCurStateName());
         }
 
         #region FishState

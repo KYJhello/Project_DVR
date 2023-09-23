@@ -26,7 +26,10 @@ public class FishBodyMeat : MonoBehaviour
     {
         kinfeRay = GameObject.Find("KnifeRayCast").GetComponent<KnifeRay>();
     }
-
+    private void Update()
+    {
+        ChackTimer();
+    }
     public void ChackTimer()
     {
         if (timer < 2)
@@ -35,27 +38,27 @@ public class FishBodyMeat : MonoBehaviour
             {
                 if (fishName == "Salmon")
                 {
-                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/SalmonMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/SalmonMeat", this.transform.position, Quaternion.identity);
                 }
                 else if (fishName == "Hirame")
                 {
-                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/HirameMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/HirameMeat", this.transform.position, Quaternion.identity);
                 }
                 else if (fishName == "Aji")
                 {
-                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/AjiMeat", kinfeRay.hitInfoPos, Quaternion.identity);
+                    fishPrefab = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/AjiMeat", this.transform.position, Quaternion.identity);
                 }
             }
             TakeFishInfo();
 
-            Destroy(kinfeRay.fish.transform.parent.gameObject);
+            Destroy(this.gameObject);
 
-            StopCoroutine(check);
+            //StopCoroutine(check);
             timer = 0;
         }
         else if (timer >= 2)
         {
-
+            
             timer = 0;
             StopCoroutine(check);
         }
@@ -74,7 +77,7 @@ public class FishBodyMeat : MonoBehaviour
         if (kinfeRay.collisionNormal.x <= x)
         {
             Debug.Log("Âß ÁøÇàÁß");
-
+            
             check = StartCoroutine(CheckSecondHitTime());
         }
 
