@@ -49,13 +49,6 @@ namespace AHN
                         sushi.transform.parent = sushiManager.transform;
                         sushi.transform.position = rice.transform.position;
                         break;
-                    case "ASashimi":
-                        sushi = GameManager.Resource.Instantiate<GameObject>("ASushi");
-                        sushi.GetComponent<SushiInfo>().sushiScore = AddSushiScore.currentSushiScore;
-                        sushi.GetComponent<SushiInfo>().fishName = other.gameObject.GetComponent<RawFishForCutting>().FishName;
-                        sushi.transform.parent = sushiManager.transform;
-                        sushi.transform.position = rice.transform.position;
-                        break;
                     case "Aji":
                         sushi = GameManager.Resource.Instantiate<GameObject>("AjiSushi");
                         sushi.GetComponent<SushiInfo>().sushiScore = AddSushiScore.currentSushiScore;
