@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65ab6ec856887f46beb70ad40393d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRange: 20
+  maxRange: 50
   damage: 1
   mask:
     serializedVersion: 2
