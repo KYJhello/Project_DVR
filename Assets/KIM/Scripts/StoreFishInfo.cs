@@ -17,6 +17,8 @@ namespace KIM
         public string Length { get { return length; } set { length = value; } }
         public string FishRank { get { return fishRank; } set { fishRank = value; } }
 
+        StoreFish_Body body_Info;
+        
         public void SetFishInfo(List<string> info)
         {
             fishInfo = info;
@@ -25,6 +27,15 @@ namespace KIM
             length = info[2];
             fishRank = info[3];
             Debug.Log("StoreFishInfo : " + name + ", " + weight + ", " + fishRank);
+            Debug.Log($"{gameObject.GetComponentInChildren<StoreFish_Body>()}");
+            SetBodyInfo();
+        }
+
+        public void SetBodyInfo()
+        {
+            body_Info = gameObject.GetComponentInChildren<StoreFish_Body>();
+            body_Info.fishName = name;
+            body_Info.fishRank = fishRank;
         }
         public string ReturnFishRank()
         {
