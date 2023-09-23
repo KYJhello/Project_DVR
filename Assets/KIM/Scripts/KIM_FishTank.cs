@@ -111,7 +111,7 @@ namespace KIM
                     GameManager.Resource.Instantiate<StoreFishInfo>("Jeon_Prefab/Salmon", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
 
                 }
-                else if (fishInfo[0] == "Aj")
+                else if (fishInfo[0] == "Aji")
                 {
                     GameManager.Resource.Instantiate<StoreFishInfo>("Jeon_Prefab/Aji", transform.position + Vector3.up, Quaternion.identity).SetFishInfo(fishInfo);
 
