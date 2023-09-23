@@ -31,6 +31,9 @@ namespace KIM
                 createFishRoutine = StartCoroutine(CreateFishRoutine(fishBoxFishList));
             }
             //else if(other.gameObject.layer == 16)
+            //{
+            //    foreach()
+            //}
         }
         private void OnTriggerExit(Collider other)
         {
