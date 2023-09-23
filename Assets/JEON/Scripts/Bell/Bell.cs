@@ -24,6 +24,7 @@ public class Bell : MonoBehaviour
 
     private Timer timer;
     CustomerSqawnManager customerSqawn;
+    Coroutine customerSpawnRoutine;
 
     private void Start()
     {
@@ -74,8 +75,11 @@ public class Bell : MonoBehaviour
         {
             freeze = true;
             timer.StertSell();
-            StartCoroutine(customerSqawn.CustomerSpawnRoutine());   // 손님 생성 시작
-            
+            if(customerSpawnRoutine == null)
+            {
+                StartCoroutine(customerSqawn.CustomerSpawnRoutine());   // 손님 생성 시작
+            }
+
             MenuManager.StoreFishListInTankRoutine();   // 수족관의 물고기 정보를 받아오기 시작
         }
     }
