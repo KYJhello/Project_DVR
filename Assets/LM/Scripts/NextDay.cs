@@ -8,12 +8,19 @@ namespace LM
     public class NextDay : BaseUI
     {
         [SerializeField] KIM.GameSceneManager gsManager;
+        CustomerSqawnManager customerSqawn;
 
         protected override void Awake()
         {
             base.Awake();
             gameObject.SetActive(false);
         }
+
+        private void Start()
+        {
+            customerSqawn = GameObject.Find("CustomerSpawnPoint").GetComponent<AHN.CustomerSqawnManager>();
+        }
+
         private void OnEnable()
         {
             List<int> dayInfo = GameManager.Data.ReturnDayInfo();
@@ -25,6 +32,7 @@ namespace LM
         public void NextDayButtonClicked()
         {
             gsManager.ReloadScene();
+            StopCoroutine(customerSqawn.CustomerSpawnRoutine());
             //this.gameObject.SetActive(false);
         }
     }
