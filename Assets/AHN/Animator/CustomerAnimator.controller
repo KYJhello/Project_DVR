@@ -116,6 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a05578b20d82c4a9c1e68fe713320b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUseSasimi: 0
+  initSasimiCount: 0
+  isUseNewFish: 0
+  randomFishIndex: 0
+  count: 0
 --- !u!1101 &-5292890069477379182
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
