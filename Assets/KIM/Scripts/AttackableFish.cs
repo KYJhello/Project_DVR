@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LM;
+using UnityEngine.Events;
 
 namespace KIM
 {
     public class AttackableFish : Fish, IAttackable
     {
-        
+        protected float attackDamage;
+        protected float attackCoolTime;
+
         public enum State { Idle = 0, Move, Hit, Attack, Die }
         StateMachine<State, AttackableFish> stateMachine;
 
@@ -17,7 +20,7 @@ namespace KIM
         GameObject player;
         Diver diver;
 
-        bool isAttackable = false;
+        bool isAttackable = true;
 
         protected override void Awake()
         {
@@ -43,6 +46,7 @@ namespace KIM
         {
             stateMachine.Update();
             transform.rotation = Quaternion.LookRotation(moveDir);
+            Debug.Log(stateMachine.GetCurStateName());
         }
 
         #region FishState
@@ -191,6 +195,7 @@ namespace KIM
 
             public override void Enter()
             {
+                owner.isAttackable = false;
             }
 
             public override void Exit()
@@ -205,6 +210,12 @@ namespace KIM
 
             public override void Transition()
             {
+                if(Vector3.Distance(owner.player.transform.position, transform.position) < 2)
+                {
+                    owner.StartCoroutine(owner.AttackRoutine());
+                    stateMachine.ChangeState(State.Idle);
+                }
+                
             }
 
             public override void Update()
@@ -269,13 +280,28 @@ namespace KIM
                 yield return new WaitForSeconds(Random.Range(3f, 5f));
             }
         }
+        IEnumerator AttackRoutine()
+        {
+            Attack();
+            yield return new WaitForSeconds(attackCoolTime);
+            isAttackable = true;
+        }
         public void Attack()
         {
 
+            diver.OnChangeO2(-attackDamage);
         }
+        
         public override string GetCurState()
         {
             return stateMachine.GetCurStateName();
+        }
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.layer == 2 && isAttackable)
+            {
+                stateMachine.ChangeState(State.Attack);
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
