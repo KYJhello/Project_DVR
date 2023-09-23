@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     [SerializeField] int second;
     [SerializeField] GameObject nextDay;
     [SerializeField] GameObject gameEnd;
-
+    
     private bool touchButton = true;
 
     private static Timer timerTime;
@@ -34,6 +34,7 @@ public class Timer : MonoBehaviour
 
         close = true;
         textMesh = GetComponentsInChildren<TextMesh>();
+        textMesh[2].text = ($"Day {GameManager.Data.Day}");
     }
     public void StertSell()
     {
@@ -97,6 +98,7 @@ public class Timer : MonoBehaviour
             if (minute < 0)
             {
                 nextDay.gameObject.SetActive(true);
+                textMesh[2].text = GameManager.Data.Day.ToString();
                 //yield return new WaitForSeconds(10f);
                 //Time.timeScale = 0;
                 //player.GetComponentInChildren<LM.GameEnd>().gameObject.SetActive(true);
