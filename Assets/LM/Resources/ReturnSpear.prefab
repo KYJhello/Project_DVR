@@ -307,7 +307,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4096
+    m_Bits: 5120
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65ab6ec856887f46beb70ad40393d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRange: 20
+  maxRange: 50
   damage: 1
   mask:
     serializedVersion: 2
