@@ -30,7 +30,7 @@ namespace AHN
                 else if (!tableManager.IsSeatFull())
                 {
                     GameManager.Pool.Get(customer, transform.position, Quaternion.identity);
-                    yield return new WaitForSeconds(5f);
+                    yield return new WaitForSeconds(10f);
                 }
             }
         }

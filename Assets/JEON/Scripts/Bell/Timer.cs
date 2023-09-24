@@ -34,7 +34,7 @@ public class Timer : MonoBehaviour
 
         close = true;
         textMesh = GetComponentsInChildren<TextMesh>();
-        textMesh[2].text = ($"Day {GameManager.Data.Day}");
+        textMesh[2].text = ($"Day {GameManager.Data.Day + 1}");
     }
     public void StertSell()
     {

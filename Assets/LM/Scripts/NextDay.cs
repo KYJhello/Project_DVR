@@ -32,7 +32,7 @@ namespace LM
         public void NextDayButtonClicked()
         {
             gsManager.ReloadScene();
-            StopCoroutine(customerSqawn.CustomerSpawnRoutine());
+            //StopCoroutine(customerSqawn.CustomerSpawnRoutine());
             PosManager.OnInitTotalSales?.Invoke();
             //this.gameObject.SetActive(false);
         }

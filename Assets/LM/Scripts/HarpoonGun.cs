@@ -71,7 +71,7 @@ namespace LM
         {
             if(args.interactorObject.transform.parent.transform.parent.GetComponentInChildren<Diver>() == null)
                 return;
-            Level = GameManager.Data.Level; 
+            Level = /*GameManager.Data.Level*/2; 
             lineRenderer.enabled = true;
             renderRay = StartCoroutine(RenderRay());
             switch(Level)
@@ -89,9 +89,9 @@ namespace LM
                     damage = 5;
                     break;
                 case 2:
-                    spearForce = 20;
-                    pullForce = 8;
-                    maxRange = 15;
+                    spearForce = 25;
+                    pullForce = 10;
+                    maxRange = 30;
                     damage = 8;
                     break;
                 default:

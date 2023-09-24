@@ -26,6 +26,7 @@ namespace LM
         public Platform platform;
         public int level;
 
+        GameSceneManager gsManager;
         FishBox box;
         ResetPos resetPos;
         DiverHelmetHUD HUD;
@@ -46,6 +47,8 @@ namespace LM
 
         private void Awake()
         {
+            gsManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
+
             isDived = false;
             invisible = false;
             invisibleTime = 1;
@@ -54,7 +57,7 @@ namespace LM
             MaxWeight = 80;
             CurWeight = 0;
             Depth = 0;
-            level = 0;
+            level = 2;
 
             box = FindObjectOfType<FishBox>();
 
@@ -164,6 +167,7 @@ namespace LM
         }
         public void OnDied()
         {
+            gsManager.ReloadScene();
             mask.gameObject.SetActive(true);
             OnPlateDisable();
             OnDiveEnded?.Invoke();
@@ -229,11 +233,11 @@ namespace LM
                     MaxWeight = 300;
                     break;
             }
-            CurWeight = 0;
-            foreach(List<string> list in box.fishList)
-            {
-                CurWeight += int.Parse(list[1]);
-            }
+            CurWeight = box.ReturnCurWeight();
+            //foreach(List<string> list in box.fishList)
+            //{
+            //    CurWeight += int.Parse(list[1]);
+            //}
             
             MeshRenderer[] renderers = args.interactableObject.transform.gameObject.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
@@ -269,6 +273,8 @@ namespace LM
         }
         IEnumerator Breath()
         {
+            CurWeight = box.ReturnCurWeight();
+            
             float count = 0;
             while(CurO2 <= MaxO2)
             {
