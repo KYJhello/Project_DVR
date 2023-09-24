@@ -33,6 +33,10 @@ namespace KIM
         {
             totalWeight -= input;
         }
+        public float ReturnCurWeight()
+        {
+            return totalWeight;
+        }
         // 수족관에서 호출하는 함수
         public List<List<string>> GetFishList()
         {

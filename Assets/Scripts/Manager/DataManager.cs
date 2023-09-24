@@ -6,12 +6,15 @@ using AHN;
 public class DataManager : MonoBehaviour
 {
     private int day = 0;
-    private int yesterDayFund;
+    private int yesterDayFund = 0;
     private int todayIncome;
     private int totalMoney;
     private int level = 0;
+    private List<List<string>> fishTankList;
     public int Day { get { return day; } }
     public int Level { get { return level; } }
+    public List<List<string>> FishTankList { get { return fishTankList; } }
+
 
     public List<int> ReturnDayInfo()
     {
@@ -24,6 +27,8 @@ public class DataManager : MonoBehaviour
         dayInfo.Add(todayIncome);
         dayInfo.Add(totalMoney);
 
+        yesterDayFund = todayIncome;
+
         return dayInfo;
     }
     public void CalCurDayData()
@@ -31,10 +36,14 @@ public class DataManager : MonoBehaviour
         day++;
         yesterDayFund = PosManager.Fund - PosManager.TotalSales;
         todayIncome = PosManager.TotalSales;
-        totalMoney = PosManager.Fund;
+        totalMoney += PosManager.Fund;
     }
     public void LevelUp()
     {
         level++;
+    }
+    public void SetFishTankList(List<List<string>> fishList)
+    {
+        fishTankList = fishList;
     }
 }

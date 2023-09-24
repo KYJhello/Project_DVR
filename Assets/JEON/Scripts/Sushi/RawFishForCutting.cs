@@ -9,9 +9,4 @@ public class RawFishForCutting : MonoBehaviour
     private string fishName;
     public string FishTier { get { return fishTier; } set {  fishTier = value; } }
     public string FishName { get { return fishName; } set { fishName = value; } }
-
-    private void Awake()
-    {
-        Debug.Log($"fishTier = {fishTier}, fishName = {fishName}");
-    }
 }

@@ -1,3 +1,4 @@
+using AHN;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,6 +10,7 @@ public class SalmonSteak : MonoBehaviour
 
     int currentScore;
 
+    // 메테리얼을 SerializeField 드레그엔 드롭으로 지정해두었다
     [SerializeField] Material goodGril;
     [SerializeField] Material burncGril;
 
@@ -46,6 +48,8 @@ public class SalmonSteak : MonoBehaviour
 
                 StopCoroutine(grillingSteak);
             }
+
+            gameObject.GetComponent<SteakInfo>().steakScore = currentScore;
         }
     }
 }

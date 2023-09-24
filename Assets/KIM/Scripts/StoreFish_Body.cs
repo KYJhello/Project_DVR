@@ -1,3 +1,4 @@
+using Jeon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,25 +7,62 @@ namespace KIM
 {
     public class StoreFish_Body : MonoBehaviour
     {
-        private string fishRank;
-        private string fishName;
-        public string FishRank { get { return fishRank; } set { fishRank = value; } }
-        public string FishName { get { return fishName; } set { fishName = value; } }
+        public string fishRank;
+        public string fishName;
 
+        public Jeon.StoreFish storeFish;
 
-        public void SetRank(string rank)
+        public bool isHeadCutting;
+        public bool isTailCutting;
+
+        Transform fishBodyPos;
+        Quaternion quaternion;
+
+        private void Awake()
         {
-            rank = fishRank;
+            storeFish = gameObject.transform.parent.GetComponent<Jeon.StoreFish>();
+            fishBodyPos = gameObject.transform;
         }
 
-        public string ReTurnRank()
+        private void Update()
         {
-            return FishRank;
+            if (isHeadCutting == true && isTailCutting == true)
+            {
+                Debug.Log(fishName);
+                InstanteFishBodyPrefab(fishName);
+            }
         }
-
-        public string ReTurnName()
+        public void FishCuttingReset()
         {
-            return FishName;
+            isHeadCutting = false;
+            isTailCutting = false;
+        }
+        public void InstanteFishBodyPrefab(string name)
+        {
+            quaternion = Quaternion.Euler(0, -90, 0);
+
+            if (name == "Salmon")
+            {
+                GameObject salmonBodyMeat = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Salmon_Body_Meat", fishBodyPos.position, quaternion, false);
+                salmonBodyMeat.GetComponent<FishBodyMeat>().fishName = fishName;
+                salmonBodyMeat.GetComponent<FishBodyMeat>().fishTier = fishRank;
+            }
+            else if (name == "Hirame")
+            {
+                GameObject hirameBodyMeat = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Hirame_Body_Meat", fishBodyPos.position, quaternion, false);
+                hirameBodyMeat.GetComponent<FishBodyMeat>().fishName = fishName;
+                hirameBodyMeat.GetComponent<FishBodyMeat>().fishTier = fishRank;
+            }
+            else if (name == "Aji")
+            {
+                GameObject ajiBodyMeat = GameManager.Resource.Instantiate<GameObject>("Jeon_Prefab/Aji_Body_Meat", fishBodyPos.position, quaternion, false);
+                ajiBodyMeat.GetComponent<FishBodyMeat>().fishName = fishName;
+                ajiBodyMeat.GetComponent<FishBodyMeat>().fishTier = fishRank;
+            }
+
+
+            Destroy(gameObject);
+            FishCuttingReset();
         }
     }
 }

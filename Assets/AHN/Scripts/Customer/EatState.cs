@@ -9,7 +9,6 @@ namespace AHN
     public class EatState : StateMachineBehaviour
     {
         StateCorutineManager corutineManger;
-        int amount = 15;     // 결제한 금액. 일단 15라고 적어놓음
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

@@ -25,12 +25,12 @@ namespace AHN
 
         public IEnumerator FoodWaitRoutine()    // 음식 기다리는 코루틴
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(20f);
             anim.SetTrigger("Angry");
             yield return new WaitForSeconds(4f);
             anim.SetTrigger("GoOut");
 
-            // Timer.TimerTime.PenaltyTime();  // 10초 시간 차감 -> error 나서 주석처리
+            Timer.TimerTime.PenaltyTime();  // 10초 시간 차감
         }
 
         public IEnumerator EatRoutine()     // 먹는 코루틴
