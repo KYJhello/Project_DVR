@@ -2328,7 +2328,6 @@ MonoBehaviour:
   localAxis: {x: 0, y: -1, z: 0}
   resetSpeed: 5
   followAngleTreshold: 40
-  customerSpawn: {fileID: 0}
 --- !u!114 &1227326529
 MonoBehaviour:
   m_ObjectHideFlags: 0
