@@ -15,26 +15,26 @@ TagManager:
   - 
   - 
   - 
+  - Fish
+  - HarpoonGun
+  - HarpoonSpear
+  - DivingHelmet
+  - Wall
+  - FishBox
+  - StoreFish
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Baked
+  - PryingPen
+  - Rice
+  - Sashimi
+  - Wasabi
+  - Sushi
+  - Plate
+  - Knife
+  - Customer
+  - ChoppingBoard
+  - Recicpe
+  - FishRayPoint
   - 
   - 
   m_SortingLayers:
